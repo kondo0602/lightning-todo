@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import "./add-task-card.css";
 
 type AddTaskCardProps = {
@@ -7,62 +7,42 @@ type AddTaskCardProps = {
 
 export const AddTaskCard = ({ onAdd }: AddTaskCardProps) => {
 	const [isAddingTodo, setIsAddingTodo] = useState(false);
-	const [newTodo, setNewTodo] = useState("");
-	const [newNote, setNewNote] = useState("");
-	const inputRef = useRef<HTMLInputElement>(null);
+	const enterEditMode = () => {
+		if (isAddingTodo) return;
+		setIsAddingTodo(true);
+	};
+	const exitEditMode = () => {
+		if (!isAddingTodo) return;
+		setIsAddingTodo(false);
+	};
 
-	const handleAdd = () => {
-		if (newTodo.trim() === "") return;
+	const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
 
-		onAdd(newTodo, newNote);
-		setNewTodo("");
-		setNewNote("");
+		const form = e.currentTarget;
+		const task = form.elements[0] as HTMLInputElement;
+		const note = form.elements[1] as HTMLInputElement;
+		onAdd(task.value, note.value);
+
 		setIsAddingTodo(false);
 	};
 
 	return (
 		<div
 			className={`add-todo-card ${isAddingTodo ? "editing" : ""}`}
-			onClick={() => {
-				if (!isAddingTodo) {
-					setIsAddingTodo(true);
-					// 次のレンダリング後にフォーカスを設定
-					setTimeout(() => inputRef.current?.focus(), 0);
-				}
-			}}
-			onKeyDown={(e) => {
-				if (e.key === "Enter" || e.key === " ") {
-					!isAddingTodo && setIsAddingTodo(true);
-				}
-			}}
+			onClick={enterEditMode}
 			role="button"
 			tabIndex={0}
 		>
 			{!isAddingTodo ? (
 				<div className="add-todo-card-placeholder">
-					<span className="add-todo-card-icon">＋</span> Add a task
+					<span className="add-todo-card-icon">＋</span>Add a task
 				</div>
 			) : (
-				<form
-					className="add-todo-form"
-					onClick={(e) => e.stopPropagation()}
-					onKeyDown={(e) => e.stopPropagation()}
-				>
-					<input
-						type="text"
-						value={newTodo}
-						onChange={(e) => setNewTodo(e.target.value)}
-						onKeyPress={(e) => e.key === "Enter" && handleAdd()}
-						placeholder="Add a task..."
-						ref={inputRef}
-					/>
-					<input
-						type="text"
-						value={newNote}
-						onChange={(e) => setNewNote(e.target.value)}
-						onKeyPress={(e) => e.key === "Enter" && handleAdd()}
-						placeholder="Add note..."
-					/>
+				<form className="add-todo-form" onSubmit={handleAddTask}>
+					<input type="text" placeholder="Add a task..." />
+					<input type="text" placeholder="Add note..." />
+					<button type="submit" style={{ display: "none" }} />
 				</form>
 			)}
 		</div>
