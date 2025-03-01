@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import { TodoListItemCard } from "./components/todo-list-item-card/todo-list-item-card";
 
 interface Todo {
 	id: number;
@@ -33,7 +34,7 @@ function App() {
 	const initialTodos: Todo[] = [
 		{
 			id: 1,
-			text: "Create a new project presentation",
+			text: "Create a new project presentation. Create a new project presentation. Create a new project presentation.asdfadsfadsfads",
 			note: "Include Q1 metrics and future roadmap",
 			completed: false,
 		},
@@ -60,13 +61,6 @@ function App() {
 	const [todos, setTodos] = useState<Todo[]>(initialTodos);
 	const [newTodo, setNewTodo] = useState("");
 	const [newNote, setNewNote] = useState("");
-	const [openMenuId, setOpenMenuId] = useState<number | null>(null);
-	const [editingId, setEditingId] = useState<number | null>(null);
-	const [editText, setEditText] = useState("");
-	const [editNote, setEditNote] = useState("");
-	const [focusedField, setFocusedField] = useState<"text" | "note" | null>(
-		null,
-	);
 	const [isAddingTodo, setIsAddingTodo] = useState(false);
 
 	const addTodo = () => {
@@ -98,33 +92,16 @@ function App() {
 		setTodos(todos.filter((todo) => todo.id !== id));
 	};
 
-	const toggleMenu = (id: number) => {
-		setOpenMenuId(openMenuId === id ? null : id);
-	};
-
-	const startEditing = (todo: Todo) => {
-		setEditingId(todo.id);
-		setEditText(todo.text);
-		setEditNote(todo.note);
-		setFocusedField("text");
-	};
-
-	const saveEdit = () => {
-		if (!editingId) return;
-
-		setTodos(
-			todos.map((todo) =>
-				todo.id === editingId
-					? { ...todo, text: editText, note: editNote }
-					: todo,
-			),
-		);
-		setEditingId(null);
-		setFocusedField(null);
-	};
-
 	const activeTodos = todos.filter((todo) => !todo.completed);
 	const completedTodos = todos.filter((todo) => todo.completed);
+
+	const handleSaveEdit = (id: number, text: string, note: string) => {
+		setTodos(
+			todos.map((todo) =>
+				todo.id === id ? { ...todo, text: text, note: note } : todo,
+			),
+		);
+	};
 
 	return (
 		<div className="container">
@@ -173,106 +150,13 @@ function App() {
 
 			<ul className="todo-list">
 				{activeTodos.map((todo) => (
-					<li
+					<TodoListItemCard
 						key={todo.id}
-						className={todo.completed ? "completed" : ""}
-						onClick={(e) => {
-							if (
-								e.target instanceof HTMLElement &&
-								(e.target.closest(".menu-button") ||
-									e.target.closest(".dropdown-menu"))
-							) {
-								return;
-							}
-							startEditing(todo);
-						}}
-						onKeyDown={(e) => {
-							if (e.key === "Enter" || e.key === " ") {
-								startEditing(todo);
-							}
-						}}
-						tabIndex={0}
-						role="button"
-					>
-						<div className="todo-content">
-							<div className="todo-main">
-								<input
-									type="checkbox"
-									checked={todo.completed}
-									onChange={() => toggleTodo(todo.id)}
-									onClick={(e) => e.stopPropagation()}
-								/>
-								{editingId === todo.id ? (
-									<input
-										type="text"
-										value={editText}
-										onChange={(e) => setEditText(e.target.value)}
-										onKeyPress={(e) => e.key === "Enter" && saveEdit()}
-										onBlur={() => {
-											if (focusedField !== "note") {
-												saveEdit();
-											}
-										}}
-										autoFocus={focusedField === "text"}
-										onClick={(e) => e.stopPropagation()}
-									/>
-								) : (
-									<span>{todo.text}</span>
-								)}
-							</div>
-							{editingId === todo.id ? (
-								<input
-									type="text"
-									value={editNote}
-									onChange={(e) => setEditNote(e.target.value)}
-									onKeyPress={(e) => e.key === "Enter" && saveEdit()}
-									onBlur={saveEdit}
-									autoFocus={focusedField === "note"}
-									placeholder="Add a note..."
-									className="edit-note"
-									onClick={(e) => {
-										e.stopPropagation();
-										setFocusedField("note");
-									}}
-								/>
-							) : (
-								todo.note && (
-									<div
-										className="todo-note"
-										onClick={(e) => {
-											e.stopPropagation();
-											startEditing(todo);
-											setFocusedField("note");
-										}}
-									>
-										{todo.note}
-									</div>
-								)
-							)}
-						</div>
-						<div className="menu-container">
-							<button
-								type="button"
-								className="menu-button"
-								onClick={() => toggleMenu(todo.id)}
-							>
-								⋮
-							</button>
-							{openMenuId === todo.id && (
-								<div className="dropdown-menu">
-									<button
-										type="button"
-										onClick={() => {
-											deleteTodo(todo.id);
-											setOpenMenuId(null);
-										}}
-									>
-										Delete
-									</button>
-								</div>
-							)}
-						</div>
-					</li>
+						todo={todo}
+						onToggle={toggleTodo}
+						onDelete={deleteTodo}
+						onSave={handleSaveEdit}
+					/>
 				))}
 			</ul>
 
@@ -281,105 +165,13 @@ function App() {
 					<h2>DONE</h2>
 					<ul className="todo-list completed-list">
 						{completedTodos.map((todo) => (
-							<li
-								key={todo.id}
-								className="completed"
-								onClick={(e) => {
-									if (
-										e.target instanceof HTMLElement &&
-										(e.target.closest(".menu-button") ||
-											e.target.closest(".dropdown-menu"))
-									) {
-										return;
-									}
-									startEditing(todo);
-								}}
-								onKeyDown={(e) => {
-									if (e.key === "Enter" || e.key === " ") {
-										startEditing(todo);
-									}
-								}}
-								tabIndex={0}
-								role="button"
-							>
-								<div className="todo-content">
-									<div className="todo-main">
-										<input
-											type="checkbox"
-											checked={todo.completed}
-											onChange={() => toggleTodo(todo.id)}
-											onClick={(e) => e.stopPropagation()}
-										/>
-										{editingId === todo.id ? (
-											<input
-												type="text"
-												value={editText}
-												onChange={(e) => setEditText(e.target.value)}
-												onKeyPress={(e) => e.key === "Enter" && saveEdit()}
-												onBlur={() => {
-													if (focusedField !== "note") {
-														saveEdit();
-													}
-												}}
-												autoFocus={focusedField === "text"}
-												onClick={(e) => e.stopPropagation()}
-											/>
-										) : (
-											<span>{todo.text}</span>
-										)}
-									</div>
-									{editingId === todo.id ? (
-										<input
-											type="text"
-											value={editNote}
-											onChange={(e) => setEditNote(e.target.value)}
-											onKeyPress={(e) => e.key === "Enter" && saveEdit()}
-											onBlur={saveEdit}
-											autoFocus={focusedField === "note"}
-											placeholder="Add a note..."
-											className="edit-note"
-											onClick={(e) => {
-												e.stopPropagation();
-												setFocusedField("note");
-											}}
-										/>
-									) : (
-										todo.note && (
-											<div
-												className="todo-note"
-												onClick={(e) => {
-													e.stopPropagation();
-													startEditing(todo);
-													setFocusedField("note");
-												}}
-											>
-												{todo.note}
-											</div>
-										)
-									)}
-								</div>
-								<div className="menu-container">
-									<button
-										type="button"
-										className="menu-button"
-										onClick={() => toggleMenu(todo.id)}
-									>
-										⋮
-									</button>
-									{openMenuId === todo.id && (
-										<div className="dropdown-menu">
-											<button
-												type="button"
-												onClick={() => {
-													deleteTodo(todo.id);
-													setOpenMenuId(null);
-												}}
-											>
-												Delete
-											</button>
-										</div>
-									)}
-								</div>
+							<li key={todo.id} className="todo-list-item">
+								<TodoListItemCard
+									todo={todo}
+									onToggle={toggleTodo}
+									onDelete={deleteTodo}
+									onSave={handleSaveEdit}
+								/>
 							</li>
 						))}
 					</ul>

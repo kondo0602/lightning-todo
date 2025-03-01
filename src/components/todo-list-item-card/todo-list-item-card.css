@@ -1,0 +1,196 @@
+.todo-card {
+	position: relative;
+	display: flex;
+	align-items: flex-start;
+	background: #3d3d3d;
+	gap: 8px;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s, box-shadow 0.2s;
+	cursor: pointer;
+}
+
+.todo-content {
+	flex: 1;
+	min-width: 0;
+}
+
+.todo-main {
+	display: flex;
+	align-items: flex-start;
+	padding: 12px;
+	gap: 10px;
+	min-width: 0;
+}
+
+.todo-task-text {
+	flex: 1;
+	font-size: 1.1em;
+	color: #ffffff;
+	word-break: break-word;
+	overflow-wrap: break-word;
+	text-align: left;
+	min-width: 0;
+	align-self: flex-start;
+	line-height: 1.4;
+	margin-top: -2px;
+	white-space: normal;
+}
+
+/* 編集中のtextareaのスタイル */
+textarea.todo-task-text {
+	border: none;
+	outline: none;
+	background: transparent;
+	padding: 0;
+	font-family: inherit;
+	resize: none;  /* リサイズハンドルを非表示 */
+	overflow: hidden;  /* スクロールバーを非表示 */
+	/* スペルチェックを無効化 */
+	spellcheck: false;
+	/* Safari用のスタイルリセット */
+	-webkit-appearance: none;
+	/* 枠線を完全に消す */
+	box-shadow: none;
+	/* 高さを自動調整 */
+	height: auto;
+	white-space: normal;
+}
+
+.todo-note-container {
+	font-size: 0.9em;
+	color: #5c6b7a;
+	padding-block: 8px;
+	padding-inline: 12px;
+	border-top: 1px solid #4c4c4c;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+.todo-note {
+	padding: 0;
+	margin: 0;
+	font-size: 0.9em;
+	color: #c2c2c2;
+	text-align: left;
+	border: none;
+}
+
+/* 編集中のinputのスタイル */
+input.todo-note {
+	border: none;
+	outline: none;
+	background: transparent;
+	padding: 0;
+	margin: 0;
+	font-size: inherit;
+	color: inherit;
+	text-align: left;
+	width: 100%;
+	font-family: inherit;
+	spellcheck: false;
+	-webkit-appearance: none;
+	box-shadow: none;
+}
+
+.todo-main input[type="checkbox"] {
+	width: 18px;
+	height: 18px;
+	cursor: pointer;
+	flex-shrink: 0;
+	margin: 0;
+	/* NOTE: Taskと垂直位置を合わせるためのmargin */
+	margin-block-start: 1px;
+	border-radius: 50%;
+	appearance: none;
+	background-color: transparent;
+	border: 2px solid #666;
+	position: relative;
+	transition: all 0.2s;
+}
+
+.todo-main input[type="checkbox"]:checked {
+	background-color: #4CAF50;
+	border-color: #4CAF50;
+}
+
+.todo-main input[type="checkbox"]:checked::after {
+	content: "✓";
+	position: absolute;
+	color: white;
+	font-size: 12px;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.todo-card.completed .todo-task-text {
+	text-decoration: line-through;
+	color: #888;
+}
+
+.menu-container {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.todo-card:hover .menu-container {
+	opacity: 1;
+}
+
+.menu-button {
+	background: none;
+	border: none;
+	color: #666;
+	font-size: 20px;
+	padding: 4px;
+	width: 28px;
+	height: 28px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: all 0.2s;
+	visibility: visible;
+}
+
+.menu-button:hover {
+	background-color: rgba(0, 0, 0, 0.05);
+	border-radius: 4px;
+	color: #333;
+}
+
+.dropdown-menu + .menu-button,
+.menu-container:has(.dropdown-menu) {
+	opacity: 1;
+}
+
+.dropdown-menu {
+	position: absolute;
+	right: 0;
+	top: calc(100% + 4px);
+	background: #f8f9fa;
+	border-radius: 4px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	z-index: 1000;
+	min-width: 120px;
+	padding: 4px 0;
+}
+
+.dropdown-menu button {
+	width: 100%;
+	text-align: left;
+	padding: 8px 16px;
+	background: transparent;
+	color: #333;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+.dropdown-menu button:hover {
+	background-color: rgba(0, 0, 0, 0.05);
+}
