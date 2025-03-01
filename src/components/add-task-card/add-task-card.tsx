@@ -6,14 +6,16 @@ type AddTaskCardProps = {
 };
 
 export const AddTaskCard = ({ onAdd }: AddTaskCardProps) => {
-	const [isAddingTodo, setIsAddingTodo] = useState(false);
+	const [isEditMode, setIsEditMode] = useState(false);
+
 	const enterEditMode = () => {
-		if (isAddingTodo) return;
-		setIsAddingTodo(true);
+		if (isEditMode) return;
+		setIsEditMode(true);
 	};
+
 	const exitEditMode = () => {
-		if (!isAddingTodo) return;
-		setIsAddingTodo(false);
+		if (!isEditMode) return;
+		setIsEditMode(false);
 	};
 
 	const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,25 +24,37 @@ export const AddTaskCard = ({ onAdd }: AddTaskCardProps) => {
 		const form = e.currentTarget;
 		const task = form.elements[0] as HTMLInputElement;
 		const note = form.elements[1] as HTMLInputElement;
-		onAdd(task.value, note.value);
 
-		setIsAddingTodo(false);
+		onAdd(task.value, note.value);
+		exitEditMode();
 	};
 
 	return (
 		<div
-			className={`add-todo-card ${isAddingTodo ? "editing" : ""}`}
+			// TODO: data-stateを使用するように修正する
+			// TODO: 編集中はフォーカスリングを表示するように修正する
+			className={`add-todo-card ${isEditMode ? "editing" : ""}`}
 			onClick={enterEditMode}
+			onKeyDown={(e) => {
+				if (
+					e.target === e.currentTarget &&
+					(e.key === "Enter" || e.key === " ")
+				) {
+					// NOTE: イベントが子要素のformに伝播してタスク追加が行われることを防いでいる
+					e.preventDefault();
+					enterEditMode();
+				}
+			}}
 			role="button"
 			tabIndex={0}
 		>
-			{!isAddingTodo ? (
+			{!isEditMode ? (
 				<div className="add-todo-card-placeholder">
 					<span className="add-todo-card-icon">＋</span>Add a task
 				</div>
 			) : (
 				<form className="add-todo-form" onSubmit={handleAddTask}>
-					<input type="text" placeholder="Add a task..." />
+					<input type="text" placeholder="Add a task..." autoFocus />
 					<input type="text" placeholder="Add note..." />
 					<button type="submit" style={{ display: "none" }} />
 				</form>
