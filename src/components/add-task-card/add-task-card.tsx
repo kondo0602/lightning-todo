@@ -56,7 +56,7 @@ export const AddTaskCard = ({ onAdd }: AddTaskCardProps) => {
 				<form className="add-todo-form" onSubmit={handleAddTask}>
 					<input type="text" placeholder="Add a task..." autoFocus />
 					<input type="text" placeholder="Add note..." />
-					<button type="submit" style={{ display: "none" }} />
+					<button type="submit" className="visually-hidden" />
 				</form>
 			)}
 		</div>
