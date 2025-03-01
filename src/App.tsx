@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import { TodoListItemCard } from "./components/todo-list-item-card/todo-list-item-card";
+import { AddTaskCard } from "./components/add-task-card/add-task-card";
 
 interface Todo {
 	id: number;
@@ -59,25 +60,17 @@ function App() {
 	];
 
 	const [todos, setTodos] = useState<Todo[]>(initialTodos);
-	const [newTodo, setNewTodo] = useState("");
-	const [newNote, setNewNote] = useState("");
-	const [isAddingTodo, setIsAddingTodo] = useState(false);
 
-	const addTodo = () => {
-		if (newTodo.trim() === "") return;
-
+	const handleAddTodo = (text: string, note: string) => {
 		setTodos([
 			{
 				id: Date.now(),
-				text: newTodo,
+				text,
+				note,
 				completed: false,
-				note: newNote,
 			},
 			...todos,
 		]);
-		setNewTodo("");
-		setNewNote("");
-		setIsAddingTodo(false);
 	};
 
 	const toggleTodo = (id: number) => {
@@ -107,48 +100,10 @@ function App() {
 		<div className="container">
 			<h1>{getCurrentMonthYear()}</h1>
 
-			<div
-				className={`add-todo-card ${isAddingTodo ? "editing" : ""}`}
-				onClick={() => !isAddingTodo && setIsAddingTodo(true)}
-				onKeyDown={(e) => {
-					if (e.key === "Enter" || e.key === " ") {
-						!isAddingTodo && setIsAddingTodo(true);
-					}
-				}}
-				role="button"
-				tabIndex={0}
-			>
-				{isAddingTodo ? (
-					<div
-						className="add-todo-form"
-						onClick={(e) => e.stopPropagation()}
-						onKeyDown={(e) => e.stopPropagation()}
-					>
-						<input
-							type="text"
-							value={newTodo}
-							onChange={(e) => setNewTodo(e.target.value)}
-							onKeyPress={(e) => e.key === "Enter" && addTodo()}
-							placeholder="Enter new task..."
-							ref={(input) => input?.focus()}
-						/>
-						<input
-							type="text"
-							value={newNote}
-							onChange={(e) => setNewNote(e.target.value)}
-							onKeyPress={(e) => e.key === "Enter" && addTodo()}
-							placeholder="Add a note (optional)..."
-							className="note-input"
-						/>
-					</div>
-				) : (
-					<div className="add-todo-placeholder">
-						<span>＋</span> Add a task
-					</div>
-				)}
-			</div>
-
 			<ul className="todo-list">
+				<li className="todo-list-item">
+					<AddTaskCard onAdd={handleAddTodo} />
+				</li>
 				{activeTodos.map((todo) => (
 					<li key={todo.id} className="todo-list-item">
 						<TodoListItemCard
