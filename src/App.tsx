@@ -150,13 +150,15 @@ function App() {
 
 			<ul className="todo-list">
 				{activeTodos.map((todo) => (
-					<TodoListItemCard
-						key={todo.id}
-						todo={todo}
-						onToggle={toggleTodo}
-						onDelete={deleteTodo}
-						onSave={handleSaveEdit}
-					/>
+					<li key={todo.id} className="todo-list-item">
+						<TodoListItemCard
+							key={todo.id}
+							todo={todo}
+							onToggle={toggleTodo}
+							onDelete={deleteTodo}
+							onSave={handleSaveEdit}
+						/>
+					</li>
 				))}
 			</ul>
 
@@ -165,7 +167,7 @@ function App() {
 					<h2>DONE</h2>
 					<ul className="todo-list completed-list">
 						{completedTodos.map((todo) => (
-							<li key={todo.id} className="todo-list-item">
+							<li key={todo.id}>
 								<TodoListItemCard
 									todo={todo}
 									onToggle={toggleTodo}

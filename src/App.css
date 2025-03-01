@@ -81,19 +81,6 @@ button:hover {
 	list-style: none;
 }
 
-.todo-list li {
-	display: flex;
-	align-items: flex-start;
-	gap: 10px;
-	padding: 15px;
-	background: #f8f9fa;
-	border-radius: 8px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	margin-bottom: 10px;
-	transition: transform 0.2s, box-shadow 0.2s;
-	cursor: pointer;
-}
-
 .todo-content {
 	flex: 1;
 	min-width: 0;
@@ -123,12 +110,12 @@ button:hover {
 	cursor: pointer;
 }
 
-.todo-list li button {
-	margin-left: auto;
-	padding: 6px 12px;
-	font-size: 0.9em;
-	opacity: 0.8;
-	transition: opacity 0.2s;
+.todo-list li:hover .menu-container {
+	opacity: 1;
+}
+
+.todo-list-item {
+	padding: 0;
 }
 
 .menu-container {
@@ -137,9 +124,7 @@ button:hover {
 	transition: opacity 0.2s;
 }
 
-.todo-list li:hover .menu-container {
-	opacity: 1;
-}
+
 
 .menu-button {
 	background: none;
@@ -165,7 +150,6 @@ button:hover {
 .completed-section h2 {
 	font-size: 0.9em;
 	color: #666;
-	text-transform: lowercase;
 	margin-bottom: 16px;
 	text-align: left;
 	font-weight: normal;
