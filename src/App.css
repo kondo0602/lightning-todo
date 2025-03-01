@@ -81,35 +81,6 @@ button:hover {
 	list-style: none;
 }
 
-.todo-content {
-	flex: 1;
-	min-width: 0;
-}
-
-.todo-main {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-}
-
-.todo-note {
-	margin-left: 24px;
-	font-size: 0.9em;
-	color: #5c6b7a;
-	font-style: italic;
-	margin-top: 8px;
-	padding-top: 8px;
-	border-top: 1px solid #eee;
-	word-break: break-word;
-	overflow-wrap: break-word;
-}
-
-.todo-main input[type="checkbox"] {
-	width: 18px;
-	height: 18px;
-	cursor: pointer;
-}
-
 .todo-list li:hover .menu-container {
 	opacity: 1;
 }
@@ -124,24 +95,6 @@ button:hover {
 	transition: opacity 0.2s;
 }
 
-
-
-.menu-button {
-	background: none;
-	border: none;
-	color: #666;
-	font-size: 20px;
-	padding: 4px 8px;
-	cursor: pointer;
-	transition: all 0.2s;
-	visibility: visible;
-}
-
-.menu-button:hover {
-	background-color: rgba(0, 0, 0, 0.05);
-	border-radius: 4px;
-	color: #333;
-}
 
 .completed-section {
 	margin-top: 40px;
