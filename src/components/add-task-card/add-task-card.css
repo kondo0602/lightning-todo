@@ -1,49 +1,38 @@
 .add-todo-card {
-	padding: 12px;
 	background: #3d3d3d;
 	border-radius: 8px;
 	cursor: pointer;
 }
 
-.add-todo-card:hover {
-	background: #454545;
-}
-
-.add-todo-placeholder {
-	display: flex;
+.add-todo-card-placeholder {
+  display: flex;
 	align-items: center;
+  padding: 12px;
 	gap: 12px;
 	color: #ffffff;
 }
 
-.add-todo-placeholder span {
+.add-todo-card-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 18px;
 	height: 18px;
 	background: #555555;
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	color: #ffffff;
 	font-size: 14px;
-	color: white;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 	line-height: 1;
-	padding-bottom: 1px;
-}
-
-.add-todo-placeholder span:hover {
-	background: #45a049;
+	border-radius: 50%;
 }
 
 .add-todo-form {
 	display: flex;
 	flex-direction: column;
-	gap: 8px;
 }
 
 .add-todo-form input {
 	width: 100%;
-	padding: 8px;
+	padding: 12px;
 	border: none;
 	outline: none;
 	background: transparent;
@@ -51,6 +40,11 @@
 	font-size: inherit;
 }
 
+.add-todo-form input:nth-child(2) {
+	font-size: 0.9em;
+	border-top: 1px solid #4c4c4c;
+}
+
 .add-todo-form input::placeholder {
-	color: #888;
+	color: #c2c2c2;
 }

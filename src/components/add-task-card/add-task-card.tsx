@@ -1,11 +1,11 @@
 import { useState, useRef } from "react";
 import "./add-task-card.css";
 
-interface AddTaskCardProps {
+type AddTaskCardProps = {
 	onAdd: (text: string, note: string) => void;
-}
+};
 
-export function AddTaskCard({ onAdd }: AddTaskCardProps) {
+export const AddTaskCard = ({ onAdd }: AddTaskCardProps) => {
 	const [isAddingTodo, setIsAddingTodo] = useState(false);
 	const [newTodo, setNewTodo] = useState("");
 	const [newNote, setNewNote] = useState("");
@@ -39,11 +39,11 @@ export function AddTaskCard({ onAdd }: AddTaskCardProps) {
 			tabIndex={0}
 		>
 			{!isAddingTodo ? (
-				<div className="add-todo-placeholder">
-					<span>＋</span> Add a task
+				<div className="add-todo-card-placeholder">
+					<span className="add-todo-card-icon">＋</span> Add a task
 				</div>
 			) : (
-				<div
+				<form
 					className="add-todo-form"
 					onClick={(e) => e.stopPropagation()}
 					onKeyDown={(e) => e.stopPropagation()}
@@ -53,6 +53,7 @@ export function AddTaskCard({ onAdd }: AddTaskCardProps) {
 						value={newTodo}
 						onChange={(e) => setNewTodo(e.target.value)}
 						onKeyPress={(e) => e.key === "Enter" && handleAdd()}
+						placeholder="Add a task..."
 						ref={inputRef}
 					/>
 					<input
@@ -61,10 +62,9 @@ export function AddTaskCard({ onAdd }: AddTaskCardProps) {
 						onChange={(e) => setNewNote(e.target.value)}
 						onKeyPress={(e) => e.key === "Enter" && handleAdd()}
 						placeholder="Add note..."
-						className="note-input"
 					/>
-				</div>
+				</form>
 			)}
 		</div>
 	);
-}
+};
