@@ -31,9 +31,9 @@ export const AddTaskCard = ({ onAdd }: AddTaskCardProps) => {
 
 	return (
 		<div
-			// TODO: data-stateを使用するように修正する
 			// TODO: 編集中はフォーカスリングを表示するように修正する
-			className={`add-todo-card ${isEditMode ? "editing" : ""}`}
+			className="add-todo-card"
+			data-state={isEditMode ? "editing" : "placeholder"}
 			onClick={enterEditMode}
 			onKeyDown={(e) => {
 				if (
