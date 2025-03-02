@@ -1,18 +1,11 @@
 .add-todo-card {
 	background: #3d3d3d;
 	border-radius: 8px;
-	padding: 12px;
 	cursor: pointer;
 	outline: none;
 }
 
-.add-todo-card:focus {
-	outline: 2px solid #2d662f;
-	outline-offset: 2px;
-}
-
-.add-todo-card[data-state="editing"] {
-	padding: 0px;
+.add-todo-card:focus-within {
 	outline: 2px solid #2d662f;
 	outline-offset: 2px;
 }
@@ -20,6 +13,7 @@
 .add-todo-card-placeholder {
 	display: flex;
 	align-items: center;
+	padding: 12px;
 	gap: 12px;
 	color: #ffffff;
 }
@@ -42,6 +36,11 @@
 	flex-direction: column;
 }
 
+/* フォームが非表示の状態（フォーカスされていない時） */
+.add-todo-card:not(:focus-within) .add-todo-form {
+	display: none;
+}
+
 .add-todo-form input {
 	width: 100%;
 	padding: 12px;
@@ -59,4 +58,19 @@
 .add-todo-form input:nth-child(2) {
 	font-size: 0.9em;
 	border-top: 1px solid #4c4c4c;
+}
+
+.add-todo-card:focus-within .add-todo-card-placeholder {
+  position: fixed !important;
+  inset: 0 !important;
+  display: block !important;
+  inline-size: 4px !important;
+  block-size: 4px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  contain: strict !important;
+  pointer-events: none !important;
+  visibility: visible !important;
+  border: none !important;
+  opacity: 0 !important;
 }
