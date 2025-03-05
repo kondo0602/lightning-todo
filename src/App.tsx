@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { TodoListItemCard } from "./components/todo-list-item-card/todo-list-item-card";
 import { AddTaskCard } from "./components/add-task-card/add-task-card";
@@ -32,37 +32,26 @@ function App() {
 		return `${month} ${year}`;
 	};
 
-	const initialTodos: Todo[] = [
-		{
-			id: 1,
-			text: "Create a new project presentation. Create a new project presentation. Create a new project presentation.asdfadsfadsfads",
-			note: "Include Q1 metrics and future roadmap",
-			completed: false,
-		},
-		{
-			id: 2,
-			text: "Review pull requests",
-			note: "Focus on the authentication module changes",
-			completed: false,
-		},
-		{
-			id: 3,
-			text: "Update documentation",
-			note: "Add examples for new API endpoints",
-			completed: true,
-		},
-		{
-			id: 4,
-			text: "Fix navigation bug",
-			note: "Issue occurs on mobile devices only",
-			completed: true,
-		},
-	];
+	const [todos, setTodos] = useState<Todo[]>([]);
 
-	const [todos, setTodos] = useState<Todo[]>(initialTodos);
+	// 初回マウント時にストレージからデータを読み込む
+	useEffect(() => {
+		const loadTodos = async () => {
+			const result = await chrome.storage.local.get(["todos"]);
+			setTodos(result.todos || []);
+		};
+		loadTodos();
+	}, []);
+
+	// todosが更新されたらストレージに保存
+	useEffect(() => {
+		if (todos.length > 0) {
+			chrome.storage.local.set({ todos });
+		}
+	}, [todos]);
 
 	const handleAddTodo = (text: string, note: string) => {
-		setTodos([
+		const newTodos = [
 			{
 				id: Date.now(),
 				text,
@@ -70,7 +59,8 @@ function App() {
 				completed: false,
 			},
 			...todos,
-		]);
+		];
+		setTodos(newTodos);
 	};
 
 	const toggleTodo = (id: number) => {
