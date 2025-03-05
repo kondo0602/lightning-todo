@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { AddTaskCard } from "./add-task-card";
+import { TodoAddCard } from "./todo-add-card";
 
 const meta = {
-	title: "Components/AddTaskCard",
-	component: AddTaskCard,
+	title: "Components/TodoAddCard",
+	component: TodoAddCard,
 	parameters: {
 		layout: "centered",
 		backgrounds: {
@@ -16,7 +16,7 @@ const meta = {
 			],
 		},
 	},
-} satisfies Meta<typeof AddTaskCard>;
+} satisfies Meta<typeof TodoAddCard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

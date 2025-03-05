@@ -1,16 +1,17 @@
-.add-todo-card {
+.todo-add-card {
 	background: #3d3d3d;
 	border-radius: 8px;
 	cursor: pointer;
 	outline: none;
+	width: 100%;
 }
 
-.add-todo-card:focus-within {
+.todo-add-card:focus-within {
 	outline: 2px solid #2d662f;
 	outline-offset: 2px;
 }
 
-.add-todo-card-placeholder {
+.todo-add-card-placeholder {
 	display: flex;
 	align-items: center;
 	padding: 12px;
@@ -18,7 +19,7 @@
 	color: #ffffff;
 }
 
-.add-todo-card-icon {
+.todo-add-card-icon {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -31,17 +32,18 @@
 	border-radius: 50%;
 }
 
-.add-todo-form {
+.todo-add-form {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 }
 
 /* フォームが非表示の状態（フォーカスされていない時） */
-.add-todo-card:not(:focus-within) .add-todo-form {
+.todo-add-card:not(:focus-within) .todo-add-form {
 	display: none;
 }
 
-.add-todo-form input {
+.todo-add-form input {
 	width: 100%;
 	padding: 12px;
 	border: none;
@@ -51,22 +53,23 @@
 	font-size: inherit;
 }
 
-.add-todo-form input::placeholder {
+.todo-add-form input::placeholder {
+	width: 100%;
 	color: #c2c2c2;
 }
 
-.add-todo-form input:nth-child(2) {
+.todo-add-form input:nth-child(2) {
 	font-size: 0.9em;
 	border-top: 1px solid #4c4c4c;
 }
 
-.add-todo-card:focus-within .add-todo-card-placeholder {
-  position: fixed !important;
-  inset: 0 !important;
-  display: block !important;
-  inline-size: 4px !important;
-  block-size: 4px !important;
-  padding: 0 !important;
+.todo-add-card:focus-within .todo-add-card-placeholder {
+	position: fixed !important;
+	inset: 0 !important;
+	display: block !important;
+	inline-size: 4px !important;
+	block-size: 4px !important;
+	padding: 0 !important;
   margin: 0 !important;
   contain: strict !important;
   pointer-events: none !important;

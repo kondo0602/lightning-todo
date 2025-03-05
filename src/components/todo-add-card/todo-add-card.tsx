@@ -1,11 +1,11 @@
 import { useRef } from "react";
-import "./add-task-card.css";
+import "./todo-add-card.css";
 
-type AddTaskCardProps = {
+type TodoAddCardProps = {
 	onAdd: (text: string, note: string) => void;
 };
 
-export const AddTaskCard = ({ onAdd }: AddTaskCardProps) => {
+export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
@@ -26,15 +26,15 @@ export const AddTaskCard = ({ onAdd }: AddTaskCardProps) => {
 
 	return (
 		<div
-			className="add-todo-card"
+			className="todo-add-card"
 			role="button"
 			tabIndex={-1}
 			onClick={() => inputRef.current?.focus()}
 		>
-			<div className="add-todo-card-placeholder">
-				<span className="add-todo-card-icon">＋</span>Add a task
+			<div className="todo-add-card-placeholder">
+				<span className="todo-add-card-icon">＋</span>Add a task
 			</div>
-			<form className="add-todo-form" onSubmit={handleAddTask}>
+			<form className="todo-add-form" onSubmit={handleAddTask}>
 				<input
 					ref={inputRef}
 					type="text"

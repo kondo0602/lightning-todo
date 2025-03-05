@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import { TodoListItemCard } from "./components/todo-list-item-card/todo-list-item-card";
-import { AddTaskCard } from "./components/add-task-card/add-task-card";
+import { TodoAddCard } from "./components/todo-add-card/todo-add-card";
 
 interface Todo {
 	id: number;
@@ -80,7 +80,7 @@ function App() {
 
 			<ul className="todo-list">
 				<li className="todo-list-item">
-					<AddTaskCard onAdd={handleAddTodo} />
+					<TodoAddCard onAdd={handleAddTodo} />
 				</li>
 				{activeTodos.map((todo) => (
 					<li key={todo.id} className="todo-list-item">
