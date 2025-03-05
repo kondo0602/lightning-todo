@@ -11,25 +11,13 @@ interface Todo {
 }
 
 function App() {
-	const getCurrentMonthYear = () => {
-		const months = [
-			"JANUARY",
-			"FEBRUARY",
-			"MARCH",
-			"APRIL",
-			"MAY",
-			"JUNE",
-			"JULY",
-			"AUGUST",
-			"SEPTEMBER",
-			"OCTOBER",
-			"NOVEMBER",
-			"DECEMBER",
-		];
+	const getCurrentDate = () => {
 		const now = new Date();
-		const month = months[now.getMonth()];
-		const year = now.getFullYear();
-		return `${month} ${year}`;
+		const month = now.getMonth() + 1;
+		const date = now.getDate();
+		const dayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+		const day = dayNames[now.getDay()];
+		return `${month}/${date} ${day}`;
 	};
 
 	const [todos, setTodos] = useState<Todo[]>([]);
@@ -88,7 +76,7 @@ function App() {
 
 	return (
 		<div className="container">
-			<h1>{getCurrentMonthYear()}</h1>
+			<div className="date-display">{getCurrentDate()}</div>
 
 			<ul className="todo-list">
 				<li className="todo-list-item">
