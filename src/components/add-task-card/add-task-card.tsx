@@ -15,7 +15,10 @@ export const AddTaskCard = ({ onAdd }: AddTaskCardProps) => {
 		const task = form.elements[0] as HTMLInputElement;
 		const note = form.elements[1] as HTMLInputElement;
 
-		onAdd(task.value, note.value);
+		const taskText = task.value.trim();
+		const noteText = note.value.trim();
+
+		onAdd(taskText, noteText);
 		task.value = "";
 		note.value = "";
 		task.blur();
@@ -32,8 +35,17 @@ export const AddTaskCard = ({ onAdd }: AddTaskCardProps) => {
 				<span className="add-todo-card-icon">＋</span>Add a task
 			</div>
 			<form className="add-todo-form" onSubmit={handleAddTask}>
-				<input ref={inputRef} type="text" placeholder="Add a task..." />
-				<input type="text" placeholder="Add note..." />
+				<input
+					ref={inputRef}
+					type="text"
+					placeholder="Add a task..."
+					required
+				/>
+				<input
+					type="text"
+					placeholder="Add note..."
+					onClick={(e) => e.stopPropagation()}
+				/>
 				<button type="submit" className="visually-hidden" tabIndex={-1} />
 			</form>
 		</div>
