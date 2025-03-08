@@ -16,6 +16,13 @@ const meta = {
 			],
 		},
 	},
+	decorators: [
+		(Story) => (
+			<div style={{ width: "400px" }}>
+				<Story />
+			</div>
+		),
+	],
 } satisfies Meta<typeof TodoAddCard>;
 
 export default meta;
