@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { TodoAddCard } from "./todo-add-card";
 
-const meta = {
+const meta: Meta<typeof TodoAddCard> = {
 	title: "Components/TodoAddCard",
 	component: TodoAddCard,
 	parameters: {
