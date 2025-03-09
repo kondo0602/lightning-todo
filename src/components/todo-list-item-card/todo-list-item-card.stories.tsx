@@ -37,20 +37,17 @@ export const Default: Story = {
 export const WithNote: Story = {
 	args: {
 		todo: {
-			id: "a6b98b95-69eb-4d9d-87aa-e309738af7ae",
-			text: "プロジェクトの計画を立てる",
-			completed: false,
-			note: "チームメンバーと相談する必要あり",
+			...Default.args?.todo!,
+			note: "終わったらアイスコーヒーが飲める",
 		},
 	},
 };
 
-export const LongText: Story = {
+export const WithLongText: Story = {
 	args: {
 		todo: {
-			id: "53a01088-6e87-4ff7-b402-7faa41265098",
+			...Default.args?.todo!,
 			text: "これは非常に長いタスクのテキストです。複数行にわたって表示されるかどうかを確認するためのものです。レイアウトが崩れないことを確認します。",
-			completed: false,
 			note: "これも長いノートのテキストです。ノートも複数行にわたって適切に表示されるかどうかを確認します。",
 		},
 	},
