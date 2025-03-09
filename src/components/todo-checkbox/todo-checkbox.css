@@ -8,8 +8,8 @@
   margin-block-start: 1px;
   border-radius: 50%;
   appearance: none;
-  background-color: transparent;
-  border: 2px solid #666;
+  background-color: #000000;
+  border: 1px solid #666;
   position: relative;
   transition: all 0.2s;
 }
@@ -22,9 +22,19 @@
 .todo-checkbox:checked::after {
   content: "✓";
   position: absolute;
-  color: white;
-  font-size: 12px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-} 
+  color: white;
+  font-size: 12px;
+}
+
+.todo-checkbox:disabled {
+  background-color: #333;
+}
+
+.todo-checkbox:checked:disabled {
+  background-color: #7EB77F;
+  border-color: #7EB77F;
+  opacity: 0.7;
+}

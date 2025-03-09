@@ -7,6 +7,7 @@ export const TodoCheckbox = ({
 	checked,
 	onChange,
 	onClick,
+	...props
 }: TodoCheckboxProps) => {
 	return (
 		<input
@@ -15,6 +16,7 @@ export const TodoCheckbox = ({
 			checked={checked}
 			onChange={onChange}
 			onClick={onClick}
+			{...props}
 		/>
 	);
 };
