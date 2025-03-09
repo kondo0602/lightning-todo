@@ -1,28 +1,23 @@
 .todo-card {
 	position: relative;
 	display: flex;
-	align-items: flex-start;
+	flex-direction: column;
 	background: #3d3d3d;
 	gap: 8px;
 	border-radius: 8px;
 	cursor: pointer;
 }
 
-.todo-content {
-	flex: 1;
-	min-width: 0;
-}
-
-.todo-main {
+.todo-task-container {
 	display: flex;
 	align-items: flex-start;
 	padding: 12px;
 	gap: 10px;
-	min-width: 0;
 }
 
-.todo-task-text,
-input.todo-note {
+.todo-card textarea {
+	width: 100%;
+	padding: 12px;
 	border: none;
 	outline: none;
 	background: transparent;
@@ -30,13 +25,11 @@ input.todo-note {
 	font-family: inherit;
 	resize: none;
 	overflow: hidden;
-	spellcheck: false;
-	-webkit-appearance: none;
 	box-shadow: none;
 	cursor: pointer;
 }
 
-.todo-main input[type="checkbox"] {
+.todo-task-container input[type="checkbox"] {
 	width: 18px;
 	height: 18px;
 	cursor: pointer;
@@ -52,12 +45,12 @@ input.todo-note {
 	transition: all 0.2s;
 }
 
-.todo-main input[type="checkbox"]:checked {
+.todo-task-container input[type="checkbox"]:checked {
 	background-color: #4CAF50;
 	border-color: #4CAF50;
 }
 
-.todo-main input[type="checkbox"]:checked::after {
+.todo-task-container input[type="checkbox"]:checked::after {
 	content: "✓";
 	position: absolute;
 	color: white;
@@ -141,48 +134,4 @@ input.todo-note {
 
 .dropdown-menu.open {
 	display: block;
-}
-
-.todo-edit-mode {
-	display: none;
-}
-
-.todo-edit-mode.editing {
-	display: block;
-}
-
-.todo-view-mode {
-	display: block;
-}
-
-.todo-card:focus-within .todo-view-mode {
-	position: fixed !important;
-	inset: 0 !important;
-	display: block !important;
-	inline-size: 4px !important;
-	block-size: 4px !important;
-	padding: 0 !important;
-  margin: 0 !important;
-  contain: strict !important;
-  pointer-events: none !important;
-  visibility: visible !important;
-  border: none !important;
-  opacity: 0 !important;
-}
-
-/* 編集中のスタイル */
-.todo-card.editing .todo-task-text,
-.todo-card.editing input.todo-note {
-	cursor: text;
-	background-color: rgba(255, 255, 255, 0.05);
-}
-
-/* 空のノートを非表示にする（プレースホルダーのみ表示） */
-.todo-note-container:has(input[value=""]:not(:focus)) {
-	opacity: 0.6;
-}
-
-/* メニューを常に表示状態にする */
-.todo-card.editing .menu-container {
-	opacity: 1;
 }

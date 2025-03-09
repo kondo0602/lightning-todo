@@ -17,28 +17,19 @@ type TodoListItemCardProps = {
 
 export const TodoListItemCard = (props: TodoListItemCardProps) => {
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
-	const noteInputRef = useRef<HTMLInputElement>(null);
 	const menuRef = useRef<HTMLDivElement>(null);
-	const cardRef = useRef<HTMLDivElement>(null);
 
 	const handleSave = () => {
-		if (textareaRef.current && noteInputRef.current) {
-			const newText = textareaRef.current.value.trim();
-			const newNote = noteInputRef.current.value.trim();
-
-			// 値が変わっていたら保存
-			if (newText !== props.todo.text || newNote !== props.todo.note) {
-				props.onSave(props.todo.id, newText, newNote);
-			}
-		}
+		// if (textareaRef.current && noteInputRef.current) {
+		// 	const newText = textareaRef.current.value.trim();
+		// 	// 値が変わっていたら保存
+		// 	if (newText !== props.todo.text || newNote !== props.todo.note) {
+		// 		props.onSave(props.todo.id, newText, newNote);
+		// 	}
+		// }
 	};
 
 	const handleFocus = (element: HTMLElement) => {
-		// フォーカス時にカードをアクティブ状態にする
-		if (cardRef.current) {
-			cardRef.current.classList.add("editing");
-		}
-
 		// 要素を編集可能にする
 		if (
 			element instanceof HTMLTextAreaElement ||
@@ -51,11 +42,6 @@ export const TodoListItemCard = (props: TodoListItemCardProps) => {
 	const handleBlur = (element: HTMLElement) => {
 		// 編集終了時に保存
 		handleSave();
-
-		// カードの編集状態を解除
-		if (cardRef.current) {
-			cardRef.current.classList.remove("editing");
-		}
 
 		// 要素を読み取り専用に戻す
 		if (
@@ -84,12 +70,12 @@ export const TodoListItemCard = (props: TodoListItemCardProps) => {
 	return (
 		<div
 			className={`todo-card ${props.todo.completed ? "completed" : ""}`}
-			ref={cardRef}
 			role="button"
 			tabIndex={-1}
+			onClick={() => textareaRef.current?.focus()}
 		>
-			<div className="todo-content">
-				<div className="todo-main">
+			<form>
+				<div className="todo-task-container">
 					<input
 						type="checkbox"
 						checked={props.todo.completed}
@@ -98,32 +84,27 @@ export const TodoListItemCard = (props: TodoListItemCardProps) => {
 					/>
 					<textarea
 						className="todo-task-text"
-						value={props.todo.text}
-						onChange={(e) => (e.currentTarget.value = e.currentTarget.value)}
 						ref={textareaRef}
+						placeholder="Add a task..."
+						rows={1}
 						onFocus={(e) => handleFocus(e.currentTarget)}
 						onBlur={(e) => handleBlur(e.currentTarget)}
 						onKeyDown={handleKeyDown}
-						readOnly
-						spellCheck={false}
 					/>
 				</div>
-				<div className="todo-note-container">
-					<input
-						type="text"
-						className="todo-note"
-						value={props.todo.note}
-						onChange={(e) => (e.currentTarget.value = e.currentTarget.value)}
-						ref={noteInputRef}
-						placeholder="Add a note..."
-						onFocus={(e) => handleFocus(e.currentTarget)}
-						onBlur={(e) => handleBlur(e.currentTarget)}
-						onKeyDown={handleKeyDown}
-						readOnly
-					/>
-				</div>
-			</div>
-			<div className="menu-container">
+				{/* <div className="todo-note-container"> */}
+				<textarea
+					className="todo-note"
+					placeholder="Add a note..."
+					rows={1}
+					onClick={(e) => e.stopPropagation()}
+					onFocus={(e) => handleFocus(e.currentTarget)}
+					onBlur={(e) => handleBlur(e.currentTarget)}
+					onKeyDown={handleKeyDown}
+				/>
+				{/* </div> */}
+			</form>
+			{/* <div className="menu-container">
 				<button type="button" className="menu-button" onClick={toggleMenu}>
 					⋮
 				</button>
@@ -140,7 +121,7 @@ export const TodoListItemCard = (props: TodoListItemCardProps) => {
 						Delete
 					</button>
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 };
