@@ -60,22 +60,22 @@ export const TodoListItemCard = (props: TodoListItemCardProps) => {
 						onClick={(e) => e.stopPropagation()}
 					/>
 					<textarea
-						className="todo-task-text"
+						className="todo-task-textarea"
 						ref={textareaRef}
 						placeholder="Add a task..."
 						rows={1}
 						onKeyDown={handleKeyDown}
 					/>
 				</div>
-				{/* <div className="todo-note-container"> */}
-				<textarea
-					className="todo-note"
-					placeholder="Add a note..."
-					rows={1}
-					onClick={(e) => e.stopPropagation()}
-					onKeyDown={handleKeyDown}
-				/>
-				{/* </div> */}
+				<div className="todo-note-container">
+					<textarea
+						className="todo-note-textarea"
+						placeholder="Add a note..."
+						rows={1}
+						onClick={(e) => e.stopPropagation()}
+						onKeyDown={handleKeyDown}
+					/>
+				</div>
 			</form>
 			{/* <div className="menu-container">
 				<button type="button" className="menu-button" onClick={toggleMenu}>

@@ -2,31 +2,52 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 	background: #3d3d3d;
-	gap: 8px;
 	border-radius: 8px;
+	outline: none;
 	cursor: pointer;
+}
+
+.todo-card:focus-within {
+	outline: 2px solid #2d662f;
+	outline-offset: 2px;
+}
+
+.todo-task-textarea {
+	width: 100%;
+	background: transparent;
+	color: #ffffff;
+	font-size: inherit;
+	field-sizing: content;
+	border: none;
+	outline: none;
+	resize: none;
+}
+
+.todo-note-textarea {
+	display:block;
+	width: 100%;
+	padding: 12px;
+	background: transparent;
+	color: #ffffff;
+	font-size: inherit;
+	field-sizing: content;
+	border: none;
+	outline: none;
+	resize: none;
 }
 
 .todo-task-container {
 	display: flex;
 	align-items: flex-start;
 	padding: 12px;
-	gap: 10px;
+	gap: 8px;
 }
 
-.todo-card textarea {
-	width: 100%;
-	padding: 12px;
-	border: none;
-	outline: none;
-	background: transparent;
-	padding: 0;
-	font-family: inherit;
-	resize: none;
-	overflow: hidden;
-	box-shadow: none;
-	cursor: pointer;
+.todo-note-container {
+	font-size: 0.9em;
+	border-top: 1px solid #4c4c4c;
 }
 
 .todo-task-container input[type="checkbox"] {
