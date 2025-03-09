@@ -2,13 +2,13 @@ import { useRef } from "react";
 import "./todo-list-item-card.css";
 interface TodoListItemCardProps {
 	todo: Todo;
-	onToggle: (id: number) => void;
-	onDelete: (id: number) => void;
-	onSave: (id: number, text: string, note: string) => void;
+	onToggle: (id: string) => void;
+	onDelete: (id: string) => void;
+	onSave: (id: string, text: string, note: string) => void;
 }
 
 interface Todo {
-	id: number;
+	id: string;
 	text: string;
 	completed: boolean;
 	note: string;
