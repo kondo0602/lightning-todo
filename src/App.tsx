@@ -1,14 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { TodoListItemCard } from "./components/todo-list-item-card/todo-list-item-card";
 import { TodoAddCard } from "./components/todo-add-card/todo-add-card";
-
-interface Todo {
-	id: number;
-	text: string;
-	completed: boolean;
-	note: string;
-}
+import { Todo, TodoCard } from "./components/todo-card/todo-card";
 
 function App() {
 	const getCurrentDate = () => {
@@ -41,7 +34,7 @@ function App() {
 	const handleAddTodo = (text: string, note: string) => {
 		const newTodos = [
 			{
-				id: Date.now(),
+				id: Date.now().toString(),
 				text,
 				note,
 				completed: false,
@@ -51,7 +44,7 @@ function App() {
 		setTodos(newTodos);
 	};
 
-	const toggleTodo = (id: number) => {
+	const toggleTodo = (id: string) => {
 		setTodos(
 			todos.map((todo) =>
 				todo.id === id ? { ...todo, completed: !todo.completed } : todo,
@@ -59,14 +52,14 @@ function App() {
 		);
 	};
 
-	const deleteTodo = (id: number) => {
+	const deleteTodo = (id: string) => {
 		setTodos(todos.filter((todo) => todo.id !== id));
 	};
 
 	const activeTodos = todos.filter((todo) => !todo.completed);
 	const completedTodos = todos.filter((todo) => todo.completed);
 
-	const handleSaveEdit = (id: number, text: string, note: string) => {
+	const handleSaveEdit = (id: string, text: string, note: string) => {
 		setTodos(
 			todos.map((todo) =>
 				todo.id === id ? { ...todo, text: text, note: note } : todo,
@@ -84,7 +77,7 @@ function App() {
 				</li>
 				{activeTodos.map((todo) => (
 					<li key={todo.id} className="todo-list-item">
-						<TodoListItemCard
+						<TodoCard
 							key={todo.id}
 							todo={todo}
 							onToggle={toggleTodo}
@@ -101,7 +94,7 @@ function App() {
 					<ul className="todo-list completed-list">
 						{completedTodos.map((todo) => (
 							<li key={todo.id}>
-								<TodoListItemCard
+								<TodoCard
 									todo={todo}
 									onToggle={toggleTodo}
 									onDelete={deleteTodo}
