@@ -51,6 +51,7 @@
 	field-sizing: content;
 	border: none;
 	outline: none;
+	resize: none;
 }
 
 .todo-add-form textarea:nth-child(2) {
