@@ -4,8 +4,8 @@ import "./todo-list-item-card.css";
 type Todo = {
 	id: string;
 	text: string;
-	completed: boolean;
 	note: string;
+	completed: boolean;
 };
 
 type TodoListItemCardProps = {
@@ -27,29 +27,6 @@ export const TodoListItemCard = (props: TodoListItemCardProps) => {
 		// 		props.onSave(props.todo.id, newText, newNote);
 		// 	}
 		// }
-	};
-
-	const handleFocus = (element: HTMLElement) => {
-		// 要素を編集可能にする
-		if (
-			element instanceof HTMLTextAreaElement ||
-			element instanceof HTMLInputElement
-		) {
-			element.readOnly = false;
-		}
-	};
-
-	const handleBlur = (element: HTMLElement) => {
-		// 編集終了時に保存
-		handleSave();
-
-		// 要素を読み取り専用に戻す
-		if (
-			element instanceof HTMLTextAreaElement ||
-			element instanceof HTMLInputElement
-		) {
-			element.readOnly = true;
-		}
 	};
 
 	const toggleMenu = () => {
@@ -87,8 +64,6 @@ export const TodoListItemCard = (props: TodoListItemCardProps) => {
 						ref={textareaRef}
 						placeholder="Add a task..."
 						rows={1}
-						onFocus={(e) => handleFocus(e.currentTarget)}
-						onBlur={(e) => handleBlur(e.currentTarget)}
 						onKeyDown={handleKeyDown}
 					/>
 				</div>
@@ -98,8 +73,6 @@ export const TodoListItemCard = (props: TodoListItemCardProps) => {
 					placeholder="Add a note..."
 					rows={1}
 					onClick={(e) => e.stopPropagation()}
-					onFocus={(e) => handleFocus(e.currentTarget)}
-					onBlur={(e) => handleBlur(e.currentTarget)}
 					onKeyDown={handleKeyDown}
 				/>
 				{/* </div> */}
