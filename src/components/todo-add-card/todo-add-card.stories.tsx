@@ -15,7 +15,7 @@ const meta: Meta<typeof TodoAddCard> = {
 			</div>
 		),
 	],
-} satisfies Meta<typeof TodoAddCard>;
+};
 
 export default meta;
 
