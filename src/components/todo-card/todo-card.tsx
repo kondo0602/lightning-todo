@@ -17,23 +17,23 @@ type TodoCardProps = {
 
 export const TodoCard = (props: TodoCardProps) => {
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
-	const menuRef = useRef<HTMLDivElement>(null);
+	// const menuRef = useRef<HTMLDivElement>(null);
 
-	const handleSave = () => {
-		// if (textareaRef.current && noteInputRef.current) {
-		// 	const newText = textareaRef.current.value.trim();
-		// 	// 値が変わっていたら保存
-		// 	if (newText !== props.todo.text || newNote !== props.todo.note) {
-		// 		props.onSave(props.todo.id, newText, newNote);
-		// 	}
-		// }
-	};
+	// const handleSave = () => {
+	// if (textareaRef.current && noteInputRef.current) {
+	// 	const newText = textareaRef.current.value.trim();
+	// 	// 値が変わっていたら保存
+	// 	if (newText !== props.todo.text || newNote !== props.todo.note) {
+	// 		props.onSave(props.todo.id, newText, newNote);
+	// 	}
+	// }
+	// };
 
-	const toggleMenu = () => {
-		if (menuRef.current) {
-			menuRef.current.classList.toggle("open");
-		}
-	};
+	// const toggleMenu = () => {
+	// 	if (menuRef.current) {
+	// 		menuRef.current.classList.toggle("open");
+	// 	}
+	// };
 
 	const handleKeyDown = (
 		e: React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>,
