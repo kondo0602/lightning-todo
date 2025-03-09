@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import "./todo-card.css";
+import { TodoCheckbox } from "../todo-checkbox/todo-checkbox";
 
 export type Todo = {
 	id: string;
@@ -53,8 +54,7 @@ export const TodoCard = (props: TodoCardProps) => {
 		>
 			<form>
 				<div className="todo-task-container">
-					<input
-						type="checkbox"
+					<TodoCheckbox
 						checked={props.todo.completed}
 						onChange={() => props.onToggle(props.todo.id)}
 						onClick={(e) => e.stopPropagation()}
