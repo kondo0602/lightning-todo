@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { TodoListItemCard } from "./todo-list-item-card";
-import { fn } from "@storybook/test";
+import { fn, userEvent, within } from "@storybook/test";
 
 const meta: Meta<typeof TodoListItemCard> = {
 	title: "Components/TodoListItemCard",
@@ -27,10 +27,27 @@ export const Default: Story = {
 	args: {
 		todo: {
 			id: "6f488950-603a-4ddc-9ef9-ba8ef9b5b1bd",
-			text: "エニタイムに行って走る",
+			text: "エニタイムに行って5km走る",
 			completed: false,
 			note: "",
 		},
+	},
+};
+
+export const EditMode: Story = {
+	args: {
+		todo: {
+			...Default.args?.todo!,
+		},
+	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+
+		const card = canvas.getByRole("button");
+
+		if (card) {
+			await userEvent.click(card);
+		}
 	},
 };
 
@@ -47,8 +64,8 @@ export const WithLongText: Story = {
 	args: {
 		todo: {
 			...Default.args?.todo!,
-			text: "これは非常に長いタスクのテキストです。複数行にわたって表示されるかどうかを確認するためのものです。レイアウトが崩れないことを確認します。",
-			note: "これも長いノートのテキストです。ノートも複数行にわたって適切に表示されるかどうかを確認します。",
+			text: "エニタイムに行って5km走る！".repeat(10),
+			note: "終わったらアイスコーヒーが飲める！".repeat(10),
 		},
 	},
 };
@@ -56,10 +73,8 @@ export const WithLongText: Story = {
 export const Completed: Story = {
 	args: {
 		todo: {
-			id: "567f0378-9fae-411e-87bd-bcba5d54af4a",
-			text: "メールを確認する",
+			...WithNote.args?.todo!,
 			completed: true,
-			note: "返信が必要なものをチェック",
 		},
 	},
 };

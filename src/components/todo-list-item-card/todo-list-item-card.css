@@ -9,6 +9,10 @@
 	cursor: pointer;
 }
 
+.todo-card.completed .todo-task-textarea {
+	color: #888;
+}
+
 .todo-card:focus-within {
 	outline: 2px solid #2d662f;
 	outline-offset: 2px;
