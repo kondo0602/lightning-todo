@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { TodoAddCard } from "./todo-add-card";
-
+import { userEvent, within } from "@storybook/test";
 const meta: Meta<typeof TodoAddCard> = {
 	title: "Components/TodoAddCard",
 	component: TodoAddCard,
@@ -43,9 +43,12 @@ export const InputMode: Story = {
 		},
 	},
 	play: async ({ canvasElement }) => {
-		const input = canvasElement.querySelector("input");
-		if (input) {
-			input.focus();
+		const canvas = within(canvasElement);
+
+		const card = canvas.getByRole("button");
+
+		if (card) {
+			await userEvent.click(card);
 		}
 	},
 };
