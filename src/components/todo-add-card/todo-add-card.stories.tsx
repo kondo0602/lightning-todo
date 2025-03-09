@@ -23,7 +23,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const InputMode: Story = {
+export const EditMode: Story = {
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
 
