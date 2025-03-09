@@ -1,9 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { TodoAddCard } from "./todo-add-card";
-import { userEvent, within } from "@storybook/test";
+import { fn, userEvent, within } from "@storybook/test";
+
 const meta: Meta<typeof TodoAddCard> = {
 	title: "Components/TodoAddCard",
 	component: TodoAddCard,
+	args: {
+		onAdd: fn(),
+	},
 	parameters: {
 		layout: "centered",
 		backgrounds: {
@@ -26,22 +30,12 @@ const meta: Meta<typeof TodoAddCard> = {
 } satisfies Meta<typeof TodoAddCard>;
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-	args: {
-		onAdd: (text: string, note: string) => {
-			console.log("Added task:", { text, note });
-		},
-	},
-};
+export const Default: Story = {};
 
 export const InputMode: Story = {
-	args: {
-		onAdd: (text: string, note: string) => {
-			console.log("Added task:", { text, note });
-		},
-	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
 
