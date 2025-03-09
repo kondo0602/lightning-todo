@@ -178,6 +178,7 @@ input.todo-note {
 	z-index: 1000;
 	min-width: 120px;
 	padding: 4px 0;
+	display: none;
 }
 
 .dropdown-menu button {
@@ -193,4 +194,24 @@ input.todo-note {
 
 .dropdown-menu button:hover {
 	background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dropdown-menu.open {
+	display: block;
+}
+
+.todo-edit-mode {
+	display: none;
+}
+
+.todo-edit-mode.editing {
+	display: block;
+}
+
+.todo-view-mode {
+	display: block;
+}
+
+form.editing + .todo-view-mode {
+	display: none;
 }
