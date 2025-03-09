@@ -8,18 +8,6 @@ const meta: Meta<typeof TodoAddCard> = {
 	args: {
 		onAdd: fn(),
 	},
-	parameters: {
-		layout: "centered",
-		backgrounds: {
-			default: "dark",
-			values: [
-				{
-					name: "dark",
-					value: "#1a1a1a",
-				},
-			],
-		},
-	},
 	decorators: [
 		(Story) => (
 			<div style={{ width: "400px" }}>
