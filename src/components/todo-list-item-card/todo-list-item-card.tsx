@@ -15,7 +15,7 @@ type TodoListItemCardProps = {
 	onSave: (id: string, text: string, note: string) => void;
 };
 
-export function TodoListItemCard(props: TodoListItemCardProps) {
+export const TodoListItemCard = (props: TodoListItemCardProps) => {
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 	const noteInputRef = useRef<HTMLInputElement>(null);
 	const menuRef = useRef<HTMLDivElement>(null);
@@ -143,4 +143,4 @@ export function TodoListItemCard(props: TodoListItemCardProps) {
 			</div>
 		</div>
 	);
-}
+};
