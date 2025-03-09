@@ -6,13 +6,13 @@ type TodoAddCardProps = {
 };
 
 export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
-	const inputRef = useRef<HTMLInputElement>(null);
+	const textareaRef = useRef<HTMLTextAreaElement>(null);
 
 	const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		const form = e.currentTarget;
-		const task = form.elements[0] as HTMLInputElement;
+		const task = form.elements[0] as HTMLTextAreaElement;
 		const note = form.elements[1] as HTMLInputElement;
 
 		const taskText = task.value.trim();
@@ -29,21 +29,21 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 			className="todo-add-card"
 			role="button"
 			tabIndex={-1}
-			onClick={() => inputRef.current?.focus()}
+			onClick={() => textareaRef.current?.focus()}
 		>
 			<div className="todo-add-card-placeholder">
 				<span className="todo-add-card-icon">＋</span>Add a task
 			</div>
 			<form className="todo-add-form" onSubmit={handleAddTask}>
-				<input
-					ref={inputRef}
-					type="text"
+				<textarea
+					ref={textareaRef}
 					placeholder="Add a task..."
 					required
+					rows={1}
 				/>
-				<input
-					type="text"
+				<textarea
 					placeholder="Add note..."
+					rows={1}
 					onClick={(e) => e.stopPropagation()}
 				/>
 				<button type="submit" className="visually-hidden" tabIndex={-1} />
