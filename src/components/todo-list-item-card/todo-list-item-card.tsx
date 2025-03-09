@@ -62,6 +62,7 @@ export const TodoListItemCard = (props: TodoListItemCardProps) => {
 					<textarea
 						className="todo-task-textarea"
 						ref={textareaRef}
+						defaultValue={props.todo.text}
 						placeholder="Add a task..."
 						rows={1}
 						onKeyDown={handleKeyDown}
@@ -70,6 +71,7 @@ export const TodoListItemCard = (props: TodoListItemCardProps) => {
 				<div className="todo-note-container">
 					<textarea
 						className="todo-note-textarea"
+						defaultValue={props.todo.note}
 						placeholder="Add a note..."
 						rows={1}
 						onClick={(e) => e.stopPropagation()}
