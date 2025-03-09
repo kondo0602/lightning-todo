@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { TodoListItemCard } from "./todo-list-item-card";
+import { TodoCard } from "./todo-card";
 import { fn, userEvent, within } from "@storybook/test";
 
-const meta: Meta<typeof TodoListItemCard> = {
-	title: "Components/TodoListItemCard",
-	component: TodoListItemCard,
+const meta: Meta<typeof TodoCard> = {
+	title: "Components/TodoCard",
+	component: TodoCard,
 	args: {
 		onToggle: fn(),
 		onDelete: fn(),

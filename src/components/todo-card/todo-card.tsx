@@ -1,21 +1,21 @@
 import { useRef } from "react";
-import "./todo-list-item-card.css";
+import "./todo-card.css";
 
-type Todo = {
+export type Todo = {
 	id: string;
 	text: string;
 	note: string;
 	completed: boolean;
 };
 
-type TodoListItemCardProps = {
+type TodoCardProps = {
 	todo: Todo;
 	onToggle: (id: string) => void;
 	onDelete: (id: string) => void;
 	onSave: (id: string, text: string, note: string) => void;
 };
 
-export const TodoListItemCard = (props: TodoListItemCardProps) => {
+export const TodoCard = (props: TodoCardProps) => {
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 	const menuRef = useRef<HTMLDivElement>(null);
 
