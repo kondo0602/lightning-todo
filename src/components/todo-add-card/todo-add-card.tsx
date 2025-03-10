@@ -10,6 +10,11 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+		// 日本語入力の変換中はEnterキーを無視する
+		if (e.nativeEvent.isComposing) {
+			return;
+		}
+
 		// NOTE: textareaでEnterを押すと改行されてしまいフォーム送信がされないため、以下のようにする
 		//
 		// Enterだけ押した場合：フォーム送信
