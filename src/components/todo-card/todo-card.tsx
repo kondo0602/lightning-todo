@@ -18,27 +18,8 @@ type TodoCardProps = {
 
 export const TodoCard = (props: TodoCardProps) => {
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
-	// const menuRef = useRef<HTMLDivElement>(null);
 
-	// const handleSave = () => {
-	// if (textareaRef.current && noteInputRef.current) {
-	// 	const newText = textareaRef.current.value.trim();
-	// 	// 値が変わっていたら保存
-	// 	if (newText !== props.todo.text || newNote !== props.todo.note) {
-	// 		props.onSave(props.todo.id, newText, newNote);
-	// 	}
-	// }
-	// };
-
-	// const toggleMenu = () => {
-	// 	if (menuRef.current) {
-	// 		menuRef.current.classList.toggle("open");
-	// 	}
-	// };
-
-	const handleKeyDown = (
-		e: React.KeyboardEvent<HTMLTextAreaElement>,
-	) => {
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
 		// 日本語入力の変換中はEnterキーを無視する
 		if (e.nativeEvent.isComposing) {
 			return;
@@ -84,24 +65,6 @@ export const TodoCard = (props: TodoCardProps) => {
 					/>
 				</div>
 			</form>
-			{/* <div className="menu-container">
-				<button type="button" className="menu-button" onClick={toggleMenu}>
-					⋮
-				</button>
-				<div className="dropdown-menu" ref={menuRef}>
-					<button
-						type="button"
-						onClick={() => {
-							props.onDelete(props.todo.id);
-							if (menuRef.current) {
-								menuRef.current.classList.remove("open");
-							}
-						}}
-					>
-						Delete
-					</button>
-				</div>
-			</div> */}
 		</div>
 	);
 };
