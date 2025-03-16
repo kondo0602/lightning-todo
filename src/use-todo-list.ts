@@ -1,10 +1,26 @@
 import { useSyncLocalStorage } from "./hooks/use-sync-local-storage";
-import { Todo } from "./repositories/todo-repository";
+
+export type Todo = {
+	id: string;
+	task: string;
+	note: string;
+	completed: boolean;
+  completedAt: Date | null;
+};
 
 export const useTodoList = () => {
+
+  // 初期化時にcompletedAtが過去日のデータを削除する
+  const onInit = () => {
+    const now = new Date();
+    const pastTodos = todos.filter((todo) => todo.completedAt && todo.completedAt < now);
+    setTodos(todos.filter((todo) => !pastTodos.includes(todo)));
+  };
+
 	const { storedValue: todos, setStoredValue: setTodos } = useSyncLocalStorage(
 		"todos",
 		[] as Todo[],
+    onInit,
 	);
 
   const addTodo = (task: string, note: string) => {
@@ -14,6 +30,7 @@ export const useTodoList = () => {
         task,
         note,
         completed: false,
+        completedAt: null,
       },
       ...todos,
     ];

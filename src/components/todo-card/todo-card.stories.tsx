@@ -29,8 +29,9 @@ export const Default: Story = {
 		todo: {
 			id: "6f488950-603a-4ddc-9ef9-ba8ef9b5b1bd",
 			task: "エニタイムに行って5km走る",
-			completed: false,
 			note: "",
+			completed: false,
+			completedAt: null,
 		},
 	},
 };
@@ -73,6 +74,7 @@ export const Completed: Story = {
 		todo: {
 			...WithNote.args?.todo!,
 			completed: true,
+			completedAt: new Date(),
 		},
 	},
 };

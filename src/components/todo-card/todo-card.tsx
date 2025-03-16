@@ -2,7 +2,7 @@ import "./todo-card.css";
 import { TodoCheckbox } from "../todo-checkbox/todo-checkbox";
 import { TodoTaskTextarea } from "../todo-task-textarea/todo-task-textarea";
 import { TodoNoteTextarea } from "../todo-note-textarea/todo-note-textarea";
-import { Todo } from "../../repositories/todo-repository";
+import { Todo } from "../../use-todo-list";
 
 type TodoCardProps = {
 	todo: Todo;
