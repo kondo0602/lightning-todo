@@ -43,11 +43,8 @@ export const EditMode: Story = {
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
 
-		const card = canvas.getByRole("button");
-
-		if (card) {
-			await userEvent.click(card);
-		}
+		const textarea = canvas.getByRole("textbox");
+		await userEvent.click(textarea);
 	},
 };
 

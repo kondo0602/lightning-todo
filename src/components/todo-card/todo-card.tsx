@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import "./todo-card.css";
 import { TodoCheckbox } from "../todo-checkbox/todo-checkbox";
 
@@ -17,8 +16,6 @@ type TodoCardProps = {
 };
 
 export const TodoCard = (props: TodoCardProps) => {
-	const textareaRef = useRef<HTMLTextAreaElement>(null);
-
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
 		// 日本語入力の変換中はEnterキーを無視する
 		if (e.nativeEvent.isComposing) {
@@ -32,22 +29,15 @@ export const TodoCard = (props: TodoCardProps) => {
 	};
 
 	return (
-		<div
-			className={`todo-card ${props.todo.completed ? "completed" : ""}`}
-			role="button"
-			tabIndex={-1}
-			onClick={() => textareaRef.current?.focus()}
-		>
+		<div className={`todo-card ${props.todo.completed ? "completed" : ""}`}>
 			<form>
 				<div className="todo-task-container">
 					<TodoCheckbox
 						checked={props.todo.completed}
 						onChange={() => props.onToggle(props.todo.id)}
-						onClick={(e) => e.stopPropagation()}
 					/>
 					<textarea
 						className="todo-task-textarea"
-						ref={textareaRef}
 						defaultValue={props.todo.text}
 						placeholder="Add a task..."
 						rows={1}
@@ -60,7 +50,6 @@ export const TodoCard = (props: TodoCardProps) => {
 						defaultValue={props.todo.note}
 						placeholder="Add a note..."
 						rows={1}
-						onClick={(e) => e.stopPropagation()}
 						onKeyDown={handleKeyDown}
 					/>
 				</div>
