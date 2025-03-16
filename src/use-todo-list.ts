@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { useSyncLocalStorage } from "./hooks/use-sync-local-storage";
 
 export type Todo = {
@@ -26,7 +27,7 @@ export const useTodoList = () => {
   const addTodo = (task: string, note: string) => {
     const newTodos = [
       {
-        id: Date.now().toString(),
+        id: uuidv4(),
         task,
         note,
         completed: false,
