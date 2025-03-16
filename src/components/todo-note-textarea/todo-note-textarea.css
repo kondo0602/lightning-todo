@@ -1,0 +1,10 @@
+.todo-note-textarea {
+  padding: 12px;
+	background: transparent;
+	color: #888;
+  font-size: 0.9em;
+	field-sizing: content;
+	border: none;
+	outline: none;
+	resize: none;
+}

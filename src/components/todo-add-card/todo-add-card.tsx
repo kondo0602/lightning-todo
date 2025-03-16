@@ -1,5 +1,7 @@
 import { useRef } from "react";
 import "./todo-add-card.css";
+import { TodoTaskTextarea } from "../todo-task-textarea/todo-task-textarea";
+import { TodoNoteTextarea } from "../todo-note-textarea/todo-note-textarea";
 
 type TodoAddCardProps = {
 	onAdd: (text: string, note: string) => void;
@@ -52,17 +54,12 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 				<span className="todo-add-card-icon">＋</span>Add a task
 			</div>
 			<form className="todo-add-form" onSubmit={handleAddTask} ref={formRef}>
-				<textarea
+				<TodoTaskTextarea
 					ref={textareaRef}
-					placeholder="Add a task..."
-					required
-					rows={1}
+					className="textarea-task"
 					onKeyDown={handleKeyDown}
 				/>
-				<textarea
-					placeholder="Add note..."
-					rows={1}
-					// NOTE: イベントが伝播してタスク追加のtextareaにフォーカスしてしまうため、stopPropagationしている
+				<TodoNoteTextarea
 					onClick={(e) => e.stopPropagation()}
 					onKeyDown={handleKeyDown}
 				/>
