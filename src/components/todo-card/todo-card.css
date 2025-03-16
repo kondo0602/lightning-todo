@@ -55,7 +55,8 @@
 }
 
 .todo-card:has(.todo-task-textarea:focus) .todo-note-container,
-.todo-card:has(.todo-note-textarea:focus) .todo-note-container {
+.todo-card:has(.todo-note-textarea:focus) .todo-note-container,
+.todo-card:has(.todo-note-textarea:not(:placeholder-shown)) .todo-note-container {
 	display: block;
 }
 
