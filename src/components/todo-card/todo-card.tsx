@@ -28,15 +28,35 @@ export const TodoCard = (props: TodoCardProps) => {
 		}
 	};
 
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		// FormDataを使ってフォームの値を取得
+		const formData = new FormData(e.currentTarget);
+		const newText = formData.get("text")?.toString() || "";
+		const newNote = formData.get("note")?.toString() || "";
+
+		// テキストか注釈が変更された場合のみ保存する
+		if (newText !== props.todo.text || newNote !== props.todo.note) {
+			props.onSave(props.todo.id, newText, newNote);
+		}
+	};
+
+	const handleBlur = (e: React.FocusEvent<HTMLFormElement>) => {
+		// フォームのsubmitイベントを発火
+		e.currentTarget.requestSubmit();
+	};
+
 	return (
 		<div className={`todo-card ${props.todo.completed ? "completed" : ""}`}>
-			<form>
+			<form onSubmit={handleSubmit} onBlur={handleBlur}>
 				<div className="todo-task-container">
 					<TodoCheckbox
 						checked={props.todo.completed}
 						onChange={() => props.onToggle(props.todo.id)}
 					/>
 					<textarea
+						name="text"
 						className="todo-task-textarea"
 						defaultValue={props.todo.text}
 						placeholder="Add a task..."
@@ -46,6 +66,7 @@ export const TodoCard = (props: TodoCardProps) => {
 				</div>
 				<div className="todo-note-container">
 					<textarea
+						name="note"
 						className="todo-note-textarea"
 						defaultValue={props.todo.note}
 						placeholder="Add a note..."
