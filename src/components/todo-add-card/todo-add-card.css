@@ -1,12 +1,12 @@
 .todo-add-card {
 	width: 100%;
-	background: #3d3d3d;
+	background: var(--color-surface);
 	border-radius: 8px;
 	outline: none;
 }
 
 .todo-add-card:focus-within {
-	outline: 2px solid #2d662f;
+	outline: 2px solid var(--color-accent-darker);
 	outline-offset: 2px;
 }
 
@@ -15,7 +15,6 @@
 	align-items: center;
 	padding: var(--spacing-sm);
 	gap: var(--spacing-sm);
-	color: #ffffff;
 }
 
 .todo-add-card-icon {
@@ -25,7 +24,6 @@
 	width: 18px;
 	height: 18px;
 	background: #555555;
-	color: #ffffff;
 	font-size: 14px;
 	line-height: 1;
 	border-radius: 50%;

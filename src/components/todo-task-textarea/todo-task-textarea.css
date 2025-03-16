@@ -1,6 +1,6 @@
 .todo-task-textarea {
 	background: transparent;
-	color: #ffffff;
+	color: var(--color-text-primary);
 	font-size: inherit;
 	field-sizing: content;
 	border: none;

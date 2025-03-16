@@ -15,7 +15,6 @@
 
 .date-display {
 	font-size: 1.2em;
-	color: #ffffff;
 	font-weight: 500;
 }
 
@@ -28,18 +27,13 @@
 	list-style: none;
 }
 
-.todo-list li:hover .menu-container {
-	opacity: 1;
-}
-
 .todo-list-item {
 	padding: 0;
 }
 
 .completed-section h2 {
 	font-size: 0.9em;
-	color: #666;
+	color: var(--color-text-secondary);
 	margin-bottom: var(--spacing-sm);
 	text-align: left;
-	font-weight: normal;
 }

@@ -1,8 +1,19 @@
 body {
+  /* colors */
+  --color-background: #242424;
+  --color-surface: #3d3d3d;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #888888;
+  --color-text-placeholder: #888888;
+  --color-border: #4c4c4c;
+  --color-accent-lighter: #4CAF50;
+  --color-accent-lighter-disabled: #7EB77F;
+  --color-accent-darker: #2d662f;
+
+  /* spacing */
   --spacing-xxs: 4px;
   --spacing-xs: 8px;
   --spacing-sm: 12px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
+  --spacing-md: 20px;
+  --spacing-lg: 32px;
 }
