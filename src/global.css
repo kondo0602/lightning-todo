@@ -1,6 +1,9 @@
-@layer settings;
+@layer settings, normalize, reset, utilities;
 
-@import "./styles/settings/variables.css" layer(settings);
+@import "./styles/variables.css" layer(settings);
+@import "modern-normalize/modern-normalize.css" layer(normalize);
+@import "./styles/reset.css" layer(reset);
+@import "./styles/utilities.css" layer(utilities);
 
 :root {
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -27,23 +30,4 @@ body {
 
 h1 {
 	font-size: 3.2em;
-}
-
-h1, h2, p, ul, ol {
-	margin: 0;
-}
-
-.visually-hidden {
-  position: fixed !important;
-  inset: 0 !important;
-  display: block !important;
-  inline-size: 4px !important;
-  block-size: 4px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  contain: strict !important;
-  pointer-events: none !important;
-  visibility: visible !important;
-  border: none !important;
-  opacity: 0 !important;
 }
