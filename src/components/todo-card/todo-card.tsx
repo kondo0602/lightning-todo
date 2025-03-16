@@ -2,13 +2,7 @@ import "./todo-card.css";
 import { TodoCheckbox } from "../todo-checkbox/todo-checkbox";
 import { TodoTaskTextarea } from "../todo-task-textarea/todo-task-textarea";
 import { TodoNoteTextarea } from "../todo-note-textarea/todo-note-textarea";
-
-export type Todo = {
-	id: string;
-	text: string;
-	note: string;
-	completed: boolean;
-};
+import { Todo } from "../../repositories/todo-repository";
 
 type TodoCardProps = {
 	todo: Todo;
@@ -35,12 +29,12 @@ export const TodoCard = (props: TodoCardProps) => {
 
 		// FormDataを使ってフォームの値を取得
 		const formData = new FormData(e.currentTarget);
-		const newText = formData.get("text")?.toString() || "";
+		const newTask = formData.get("task")?.toString() || "";
 		const newNote = formData.get("note")?.toString() || "";
 
 		// テキストか注釈が変更された場合のみ保存する
-		if (newText !== props.todo.text || newNote !== props.todo.note) {
-			props.onSave(props.todo.id, newText, newNote);
+		if (newTask !== props.todo.task || newNote !== props.todo.note) {
+			props.onSave(props.todo.id, newTask, newNote);
 		}
 	};
 
@@ -59,8 +53,8 @@ export const TodoCard = (props: TodoCardProps) => {
 					/>
 					<TodoTaskTextarea
 						className="todo-task-textarea"
-						name="text"
-						defaultValue={props.todo.text}
+						name="task"
+						defaultValue={props.todo.task}
 						onKeyDown={handleKeyDown}
 					/>
 				</div>

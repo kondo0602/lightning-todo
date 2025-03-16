@@ -1,6 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { TodoCard } from "./todo-card";
 import { fn, userEvent, within } from "@storybook/test";
+
+import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof TodoCard> = {
 	title: "Components/TodoCard",
@@ -27,7 +28,7 @@ export const Default: Story = {
 	args: {
 		todo: {
 			id: "6f488950-603a-4ddc-9ef9-ba8ef9b5b1bd",
-			text: "エニタイムに行って5km走る",
+			task: "エニタイムに行って5km走る",
 			completed: false,
 			note: "",
 		},
@@ -61,7 +62,7 @@ export const WithLongText: Story = {
 	args: {
 		todo: {
 			...Default.args?.todo!,
-			text: "エニタイムに行って5km走る！".repeat(10),
+			task: "エニタイムに行って5km走る！".repeat(10),
 			note: "終わったらアイスコーヒーが飲める！".repeat(10),
 		},
 	},

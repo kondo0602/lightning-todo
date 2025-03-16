@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
-import "./App.css";
 import { TodoAddCard } from "./components/todo-add-card/todo-add-card";
-import { Todo, TodoCard } from "./components/todo-card/todo-card";
+import { TodoCard } from "./components/todo-card/todo-card";
+import { useSyncLocalStorage } from "./hooks/use-sync-local-storage";
+import "./App.css";
+
+import type { Todo } from "./repositories/todo-repository";
 
 function App() {
 	const getCurrentDate = () => {
@@ -13,29 +15,16 @@ function App() {
 		return `${month}/${date} ${day}`;
 	};
 
-	const [todos, setTodos] = useState<Todo[]>([]);
+	const { storedValue: todos, setStoredValue: setTodos } = useSyncLocalStorage(
+		"todos",
+		[] as Todo[],
+	);
 
-	// 初回マウント時にストレージからデータを読み込む
-	useEffect(() => {
-		const loadTodos = async () => {
-			const result = await chrome.storage.local.get(["todos"]);
-			setTodos(result.todos || []);
-		};
-		loadTodos();
-	}, []);
-
-	// todosが更新されたらストレージに保存
-	useEffect(() => {
-		if (todos.length > 0) {
-			chrome.storage.local.set({ todos });
-		}
-	}, [todos]);
-
-	const handleAddTodo = (text: string, note: string) => {
+	const handleAddTodo = (task: string, note: string) => {
 		const newTodos = [
 			{
 				id: Date.now().toString(),
-				text,
+				task,
 				note,
 				completed: false,
 			},
