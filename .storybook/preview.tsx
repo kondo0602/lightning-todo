@@ -1,6 +1,6 @@
 import type { Preview } from "@storybook/react";
 import "modern-normalize/modern-normalize.css";
-import "../src/index.css";
+import "../src/global.css";
 
 const preview: Preview = {
 	parameters: {

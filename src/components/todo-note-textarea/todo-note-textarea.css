@@ -1,7 +1,7 @@
 .todo-note-textarea {
 	display: block;
 	width: 100%;
-  padding: 12px;
+  padding: var(--spacing-sm);
 	background: transparent;
 	color: #888;
   font-size: 0.9em;

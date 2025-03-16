@@ -13,8 +13,8 @@
 .todo-add-card-placeholder {
 	display: flex;
 	align-items: center;
-	padding: 12px;
-	gap: 12px;
+	padding: var(--spacing-sm);
+	gap: var(--spacing-sm);
 	color: #ffffff;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .textarea-task {
-	padding: 12px;
+	padding: var(--spacing-xs);
 }
 
 .todo-add-card:focus-within .todo-add-card-placeholder {

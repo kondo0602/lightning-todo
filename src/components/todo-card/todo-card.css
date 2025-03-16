@@ -32,8 +32,8 @@
 .todo-task-container {
 	display: flex;
 	align-items: flex-start;
-	padding: 12px;
-	gap: 8px;
+	padding: var(--spacing-sm);
+	gap: var(--spacing-xs);
 }
 
 .todo-note-container {

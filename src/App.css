@@ -1,7 +1,7 @@
 #root {
 	width: 360px;
 	min-height: 480px;
-	padding: 16px;
+	padding: var(--spacing-md);
 	font-size: 14px;
 }
 
@@ -10,12 +10,12 @@
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+	gap: var(--spacing-md);
 }
 
 .date-display {
 	font-size: 1.2em;
 	color: #ffffff;
-	margin-bottom: 24px;
 	font-weight: 500;
 }
 
@@ -24,7 +24,7 @@
 	width: 100%;
 	flex-direction: column;
 	padding: 0;
-	gap: 8px;
+	gap: var(--spacing-xs);
 	list-style: none;
 }
 
@@ -36,14 +36,10 @@
 	padding: 0;
 }
 
-.completed-section {
-	margin-top: 24px;
-}
-
 .completed-section h2 {
 	font-size: 0.9em;
 	color: #666;
-	margin-bottom: 8px;
+	margin-bottom: var(--spacing-sm);
 	text-align: left;
 	font-weight: normal;
 }
