@@ -12,7 +12,7 @@ export type Todo = {
 export const useTodoList = () => {
 
   // 初期化時にcompletedAtが過去日のデータを削除する
-  const onInit = () => {
+  const onInitialize = () => {
     const now = new Date();
     const pastTodos = todos.filter((todo) => todo.completedAt && todo.completedAt < now);
     setTodos(todos.filter((todo) => !pastTodos.includes(todo)));
@@ -21,7 +21,7 @@ export const useTodoList = () => {
 	const { storedValue: todos, setStoredValue: setTodos } = useSyncLocalStorage(
 		"todos",
 		[] as Todo[],
-    onInit,
+    onInitialize,
 	);
 
   const addTodo = (task: string, note: string) => {
