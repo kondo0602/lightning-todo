@@ -5,6 +5,7 @@
   font-size: 0.9em;
 	field-sizing: content;
 	border: none;
+  border-top: 1px solid #4c4c4c;
 	outline: none;
 	resize: none;
 }

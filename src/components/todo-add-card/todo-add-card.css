@@ -45,10 +45,6 @@
 	padding: 12px;
 }
 
-.todo-add-form textarea:nth-child(2) {
-	border-top: 1px solid #4c4c4c;
-}
-
 .todo-add-card:focus-within .todo-add-card-placeholder {
 	position: fixed !important;
 	inset: 0 !important;

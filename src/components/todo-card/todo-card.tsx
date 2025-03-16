@@ -1,5 +1,7 @@
 import "./todo-card.css";
 import { TodoCheckbox } from "../todo-checkbox/todo-checkbox";
+import { TodoTaskTextarea } from "../todo-task-textarea/todo-task-textarea";
+import { TodoNoteTextarea } from "../todo-note-textarea/todo-note-textarea";
 
 export type Todo = {
 	id: string;
@@ -55,22 +57,17 @@ export const TodoCard = (props: TodoCardProps) => {
 						checked={props.todo.completed}
 						onChange={() => props.onToggle(props.todo.id)}
 					/>
-					<textarea
-						name="text"
+					<TodoTaskTextarea
 						className="todo-task-textarea"
+						name="text"
 						defaultValue={props.todo.text}
-						placeholder="Add a task..."
-						rows={1}
 						onKeyDown={handleKeyDown}
 					/>
 				</div>
 				<div className="todo-note-container">
-					<textarea
+					<TodoNoteTextarea
 						name="note"
-						className="todo-note-textarea"
 						defaultValue={props.todo.note}
-						placeholder="Add a note..."
-						rows={1}
 						onKeyDown={handleKeyDown}
 					/>
 				</div>
