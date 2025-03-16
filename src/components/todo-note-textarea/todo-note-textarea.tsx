@@ -12,7 +12,6 @@ export const TodoNoteTextarea = ({
 		<textarea
 			className={clsx("todo-note-textarea", className)}
 			placeholder="Add a note..."
-			required
 			rows={1}
 			{...props}
 		/>
