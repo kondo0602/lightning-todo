@@ -8,9 +8,17 @@ function App() {
 		const now = new Date();
 		const month = now.getMonth() + 1;
 		const date = now.getDate();
-		const dayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+		const dayNames = [
+			"（日）",
+			"（月）",
+			"（火）",
+			"（水）",
+			"（木）",
+			"（金）",
+			"（土）",
+		];
 		const day = dayNames[now.getDay()];
-		return `${month}/${date} ${day}`;
+		return `${month} / ${date} ${day}`;
 	};
 
 	const {
