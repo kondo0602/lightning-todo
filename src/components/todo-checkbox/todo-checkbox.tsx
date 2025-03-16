@@ -16,6 +16,7 @@ export const TodoCheckbox = ({
 			checked={checked}
 			onChange={onChange}
 			onClick={onClick}
+			tabIndex={-1}
 			{...props}
 		/>
 	);
