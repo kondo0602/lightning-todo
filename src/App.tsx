@@ -1,9 +1,7 @@
 import { TodoAddCard } from "./components/todo-add-card/todo-add-card";
 import { TodoCard } from "./components/todo-card/todo-card";
-import { useSyncLocalStorage } from "./hooks/use-sync-local-storage";
+import { useTodoList } from "./use-todo-list";
 import "./App.css";
-
-import type { Todo } from "./repositories/todo-repository";
 
 function App() {
 	const getCurrentDate = () => {
@@ -15,46 +13,15 @@ function App() {
 		return `${month}/${date} ${day}`;
 	};
 
-	const { storedValue: todos, setStoredValue: setTodos } = useSyncLocalStorage(
-		"todos",
-		[] as Todo[],
-	);
-
-	const handleAddTodo = (task: string, note: string) => {
-		const newTodos = [
-			{
-				id: Date.now().toString(),
-				task,
-				note,
-				completed: false,
-			},
-			...todos,
-		];
-		setTodos(newTodos);
-	};
-
-	const toggleTodo = (id: string) => {
-		setTodos(
-			todos.map((todo) =>
-				todo.id === id ? { ...todo, completed: !todo.completed } : todo,
-			),
-		);
-	};
-
-	const deleteTodo = (id: string) => {
-		setTodos(todos.filter((todo) => todo.id !== id));
-	};
-
-	const activeTodos = todos.filter((todo) => !todo.completed);
-	const completedTodos = todos.filter((todo) => todo.completed);
-
-	const handleSaveEdit = (id: string, text: string, note: string) => {
-		setTodos(
-			todos.map((todo) =>
-				todo.id === id ? { ...todo, text: text, note: note } : todo,
-			),
-		);
-	};
+	const {
+		addTodo,
+		unCompleteTodo,
+		completeTodo,
+		deleteTodo,
+		activeTodos,
+		completedTodos,
+		handleSaveEdit,
+	} = useTodoList();
 
 	return (
 		<div className="container">
@@ -62,14 +29,14 @@ function App() {
 
 			<ul className="todo-list">
 				<li className="todo-list-item">
-					<TodoAddCard onAdd={handleAddTodo} />
+					<TodoAddCard onAdd={addTodo} />
 				</li>
 				{activeTodos.map((todo) => (
 					<li key={todo.id} className="todo-list-item">
 						<TodoCard
 							key={todo.id}
 							todo={todo}
-							onToggle={toggleTodo}
+							onToggle={completeTodo}
 							onDelete={deleteTodo}
 							onSave={handleSaveEdit}
 						/>
@@ -85,7 +52,7 @@ function App() {
 							<li key={todo.id}>
 								<TodoCard
 									todo={todo}
-									onToggle={toggleTodo}
+									onToggle={unCompleteTodo}
 									onDelete={deleteTodo}
 									onSave={handleSaveEdit}
 								/>
