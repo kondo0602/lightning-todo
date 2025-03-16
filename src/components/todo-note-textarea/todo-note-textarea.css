@@ -1,4 +1,5 @@
 .todo-note-textarea {
+	display: block;
   padding: 12px;
 	background: transparent;
 	color: #888;
