@@ -56,7 +56,7 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 			<form className="todo-add-form" onSubmit={handleAddTask} ref={formRef}>
 				<TodoTaskTextarea
 					ref={textareaRef}
-					className="textarea-task"
+					className="todo-add-card-task-textarea"
 					onKeyDown={handleKeyDown}
 				/>
 				<TodoNoteTextarea

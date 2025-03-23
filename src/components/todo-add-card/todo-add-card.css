@@ -57,3 +57,7 @@
   border: none !important;
   opacity: 0 !important;
 }
+
+.todo-add-card-task-textarea {
+	padding: var(--spacing-sm);
+}
