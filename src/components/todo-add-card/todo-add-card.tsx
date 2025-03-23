@@ -24,6 +24,7 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 		if (e.key === "Enter" && !e.shiftKey) {
 			e.preventDefault();
 			formRef.current?.requestSubmit();
+			textareaRef.current?.blur();
 		}
 	};
 
