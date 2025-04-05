@@ -38,14 +38,13 @@ export const TodoCard = (props: TodoCardProps) => {
 		}
 	};
 
-	const handleBlur = (e: React.FocusEvent<HTMLFormElement>) => {
-		// フォームのsubmitイベントを発火
-		e.currentTarget.requestSubmit();
-	};
-
 	return (
 		<div className={`todo-card ${props.todo.completed ? "completed" : ""}`}>
-			<form onSubmit={handleSubmit} onBlur={handleBlur}>
+			<form
+				className="todo-card-form"
+				onBlur={handleSubmit}
+				onSubmit={handleSubmit}
+			>
 				<div className="todo-task-container">
 					<TodoCheckbox
 						checked={props.todo.completed}
@@ -60,6 +59,7 @@ export const TodoCard = (props: TodoCardProps) => {
 				</div>
 				<div className="todo-note-container">
 					<TodoNoteTextarea
+						className="todo-note-textarea"
 						name="note"
 						defaultValue={props.todo.note}
 						onKeyDown={handleKeyDown}

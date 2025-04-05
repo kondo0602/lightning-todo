@@ -36,14 +36,7 @@
 }
 
 .todo-note-container {
-	display: none;
 	font-size: 0.9em;
-}
-
-.todo-card:has(.todo-task-textarea:focus) .todo-note-container,
-.todo-card:has(.todo-note-textarea:focus) .todo-note-container,
-.todo-card:has(.todo-note-textarea:not(:placeholder-shown)) .todo-note-container {
-	display: block;
 }
 
 .todo-card.completed .todo-task-text {
