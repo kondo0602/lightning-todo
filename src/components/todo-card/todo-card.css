@@ -13,7 +13,7 @@
 }
 
 .todo-card:focus-within {
-	outline: 2px solid var(--color-accent);
+	outline: 2px solid var(--color-accent-darker);
 	outline-offset: 2px;
 }
 
@@ -38,6 +38,7 @@
 .todo-note-container {
 	font-size: 0.9em;
 }
+
 
 .todo-card.completed .todo-task-text {
 	color: var(--color-text-secondary);
