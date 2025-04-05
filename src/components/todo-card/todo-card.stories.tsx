@@ -45,7 +45,7 @@ export const EditMode: Story = {
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
 
-		const textarea = canvas.getByRole("textbox");
+		const textarea = canvas.getByDisplayValue("エニタイムに行って5km走る");
 		await userEvent.click(textarea);
 	},
 };
