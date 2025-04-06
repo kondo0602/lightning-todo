@@ -19,10 +19,7 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true,
-			"a11y": {
-				"noAutoFocus": "off"
-			}
+			"recommended": true
 		}
 	},
 	"javascript": {

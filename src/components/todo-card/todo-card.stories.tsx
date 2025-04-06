@@ -1,5 +1,5 @@
-import { TodoCard } from "./todo-card";
 import { fn, userEvent, within } from "@storybook/test";
+import { TodoCard } from "./todo-card";
 
 import type { Meta, StoryObj } from "@storybook/react";
 

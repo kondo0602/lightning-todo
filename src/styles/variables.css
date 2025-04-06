@@ -1,20 +1,20 @@
 body {
-  /* colors */
-  --color-background: #242424;
-  --color-surface: #3d3d3d;
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #888888;
-  --color-text-placeholder: #888888;
-  --color-border: #4c4c4c;
-  --color-accent-lighter: #4CAF50;
-  --color-accent-lighter-disabled: #7EB77F;
-  --color-accent-darker: #2d662f;
+	/* colors */
+	--color-background: #242424;
+	--color-surface: #3d3d3d;
+	--color-text-primary: #ffffff;
+	--color-text-secondary: #888888;
+	--color-text-placeholder: #888888;
+	--color-border: #4c4c4c;
+	--color-accent-lighter: #4caf50;
+	--color-accent-lighter-disabled: #7eb77f;
+	--color-accent-darker: #2d662f;
 
-  /* spacing */
-  --space-unit: 16px;
-  --spacing-xxs: calc(var(--space-unit) * 0.25);
-  --spacing-xs: calc(var(--space-unit) * 0.5);
-  --spacing-sm: calc(var(--space-unit) * 0.75);
-  --spacing-md: calc(var(--space-unit) * 1.25);
-  --spacing-lg: calc(var(--space-unit) * 1.5);
+	/* spacing */
+	--space-unit: 16px;
+	--spacing-xxs: calc(var(--space-unit) * 0.25);
+	--spacing-xs: calc(var(--space-unit) * 0.5);
+	--spacing-sm: calc(var(--space-unit) * 0.75);
+	--spacing-md: calc(var(--space-unit) * 1.25);
+	--spacing-lg: calc(var(--space-unit) * 1.5);
 }

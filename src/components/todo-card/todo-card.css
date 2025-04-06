@@ -27,7 +27,6 @@
 	resize: none;
 }
 
-
 .todo-task-container {
 	display: flex;
 	align-items: flex-start;
@@ -38,7 +37,6 @@
 .todo-note-container {
 	font-size: 0.9em;
 }
-
 
 .todo-card.completed .todo-task-text {
 	color: var(--color-text-secondary);

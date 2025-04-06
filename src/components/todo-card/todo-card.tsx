@@ -1,9 +1,9 @@
 import "./todo-card.css";
-import { TodoCheckbox } from "../todo-checkbox/todo-checkbox";
-import { TodoTaskTextarea } from "../todo-task-textarea/todo-task-textarea";
-import { TodoNoteTextarea } from "../todo-note-textarea/todo-note-textarea";
-import { Todo } from "../../use-todo-list";
 import { FaAngleRight, FaRegTrashAlt } from "react-icons/fa";
+import type { Todo } from "../../use-todo-list";
+import { TodoCheckbox } from "../todo-checkbox/todo-checkbox";
+import { TodoNoteTextarea } from "../todo-note-textarea/todo-note-textarea";
+import { TodoTaskTextarea } from "../todo-task-textarea/todo-task-textarea";
 
 type TodoCardProps = {
 	todo: Todo;

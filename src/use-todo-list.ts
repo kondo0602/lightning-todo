@@ -1,79 +1,105 @@
-import { v4 as uuidv4 } from 'uuid';
+import { Temporal } from "temporal-polyfill";
+import { v4 as uuidv4 } from "uuid";
 import { useSyncLocalStorage } from "./hooks/use-sync-local-storage";
 
 export type Todo = {
 	id: string;
 	task: string;
 	note: string;
-  startAt: Date;
+	startAt: Temporal.PlainDate;
 	completed: boolean;
-  completedAt: Date | null;
+	completedAt: Temporal.PlainDate | null;
 };
 
 export const useTodoList = () => {
+	const onInitialize = () => {
+		const filteredTodos = todos.filter((todo) => {
+			if (!todo.completed || todo.completedAt === null) return true;
 
-  // 初期化時にcompletedAtが過去日のデータを削除する
-  const onInitialize = () => {
-    const now = new Date();
-    const pastTodos = todos.filter((todo) => todo.completedAt && todo.completedAt < now);
-    setTodos(todos.filter((todo) => !pastTodos.includes(todo)));
-  };
+			const duration = Temporal.Now.plainDateISO().since(todo.completedAt);
+			return duration.days > 1;
+		});
+
+		setTodos(filteredTodos);
+	};
 
 	const { storedValue: todos, setStoredValue: setTodos } = useSyncLocalStorage(
 		"todos",
 		[] as Todo[],
-    onInitialize,
+		onInitialize,
 	);
 
-  const addTodo = (task: string, note: string) => {
-    const newTodos = [
-      {
-        id: uuidv4(),
-        task,
-        note,
-        startAt: new Date(),
-        completed: false,
-        completedAt: null,
-      },
-      ...todos,
-    ];
-    setTodos(newTodos);
-  };
+	const addTodo = (task: string, note: string) => {
+		const newTodos = [
+			{
+				id: uuidv4(),
+				task,
+				note,
+				startAt: Temporal.Now.plainDateISO(),
+				completed: false,
+				completedAt: null,
+			},
+			...todos,
+		];
+		setTodos(newTodos);
+	};
 
-  const deleteTodo = (id: string) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
+	const deleteTodo = (id: string) => {
+		setTodos(todos.filter((todo) => todo.id !== id));
+	};
 
-  const unCompleteTodo = (id: string) => {
-    setTodos(todos.map((todo) => todo.id === id ? { ...todo, completed: false } : todo));
-  };
+	const unCompleteTodo = (id: string) => {
+		setTodos(
+			todos.map((todo) =>
+				todo.id === id ? { ...todo, completed: false } : todo,
+			),
+		);
+	};
 
-  const completeTodo = (id: string) => {
-    setTodos(todos.map((todo) => todo.id === id ? { ...todo, completed: true } : todo));
-  };
+	const completeTodo = (id: string) => {
+		setTodos(
+			todos.map((todo) =>
+				todo.id === id
+					? {
+							...todo,
+							completed: true,
+							completedAt: Temporal.Now.plainDateISO(),
+						}
+					: todo,
+			),
+		);
+	};
 
-  const postponeTodo = (id: string) => {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    setTodos(todos.map((todo) => todo.id === id ? { ...todo, startAt: tomorrow } : todo));
-  };
+	const postponeTodo = (id: string) => {
+		setTodos(
+			todos.map((todo) =>
+				todo.id === id
+					? { ...todo, startAt: Temporal.Now.plainDateISO() }
+					: todo,
+			),
+		);
+	};
 
-  const saveTodo = (id: string, text: string, note: string) => {
-    setTodos(todos.map((todo) => todo.id === id ? { ...todo, text: text, note: note } : todo));
-  };
+	const saveTodo = (id: string, text: string, note: string) => {
+		setTodos(
+			todos.map((todo) =>
+				todo.id === id ? { ...todo, text: text, note: note } : todo,
+			),
+		);
+	};
 
-  const activeTodos = todos.filter((todo) => !todo.completed);
+	const activeTodos = todos.filter((todo) => !todo.completed);
 
-  const completedTodos = todos.filter((todo) => todo.completed);
+	const completedTodos = todos.filter((todo) => todo.completed);
 
-  return {
-    addTodo,
-    deleteTodo,
-    unCompleteTodo,
-    completeTodo,
-    postponeTodo,
-    saveTodo,
-    activeTodos,
-    completedTodos,
-  };
+	return {
+		addTodo,
+		deleteTodo,
+		unCompleteTodo,
+		completeTodo,
+		postponeTodo,
+		saveTodo,
+		activeTodos,
+		completedTodos,
+	};
 };
