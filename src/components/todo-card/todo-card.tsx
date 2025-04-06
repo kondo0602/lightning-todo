@@ -66,6 +66,14 @@ export const TodoCard = (props: TodoCardProps) => {
 					/>
 				</div>
 			</form>
+			<button
+				className="trash-button"
+				type="button"
+				aria-label="trash"
+				onClick={() => props.onDelete(props.todo.id)}
+			>
+				trash
+			</button>
 		</div>
 	);
 };

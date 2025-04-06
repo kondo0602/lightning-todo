@@ -44,3 +44,29 @@
 	color: var(--color-text-secondary);
 	text-decoration: line-through;
 }
+
+.trash-button {
+	position: absolute;
+	top: var(--spacing-xs);
+	right: var(--spacing-xs);
+	background: none;
+	border: none;
+	border-radius: 4px;
+	color: var(--color-text-secondary);
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity 0.2s ease-in-out;
+	padding: 4px;
+}
+
+.trash-button:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.todo-card:hover .trash-button {
+	opacity: 1;
+}
+
+.todo-card:focus-within .trash-button {
+	opacity: 0;
+}
