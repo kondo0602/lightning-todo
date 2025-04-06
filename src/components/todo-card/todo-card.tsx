@@ -77,7 +77,7 @@ export const TodoCard = (props: TodoCardProps) => {
 					e.stopPropagation();
 				}}
 			>
-				trash
+				Delete
 			</button>
 		</div>
 	);
