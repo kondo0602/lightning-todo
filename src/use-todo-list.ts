@@ -5,6 +5,7 @@ export type Todo = {
 	id: string;
 	task: string;
 	note: string;
+  startAt: Date;
 	completed: boolean;
   completedAt: Date | null;
 };
@@ -30,6 +31,7 @@ export const useTodoList = () => {
         id: uuidv4(),
         task,
         note,
+        startAt: new Date(),
         completed: false,
         completedAt: null,
       },
