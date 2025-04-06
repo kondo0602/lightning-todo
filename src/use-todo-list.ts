@@ -40,6 +40,10 @@ export const useTodoList = () => {
     setTodos(newTodos);
   };
 
+  const deleteTodo = (id: string) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
   const unCompleteTodo = (id: string) => {
     setTodos(todos.map((todo) => todo.id === id ? { ...todo, completed: false } : todo));
   };
@@ -48,24 +52,28 @@ export const useTodoList = () => {
     setTodos(todos.map((todo) => todo.id === id ? { ...todo, completed: true } : todo));
   };
 
-  const deleteTodo = (id: string) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+  const postponeTodo = (id: string) => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    setTodos(todos.map((todo) => todo.id === id ? { ...todo, startAt: tomorrow } : todo));
   };
 
-  const activeTodos = todos.filter((todo) => !todo.completed);
-  const completedTodos = todos.filter((todo) => todo.completed);
-
-  const handleSaveEdit = (id: string, text: string, note: string) => {
+  const saveTodo = (id: string, text: string, note: string) => {
     setTodos(todos.map((todo) => todo.id === id ? { ...todo, text: text, note: note } : todo));
   };
 
+  const activeTodos = todos.filter((todo) => !todo.completed);
+
+  const completedTodos = todos.filter((todo) => todo.completed);
+
   return {
     addTodo,
+    deleteTodo,
     unCompleteTodo,
     completeTodo,
-    deleteTodo,
+    postponeTodo,
+    saveTodo,
     activeTodos,
     completedTodos,
-    handleSaveEdit,
   };
 };

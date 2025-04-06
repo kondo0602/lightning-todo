@@ -23,12 +23,13 @@ function App() {
 
 	const {
 		addTodo,
+		deleteTodo,
 		unCompleteTodo,
 		completeTodo,
-		deleteTodo,
+		postponeTodo,
 		activeTodos,
 		completedTodos,
-		handleSaveEdit,
+		saveTodo,
 	} = useTodoList();
 
 	return (
@@ -45,8 +46,9 @@ function App() {
 							key={todo.id}
 							todo={todo}
 							onToggle={completeTodo}
+							onPostpone={postponeTodo}
 							onDelete={deleteTodo}
-							onSave={handleSaveEdit}
+							onSave={saveTodo}
 						/>
 					</li>
 				))}
@@ -61,8 +63,9 @@ function App() {
 								<TodoCard
 									todo={todo}
 									onToggle={unCompleteTodo}
+									onPostpone={postponeTodo}
 									onDelete={deleteTodo}
-									onSave={handleSaveEdit}
+									onSave={saveTodo}
 								/>
 							</li>
 						))}

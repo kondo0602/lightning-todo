@@ -3,11 +3,12 @@ import { TodoCheckbox } from "../todo-checkbox/todo-checkbox";
 import { TodoTaskTextarea } from "../todo-task-textarea/todo-task-textarea";
 import { TodoNoteTextarea } from "../todo-note-textarea/todo-note-textarea";
 import { Todo } from "../../use-todo-list";
-import { FaRegTrashAlt } from "react-icons/fa";
+import { FaAngleRight, FaRegTrashAlt } from "react-icons/fa";
 
 type TodoCardProps = {
 	todo: Todo;
 	onToggle: (id: string) => void;
+	onPostpone: (id: string) => void;
 	onDelete: (id: string) => void;
 	onSave: (id: string, text: string, note: string) => void;
 };
@@ -67,6 +68,20 @@ export const TodoCard = (props: TodoCardProps) => {
 					/>
 				</div>
 			</form>
+			{!props.todo.completed && (
+				<button
+					className="right-button"
+					type="button"
+					onClick={() => props.onPostpone(props.todo.id)}
+					// NOTE: 削除ボタンを押した時にカードにフォーカスリングが表示されないようにするための記述
+					onMouseDown={(e) => {
+						e.preventDefault();
+						e.stopPropagation();
+					}}
+				>
+					<FaAngleRight />
+				</button>
+			)}
 			<button
 				className="trash-button"
 				type="button"

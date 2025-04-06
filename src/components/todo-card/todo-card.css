@@ -45,10 +45,10 @@
 	text-decoration: line-through;
 }
 
+.right-button,
 .trash-button {
 	position: absolute;
 	top: var(--spacing-xs);
-	right: var(--spacing-xs);
 	background: var(--color-surface);
 	border: none;
 	color: var(--color-text-secondary);
@@ -60,15 +60,26 @@
 	z-index: 10;
 }
 
+.right-button {
+	right: calc(var(--spacing-xs) + 36px); /* ゴミ箱ボタンの左側に配置 */
+}
+
+.trash-button {
+	right: var(--spacing-xs);
+}
+
+.right-button:hover,
 .trash-button:hover {
 	background-color: rgba(0, 0, 0, 0.1);
 }
 
+.todo-card:hover .right-button,
 .todo-card:hover .trash-button {
 	opacity: 1;
 	background-color: var(--color-surface);
 }
 
+.todo-card:focus-within .right-button,
 .todo-card:focus-within .trash-button {
 	opacity: 0;
 }
