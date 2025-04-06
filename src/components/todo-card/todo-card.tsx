@@ -71,6 +71,11 @@ export const TodoCard = (props: TodoCardProps) => {
 				type="button"
 				aria-label="trash"
 				onClick={() => props.onDelete(props.todo.id)}
+				// NOTE: 削除ボタンを押した時にカードにフォーカスリングが表示されないようにするための記述
+				onMouseDown={(e) => {
+					e.preventDefault();
+					e.stopPropagation();
+				}}
 			>
 				trash
 			</button>
