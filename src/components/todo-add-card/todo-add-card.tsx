@@ -10,6 +10,7 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 	const formRef = useRef<HTMLFormElement>(null);
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+	// TODO: textarea側に委譲する
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
 		// 日本語入力の変換中はEnterキーを無視する
 		if (e.nativeEvent.isComposing) {
