@@ -2,8 +2,34 @@ import { TodoAddCard } from "./components/todo-add-card/todo-add-card";
 import { TodoCard } from "./components/todo-card/todo-card";
 import { useTodoList } from "./use-todo-list";
 import "./App.css";
+import { Temporal } from "temporal-polyfill";
 
 function App() {
+	const weekday = [
+		"Sunday",
+		"Monday",
+		"Tuesday",
+		"Wednesday",
+		"Thursday",
+		"Friday",
+		"Saturday",
+	];
+
+	const month = [
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"May",
+		"Jun",
+		"Jul",
+		"Aug",
+		"Sep",
+		"Oct",
+		"Nov",
+		"Dec",
+	];
+
 	const {
 		addTodo,
 		deleteTodo,
@@ -17,7 +43,18 @@ function App() {
 
 	return (
 		<div className="container">
-			<h2>TODO</h2>
+			<div className="date-display">
+				<h1 className="date-display-day">
+					{Temporal.Now.plainDateISO().day.toString()}
+				</h1>
+				<span className="date-display-weekday">
+					{weekday[Temporal.Now.plainDateISO().dayOfWeek]}
+				</span>
+				<span className="date-display-month-year">
+					{`${month[Temporal.Now.plainDateISO().month - 1]}, ${Temporal.Now.plainDateISO().year.toString()}`}
+				</span>
+			</div>
+
 			<ul className="todo-list">
 				<li className="todo-list-item">
 					<TodoAddCard onAdd={addTodo} />
