@@ -27,7 +27,3 @@ body {
 	background-color: var(--color-background);
 	color: var(--color-text);
 }
-
-h1 {
-	font-size: 3.2em;
-}
