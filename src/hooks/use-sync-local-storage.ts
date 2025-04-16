@@ -15,6 +15,7 @@ export const useSyncLocalStorage = <T>(
 	const [storedValue, setStoredValue] = useState<T>(initialValue);
 
 	// 初回マウント時にストレージから読み込む
+	// biome-ignore lint/correctness/useExhaustiveDependencies:
 	useEffect(() => {
 		const loadData = async () => {
 			const result = await chrome.storage.local.get([key]);
@@ -24,7 +25,7 @@ export const useSyncLocalStorage = <T>(
 			onInitialize();
 		}
 		loadData();
-	}, [key, initialValue, onInitialize]);
+	}, []);
 
 	// 値が変更されたらストレージに保存する
 	useEffect(() => {

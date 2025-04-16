@@ -2,6 +2,7 @@ import { fn, userEvent, within } from "@storybook/test";
 import { TodoCard } from "./todo-card";
 
 import type { Meta, StoryObj } from "@storybook/react";
+import { Temporal } from "temporal-polyfill";
 
 const meta: Meta<typeof TodoCard> = {
 	title: "Components/TodoCard",
@@ -30,7 +31,7 @@ export const Default: Story = {
 			id: "6f488950-603a-4ddc-9ef9-ba8ef9b5b1bd",
 			task: "エニタイムに行って5km走る",
 			note: "",
-			startAt: new Date(),
+			startAt: Temporal.Now.plainDateISO(),
 			completed: false,
 			completedAt: null,
 		},
@@ -40,6 +41,7 @@ export const Default: Story = {
 export const EditMode: Story = {
 	args: {
 		todo: {
+			// biome-ignore lint/style/noNonNullAssertion:
 			...Default.args?.todo!,
 		},
 	},
@@ -54,6 +56,7 @@ export const EditMode: Story = {
 export const WithNote: Story = {
 	args: {
 		todo: {
+			// biome-ignore lint/style/noNonNullAssertion:
 			...Default.args?.todo!,
 			note: "終わったらアイスコーヒーが飲める",
 		},
@@ -63,6 +66,7 @@ export const WithNote: Story = {
 export const WithLongText: Story = {
 	args: {
 		todo: {
+			// biome-ignore lint/style/noNonNullAssertion:
 			...Default.args?.todo!,
 			task: "エニタイムに行って5km走る！".repeat(10),
 			note: "終わったらアイスコーヒーが飲める！".repeat(10),
@@ -73,9 +77,10 @@ export const WithLongText: Story = {
 export const Completed: Story = {
 	args: {
 		todo: {
+			// biome-ignore lint/style/noNonNullAssertion:
 			...WithNote.args?.todo!,
 			completed: true,
-			completedAt: new Date(),
+			completedAt: Temporal.Now.plainDateISO(),
 		},
 	},
 };
