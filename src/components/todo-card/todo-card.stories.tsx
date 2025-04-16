@@ -30,7 +30,6 @@ export const Default: Story = {
 		todo: {
 			id: "6f488950-603a-4ddc-9ef9-ba8ef9b5b1bd",
 			task: "エニタイムに行って5km走る",
-			note: "",
 			startAt: Temporal.Now.plainDateISO(),
 			completed: false,
 			completedAt: null,
@@ -58,7 +57,6 @@ export const WithNote: Story = {
 		todo: {
 			// biome-ignore lint/style/noNonNullAssertion:
 			...Default.args?.todo!,
-			note: "終わったらアイスコーヒーが飲める",
 		},
 	},
 };
@@ -69,7 +67,6 @@ export const WithLongText: Story = {
 			// biome-ignore lint/style/noNonNullAssertion:
 			...Default.args?.todo!,
 			task: "エニタイムに行って5km走る！".repeat(10),
-			note: "終わったらアイスコーヒーが飲める！".repeat(10),
 		},
 	},
 };

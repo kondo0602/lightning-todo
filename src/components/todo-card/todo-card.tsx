@@ -2,7 +2,6 @@ import "./todo-card.css";
 import { FaAngleRight, FaRegTrashAlt } from "react-icons/fa";
 import type { Todo } from "../../use-todo-list";
 import { TodoCheckbox } from "../todo-checkbox/todo-checkbox";
-import { TodoNoteTextarea } from "../todo-note-textarea/todo-note-textarea";
 import { TodoTaskTextarea } from "../todo-task-textarea/todo-task-textarea";
 
 type TodoCardProps = {
@@ -35,7 +34,7 @@ export const TodoCard = (props: TodoCardProps) => {
 		const newNote = formData.get("note")?.toString() || "";
 
 		// テキストか注釈が変更された場合のみ保存する
-		if (newTask !== props.todo.task || newNote !== props.todo.note) {
+		if (newTask !== props.todo.task) {
 			props.onSave(props.todo.id, newTask, newNote);
 		}
 	};
@@ -56,14 +55,6 @@ export const TodoCard = (props: TodoCardProps) => {
 						className="todo-task-textarea"
 						name="task"
 						defaultValue={props.todo.task}
-						onKeyDown={handleKeyDown}
-					/>
-				</div>
-				<div className="todo-note-container">
-					<TodoNoteTextarea
-						className="todo-note-textarea"
-						name="note"
-						defaultValue={props.todo.note}
 						onKeyDown={handleKeyDown}
 					/>
 				</div>

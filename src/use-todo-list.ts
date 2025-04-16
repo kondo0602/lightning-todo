@@ -5,7 +5,6 @@ import { useSyncLocalStorage } from "./hooks/use-sync-local-storage";
 export type Todo = {
 	id: string;
 	task: string;
-	note: string;
 	startAt: Temporal.PlainDate;
 	completed: boolean;
 	completedAt: Temporal.PlainDate | null;
@@ -29,12 +28,11 @@ export const useTodoList = () => {
 		onInitialize,
 	);
 
-	const addTodo = (task: string, note: string) => {
+	const addTodo = (task: string) => {
 		const newTodos = [
 			{
 				id: uuidv4(),
 				task,
-				note,
 				startAt: Temporal.Now.plainDateISO(),
 				completed: false,
 				completedAt: null,

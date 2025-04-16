@@ -1,10 +1,9 @@
 import { useRef } from "react";
 import "./todo-add-card.css";
-import { TodoNoteTextarea } from "../todo-note-textarea/todo-note-textarea";
 import { TodoTaskTextarea } from "../todo-task-textarea/todo-task-textarea";
 
 type TodoAddCardProps = {
-	onAdd: (text: string, note: string) => void;
+	onAdd: (text: string) => void;
 };
 
 export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
@@ -33,14 +32,11 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 
 		const form = e.currentTarget;
 		const task = form.elements[0] as HTMLTextAreaElement;
-		const note = form.elements[1] as HTMLInputElement;
 
 		const taskText = task.value.trim();
-		const noteText = note.value.trim();
 
-		onAdd(taskText, noteText);
+		onAdd(taskText);
 		task.value = "";
-		note.value = "";
 		task.blur();
 	};
 
@@ -58,10 +54,6 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 				<TodoTaskTextarea
 					ref={textareaRef}
 					className="todo-add-card-task-textarea"
-					onKeyDown={handleKeyDown}
-				/>
-				<TodoNoteTextarea
-					onClick={(e) => e.stopPropagation()}
 					onKeyDown={handleKeyDown}
 				/>
 				<button type="submit" className="visually-hidden" tabIndex={-1} />
