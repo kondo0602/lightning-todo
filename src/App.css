@@ -23,7 +23,7 @@
 	width: 100%;
 	flex-direction: column;
 	padding: 0;
-	gap: var(--spacing-xs);
+	gap: var(--spacing-sm);
 }
 
 .todo-list-item {

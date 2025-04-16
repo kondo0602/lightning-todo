@@ -15,14 +15,15 @@
 	align-items: center;
 	padding: var(--spacing-sm);
 	gap: var(--spacing-sm);
+	line-height: 1.15;
 }
 
 .todo-add-card-icon {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 18px;
-	height: 18px;
+	width: 16px;
+	height: 16px;
 	background: #555555;
 	font-size: 14px;
 	line-height: 1;
@@ -37,10 +38,6 @@
 
 .todo-add-card:not(:focus-within) .todo-add-form {
 	display: none;
-}
-
-.textarea-task {
-	padding: var(--spacing-xs);
 }
 
 .todo-add-card:focus-within .todo-add-card-placeholder {

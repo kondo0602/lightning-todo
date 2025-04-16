@@ -35,8 +35,10 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 		const task = form.elements[0] as HTMLTextAreaElement;
 		const taskText = task.value.trim();
 
-		onAdd(taskText);
-		task.value = "";
+		if (taskText) {
+			onAdd(taskText);
+			task.value = "";
+		}
 		task.blur();
 	};
 
@@ -48,8 +50,10 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 
 		const taskText = task.value.trim();
 
-		onAdd(taskText);
-		task.value = "";
+		if (taskText) {
+			onAdd(taskText);
+			task.value = "";
+		}
 		task.blur();
 	};
 
@@ -61,7 +65,8 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 			onClick={() => textareaRef.current?.focus()}
 		>
 			<div className="todo-add-card-placeholder">
-				<span className="todo-add-card-icon">＋</span>Add a task
+				<span className="todo-add-card-icon">＋</span>
+				<span>Add a task</span>
 			</div>
 			<form
 				className="todo-add-form"
