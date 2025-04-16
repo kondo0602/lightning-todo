@@ -4,23 +4,6 @@ import { useTodoList } from "./use-todo-list";
 import "./App.css";
 
 function App() {
-	const getCurrentDate = () => {
-		const now = new Date();
-		const month = now.getMonth() + 1;
-		const date = now.getDate();
-		const dayNames = [
-			"（日）",
-			"（月）",
-			"（火）",
-			"（水）",
-			"（木）",
-			"（金）",
-			"（土）",
-		];
-		const day = dayNames[now.getDay()];
-		return `${month} / ${date} ${day}`;
-	};
-
 	const {
 		addTodo,
 		deleteTodo,
@@ -34,8 +17,7 @@ function App() {
 
 	return (
 		<div className="container">
-			<div className="date-display">{getCurrentDate()}</div>
-
+			<h2>TODO</h2>
 			<ul className="todo-list">
 				<li className="todo-list-item">
 					<TodoAddCard onAdd={addTodo} />
