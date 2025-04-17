@@ -6,6 +6,7 @@
 	background: var(--color-surface);
 	border-radius: 8px;
 	outline: none;
+	cursor: pointer;
 }
 
 .todo-card.completed .todo-task-textarea {
