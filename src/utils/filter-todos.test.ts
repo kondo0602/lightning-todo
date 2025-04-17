@@ -5,17 +5,26 @@ import { filterExpiredCompletedTodos } from "./filter-todos";
 
 describe("filterExpiredCompletedTodos", () => {
 	vi.spyOn(Temporal.Now, "plainDateISO").mockImplementation(() => {
-		return Temporal.PlainDate.from({ year: 2023, month: 1, day: 10 });
+		return Temporal.PlainDate.from({ year: 2025, month: 4, day: 1 });
 	});
 
-	it("未完了のタスクはフィルタリングされないこと", () => {
+	const defaultTodo: Todo = {
+		id: "1",
+		task: "タスク",
+		startAt: Temporal.Now.plainDateISO(),
+		completed: false,
+		completedAt: null,
+	};
+
+	it("本日以前の日付に開始 かつ 未完了のタスクはフィルタリングされないこと", () => {
 		const todos: Todo[] = [
 			{
-				id: "1",
-				task: "未完了タスク",
-				startAt: Temporal.Now.plainDateISO(),
-				completed: false,
-				completedAt: null,
+				...defaultTodo,
+				startAt: Temporal.PlainDate.from({ year: 2025, month: 3, day: 31 }),
+			},
+			{
+				...defaultTodo,
+				startAt: Temporal.PlainDate.from({ year: 2025, month: 4, day: 1 }),
 			},
 		];
 
@@ -24,12 +33,17 @@ describe("filterExpiredCompletedTodos", () => {
 		expect(result.length).toEqual(todos.length);
 	});
 
-	it("完了日付が本日のタスクはフィルタリングされないこと", () => {
+	it("本日以前の日付に開始 かつ 本日完了したタスクはフィルタリングされないこと", () => {
 		const todos: Todo[] = [
 			{
-				id: "1",
-				task: "本日完了したタスク",
-				startAt: Temporal.Now.plainDateISO(),
+				...defaultTodo,
+				startAt: Temporal.PlainDate.from({ year: 2025, month: 3, day: 31 }),
+				completed: true,
+				completedAt: Temporal.Now.plainDateISO(),
+			},
+			{
+				...defaultTodo,
+				startAt: Temporal.PlainDate.from({ year: 2025, month: 4, day: 1 }),
 				completed: true,
 				completedAt: Temporal.Now.plainDateISO(),
 			},
@@ -40,14 +54,26 @@ describe("filterExpiredCompletedTodos", () => {
 		expect(result.length).toEqual(todos.length);
 	});
 
-	it("完了日付が本日より前のタスクはフィルタリングされること", () => {
+	it("本日以降の日付に開始するタスクはフィルタリングされること", () => {
 		const todos: Todo[] = [
 			{
-				id: "3",
-				task: "古い完了タスク",
-				startAt: Temporal.PlainDate.from({ year: 2023, month: 1, day: 1 }),
+				...defaultTodo,
+				startAt: Temporal.PlainDate.from({ year: 2025, month: 4, day: 2 }),
+			},
+		];
+
+		const result = filterExpiredCompletedTodos(todos);
+
+		expect(result.length).toEqual(0);
+	});
+
+	it("本日以前の日付に完了したタスクはフィルタリングされること", () => {
+		const todos: Todo[] = [
+			{
+				...defaultTodo,
+				startAt: Temporal.PlainDate.from({ year: 2025, month: 3, day: 31 }),
 				completed: true,
-				completedAt: Temporal.PlainDate.from({ year: 2023, month: 1, day: 7 }),
+				completedAt: Temporal.PlainDate.from({ year: 2025, month: 3, day: 31 }),
 			},
 		];
 

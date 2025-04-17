@@ -1,14 +1,18 @@
 import { Temporal } from "temporal-polyfill";
 import type { Todo } from "../use-todo-list";
 
-/**
- * 完了してから2日以上経過したTodoを除外するフィルタリング関数
- */
 export const filterExpiredCompletedTodos = (todos: Todo[]): Todo[] => {
-	return todos.filter((todo) => {
-		if (!todo.completed || todo.completedAt === null) return true;
+	const today = Temporal.Now.plainDateISO();
 
-		const duration = Temporal.Now.plainDateISO().since(todo.completedAt);
-		return duration.days <= 1;
+	return todos.filter((todo) => {
+		if (Temporal.PlainDate.compare(todo.startAt, today) > 0) return false;
+		if (
+			todo.completed &&
+			todo.completedAt !== null &&
+			Temporal.PlainDate.compare(todo.completedAt, today) < 0
+		)
+			return false;
+
+		return true;
 	});
 };

@@ -1,5 +1,6 @@
 #root {
 	width: 360px;
+	height: 100%;
 	min-height: 480px;
 	padding: var(--spacing-md);
 	font-size: 14px;
