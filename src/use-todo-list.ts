@@ -58,7 +58,9 @@ export const useTodoList = () => {
 	const unCompleteTodo = (id: string) => {
 		setStoredValue(
 			storedValue.map((todo) =>
-				todo.id === id ? { ...todo, completed: false } : todo,
+				todo.id === id
+					? { ...todo, completed: false, completedAt: null }
+					: todo,
 			),
 		);
 	};
