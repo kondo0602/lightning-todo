@@ -5,6 +5,8 @@ import "./App.css";
 import { Temporal } from "temporal-polyfill";
 
 function App() {
+	const now = Temporal.Now.plainDateISO();
+
 	const weekday = [
 		"Sunday",
 		"Monday",
@@ -44,14 +46,10 @@ function App() {
 	return (
 		<div className="container">
 			<div className="date-display">
-				<h1 className="date-display-day">
-					{Temporal.Now.plainDateISO().day.toString()}
-				</h1>
-				<span className="date-display-weekday">
-					{weekday[Temporal.Now.plainDateISO().dayOfWeek]}
-				</span>
+				<h1 className="date-display-day">{now.day.toString()}</h1>
+				<span className="date-display-weekday">{weekday[now.dayOfWeek]}</span>
 				<span className="date-display-month-year">
-					{`${month[Temporal.Now.plainDateISO().month - 1]}, ${Temporal.Now.plainDateISO().year.toString()}`}
+					{`${month[now.month - 1]}, ${now.year.toString()}`}
 				</span>
 			</div>
 
