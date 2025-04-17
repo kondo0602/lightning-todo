@@ -13,11 +13,11 @@ export type Todo = {
 
 export const useTodoList = () => {
 	const onInitialize = () => {
-		const filteredTodos = filterExpiredCompletedTodos(todos);
-		setTodos(filteredTodos);
+		const filteredTodos = filterExpiredCompletedTodos(storedValue);
+		setStoredValue(filteredTodos);
 	};
 
-	const { storedValue: todos, setStoredValue: setTodos } = useSyncLocalStorage(
+	const { storedValue, setStoredValue } = useSyncLocalStorage(
 		"todos",
 		[] as Todo[],
 		onInitialize,
@@ -32,26 +32,18 @@ export const useTodoList = () => {
 				completed: false,
 				completedAt: null,
 			},
-			...todos,
+			...storedValue,
 		];
-		setTodos(newTodos);
+		setStoredValue(newTodos);
 	};
 
 	const deleteTodo = (id: string) => {
-		setTodos(todos.filter((todo) => todo.id !== id));
-	};
-
-	const unCompleteTodo = (id: string) => {
-		setTodos(
-			todos.map((todo) =>
-				todo.id === id ? { ...todo, completed: false } : todo,
-			),
-		);
+		setStoredValue(storedValue.filter((todo) => todo.id !== id));
 	};
 
 	const completeTodo = (id: string) => {
-		setTodos(
-			todos.map((todo) =>
+		setStoredValue(
+			storedValue.map((todo) =>
 				todo.id === id
 					? {
 							...todo,
@@ -63,33 +55,44 @@ export const useTodoList = () => {
 		);
 	};
 
+	const unCompleteTodo = (id: string) => {
+		setStoredValue(
+			storedValue.map((todo) =>
+				todo.id === id ? { ...todo, completed: false } : todo,
+			),
+		);
+	};
+
 	const postponeTodo = (id: string) => {
-		setTodos(
-			todos.map((todo) =>
+		setStoredValue(
+			storedValue.map((todo) =>
 				todo.id === id
-					? { ...todo, startAt: Temporal.Now.plainDateISO() }
+					? {
+							...todo,
+							startAt: Temporal.Now.plainDateISO().add({ days: 1 }),
+						}
 					: todo,
 			),
 		);
 	};
 
 	const saveTodo = (id: string, text: string, note: string) => {
-		setTodos(
-			todos.map((todo) =>
+		setStoredValue(
+			storedValue.map((todo) =>
 				todo.id === id ? { ...todo, text: text, note: note } : todo,
 			),
 		);
 	};
 
-	const activeTodos = todos.filter((todo) => !todo.completed);
+	const activeTodos = storedValue.filter((todo) => !todo.completed);
 
-	const completedTodos = todos.filter((todo) => todo.completed);
+	const completedTodos = storedValue.filter((todo) => todo.completed);
 
 	return {
 		addTodo,
 		deleteTodo,
-		unCompleteTodo,
 		completeTodo,
+		unCompleteTodo,
 		postponeTodo,
 		saveTodo,
 		activeTodos,
