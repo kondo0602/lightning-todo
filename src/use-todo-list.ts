@@ -1,6 +1,7 @@
 import { Temporal } from "temporal-polyfill";
 import { v4 as uuidv4 } from "uuid";
 import { useSyncLocalStorage } from "./hooks/use-sync-local-storage";
+import { filterExpiredCompletedTodos } from "./utils/filter-todos";
 
 export type Todo = {
 	id: string;
@@ -12,13 +13,7 @@ export type Todo = {
 
 export const useTodoList = () => {
 	const onInitialize = () => {
-		const filteredTodos = todos.filter((todo) => {
-			if (!todo.completed || todo.completedAt === null) return true;
-
-			const duration = Temporal.Now.plainDateISO().since(todo.completedAt);
-			return duration.days > 1;
-		});
-
+		const filteredTodos = filterExpiredCompletedTodos(todos);
 		setTodos(filteredTodos);
 	};
 
