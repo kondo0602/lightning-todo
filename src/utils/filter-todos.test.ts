@@ -4,8 +4,6 @@ import type { Todo } from "../use-todo-list";
 import { filterExpiredCompletedTodos } from "./filter-todos";
 
 describe("filterExpiredCompletedTodos", () => {
-	// モックで現在日時を固定
-	const mockNow = new Date("2023-01-10T12:00:00Z");
 	vi.spyOn(Temporal.Now, "plainDateISO").mockImplementation(() => {
 		return Temporal.PlainDate.from({ year: 2023, month: 1, day: 10 });
 	});
