@@ -58,4 +58,5 @@
 
 .todo-add-card-task-textarea {
 	padding: var(--spacing-sm);
+	cursor: pointer;
 }
