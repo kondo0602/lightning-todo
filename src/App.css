@@ -22,10 +22,6 @@
 	gap: var(--spacing-sm);
 }
 
-.todo-list-item {
-	padding: 0;
-}
-
 .completed-section h2 {
 	font-size: 0.9em;
 	color: var(--color-text-secondary);

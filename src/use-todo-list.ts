@@ -12,7 +12,7 @@ export type Todo = {
 };
 
 export const useTodoList = () => {
-	const onInitialize = () => {
+	const deleteExpiredCompletedTodos = () => {
 		const filteredTodos = filterExpiredCompletedTodos(storedValue);
 		setStoredValue(filteredTodos);
 	};
@@ -20,7 +20,7 @@ export const useTodoList = () => {
 	const { storedValue, setStoredValue } = useSyncLocalStorage(
 		"todos",
 		[] as Todo[],
-		onInitialize,
+		deleteExpiredCompletedTodos,
 	);
 
 	const addTodo = (task: string) => {

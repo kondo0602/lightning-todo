@@ -21,13 +21,12 @@ function App() {
 			<TodoDateDisplay />
 
 			<ul className="todo-list">
-				<li className="todo-list-item">
+				<li>
 					<TodoAddCard onAdd={addTodo} />
 				</li>
 				{activeTodos.map((todo) => (
-					<li key={todo.id} className="todo-list-item">
+					<li key={todo.id}>
 						<TodoCard
-							key={todo.id}
 							todo={todo}
 							onToggle={completeTodo}
 							onPostpone={postponeTodo}
