@@ -11,7 +11,7 @@ describe("filterExpiredCompletedTodos", () => {
 	const defaultTodo: Todo = {
 		id: "1",
 		task: "タスク",
-		startAt: Temporal.Now.plainDateISO(),
+		startAt: Temporal.Now.plainDateISO().toString(),
 		completed: false,
 		completedAt: null,
 	};
@@ -20,11 +20,19 @@ describe("filterExpiredCompletedTodos", () => {
 		const todos: Todo[] = [
 			{
 				...defaultTodo,
-				startAt: Temporal.PlainDate.from({ year: 2025, month: 3, day: 31 }),
+				startAt: Temporal.PlainDate.from({
+					year: 2025,
+					month: 3,
+					day: 31,
+				}).toString(),
 			},
 			{
 				...defaultTodo,
-				startAt: Temporal.PlainDate.from({ year: 2025, month: 4, day: 1 }),
+				startAt: Temporal.PlainDate.from({
+					year: 2025,
+					month: 4,
+					day: 1,
+				}).toString(),
 			},
 		];
 
@@ -37,15 +45,23 @@ describe("filterExpiredCompletedTodos", () => {
 		const todos: Todo[] = [
 			{
 				...defaultTodo,
-				startAt: Temporal.PlainDate.from({ year: 2025, month: 3, day: 31 }),
+				startAt: Temporal.PlainDate.from({
+					year: 2025,
+					month: 3,
+					day: 31,
+				}).toString(),
 				completed: true,
-				completedAt: Temporal.Now.plainDateISO(),
+				completedAt: Temporal.Now.plainDateISO().toString(),
 			},
 			{
 				...defaultTodo,
-				startAt: Temporal.PlainDate.from({ year: 2025, month: 4, day: 1 }),
+				startAt: Temporal.PlainDate.from({
+					year: 2025,
+					month: 4,
+					day: 1,
+				}).toString(),
 				completed: true,
-				completedAt: Temporal.Now.plainDateISO(),
+				completedAt: Temporal.Now.plainDateISO().toString(),
 			},
 		];
 
@@ -58,7 +74,11 @@ describe("filterExpiredCompletedTodos", () => {
 		const todos: Todo[] = [
 			{
 				...defaultTodo,
-				startAt: Temporal.PlainDate.from({ year: 2025, month: 4, day: 2 }),
+				startAt: Temporal.PlainDate.from({
+					year: 2025,
+					month: 4,
+					day: 2,
+				}).toString(),
 			},
 		];
 
@@ -71,9 +91,17 @@ describe("filterExpiredCompletedTodos", () => {
 		const todos: Todo[] = [
 			{
 				...defaultTodo,
-				startAt: Temporal.PlainDate.from({ year: 2025, month: 3, day: 31 }),
+				startAt: Temporal.PlainDate.from({
+					year: 2025,
+					month: 3,
+					day: 31,
+				}).toString(),
 				completed: true,
-				completedAt: Temporal.PlainDate.from({ year: 2025, month: 3, day: 31 }),
+				completedAt: Temporal.PlainDate.from({
+					year: 2025,
+					month: 3,
+					day: 31,
+				}).toString(),
 			},
 		];
 

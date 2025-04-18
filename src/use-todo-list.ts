@@ -6,9 +6,9 @@ import { filterExpiredCompletedTodos } from "./utils/filter-todos";
 export type Todo = {
 	id: string;
 	task: string;
-	startAt: Temporal.PlainDate;
+	startAt: string;
 	completed: boolean;
-	completedAt: Temporal.PlainDate | null;
+	completedAt: string | null;
 };
 
 export const useTodoList = () => {
@@ -28,7 +28,7 @@ export const useTodoList = () => {
 			{
 				id: uuidv4(),
 				task,
-				startAt: Temporal.Now.plainDateISO(),
+				startAt: Temporal.Now.plainDateISO().toString(),
 				completed: false,
 				completedAt: null,
 			},
@@ -48,7 +48,7 @@ export const useTodoList = () => {
 					? {
 							...todo,
 							completed: true,
-							completedAt: Temporal.Now.plainDateISO(),
+							completedAt: Temporal.Now.plainDateISO().toString(),
 						}
 					: todo,
 			),
@@ -71,7 +71,7 @@ export const useTodoList = () => {
 				todo.id === id
 					? {
 							...todo,
-							startAt: Temporal.Now.plainDateISO().add({ days: 1 }),
+							startAt: Temporal.Now.plainDateISO().add({ days: 1 }).toString(),
 						}
 					: todo,
 			),
@@ -86,7 +86,15 @@ export const useTodoList = () => {
 		);
 	};
 
-	const activeTodos = storedValue.filter((todo) => !todo.completed);
+	const activeTodos = storedValue
+		.filter((todo) => !todo.completed)
+		.filter(
+			(todo) =>
+				Temporal.PlainDate.compare(
+					Temporal.PlainDate.from(todo.startAt),
+					Temporal.Now.plainDateISO(),
+				) <= 0,
+		);
 
 	const completedTodos = storedValue.filter((todo) => todo.completed);
 
