@@ -1,4 +1,5 @@
 import "./todo-card.css";
+import { useRef } from "react";
 import { FaAngleRight, FaRegTrashAlt } from "react-icons/fa";
 import type { Todo } from "../../use-todo-list";
 import { TodoCheckbox } from "../todo-checkbox/todo-checkbox";
@@ -13,6 +14,8 @@ type TodoCardProps = {
 };
 
 export const TodoCard = (props: TodoCardProps) => {
+	const textareaRef = useRef<HTMLTextAreaElement>(null);
+
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
 		// 日本語入力の変換中はEnterキーを無視する
 		if (e.nativeEvent.isComposing) {
@@ -40,7 +43,12 @@ export const TodoCard = (props: TodoCardProps) => {
 	};
 
 	return (
-		<div className={`todo-card ${props.todo.completed ? "completed" : ""}`}>
+		<div
+			className={`todo-card ${props.todo.completed ? "completed" : ""}`}
+			onClick={() => textareaRef.current?.focus()}
+			role="button"
+			tabIndex={-1}
+		>
 			<form
 				className="todo-card-form"
 				onBlur={handleSubmit}
@@ -52,6 +60,7 @@ export const TodoCard = (props: TodoCardProps) => {
 						onChange={() => props.onToggle(props.todo.id)}
 					/>
 					<TodoTaskTextarea
+						ref={textareaRef}
 						className="todo-task-textarea"
 						name="task"
 						defaultValue={props.todo.task}
@@ -63,7 +72,10 @@ export const TodoCard = (props: TodoCardProps) => {
 				<button
 					className="right-button"
 					type="button"
-					onClick={() => props.onPostpone(props.todo.id)}
+					onClick={(e) => {
+						e.stopPropagation(); // カードのクリックイベントが発火しないようにする
+						props.onPostpone(props.todo.id);
+					}}
 					// NOTE: 削除ボタンを押した時にカードにフォーカスリングが表示されないようにするための記述
 					onMouseDown={(e) => {
 						e.preventDefault();
@@ -77,7 +89,10 @@ export const TodoCard = (props: TodoCardProps) => {
 				className="trash-button"
 				type="button"
 				aria-label="trash"
-				onClick={() => props.onDelete(props.todo.id)}
+				onClick={(e) => {
+					e.stopPropagation(); // カードのクリックイベントが発火しないようにする
+					props.onDelete(props.todo.id);
+				}}
 				// NOTE: 削除ボタンを押した時にカードにフォーカスリングが表示されないようにするための記述
 				onMouseDown={(e) => {
 					e.preventDefault();
