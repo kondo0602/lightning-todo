@@ -1,8 +1,7 @@
-import { fn, userEvent, within } from "@storybook/test";
-import { TodoCard } from "./todo-card";
-
 import type { Meta, StoryObj } from "@storybook/react";
+import { fn, userEvent, within } from "@storybook/test";
 import { Temporal } from "temporal-polyfill";
+import { TodoCard } from "./todo-card";
 
 const meta: Meta<typeof TodoCard> = {
 	title: "Components/TodoCard",

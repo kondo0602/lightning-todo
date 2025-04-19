@@ -1,7 +1,7 @@
 import { TodoAddCard } from "./components/todo-add-card/todo-add-card";
 import { TodoCard } from "./components/todo-card/todo-card";
 import { TodoDateDisplay } from "./components/todo-date-display/todo-date-display";
-import { useTodoList } from "./use-todo-list";
+import { useTodoList } from "./hooks/use-todo-list/use-todo-list";
 import "./App.css";
 import {
 	DndContext,

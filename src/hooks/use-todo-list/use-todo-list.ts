@@ -1,16 +1,9 @@
 import { Temporal } from "temporal-polyfill";
 import { v4 as uuidv4 } from "uuid";
-import { useSyncLocalStorage } from "./hooks/use-sync-local-storage";
-import { filterExpiredCompletedTodos } from "./utils/filter-todos";
+import { useSyncLocalStorage } from "../use-sync-local-storage/use-sync-local-storage";
+import { filterExpiredCompletedTodos } from "./filter-todos";
 
-export type Todo = {
-	id: string;
-	task: string;
-	startAt: string;
-	completed: boolean;
-	completedAt: string | null;
-	order: number;
-};
+import type { Todo } from "../../types/todo";
 
 export const useTodoList = () => {
 	const deleteExpiredCompletedTodos = () => {

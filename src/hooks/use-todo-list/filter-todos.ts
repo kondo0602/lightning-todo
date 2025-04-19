@@ -1,5 +1,5 @@
 import { Temporal } from "temporal-polyfill";
-import type { Todo } from "../use-todo-list";
+import type { Todo } from "../../types/todo";
 
 export const filterExpiredCompletedTodos = (todos: Todo[]): Todo[] => {
 	const today = Temporal.Now.plainDateISO();

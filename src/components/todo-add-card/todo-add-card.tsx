@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import "./todo-add-card.css";
 import { TodoTaskTextarea } from "../todo-task-textarea/todo-task-textarea";
+import "./todo-add-card.css";
 
 type TodoAddCardProps = {
 	onAdd: (text: string) => void;

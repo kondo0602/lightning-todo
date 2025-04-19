@@ -1,6 +1,6 @@
 import { Temporal } from "temporal-polyfill";
 import { describe, expect, it, vi } from "vitest";
-import type { Todo } from "../use-todo-list";
+import type { Todo } from "../../types/todo";
 import { filterExpiredCompletedTodos } from "./filter-todos";
 
 describe("filterExpiredCompletedTodos", () => {
