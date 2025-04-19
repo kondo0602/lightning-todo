@@ -8,10 +8,17 @@ type SortableItemProps = {
 };
 
 export const SortableItem = (props: SortableItemProps) => {
-	const { attributes, listeners, setNodeRef, transform, transition } =
-		useSortable({ id: props.id });
+	const {
+		attributes,
+		isDragging,
+		listeners,
+		setNodeRef,
+		transform,
+		transition,
+	} = useSortable({ id: props.id });
 
 	const style = {
+		opacity: isDragging ? 0.5 : 1,
 		transform: CSS.Transform.toString(transform),
 		transition,
 	};

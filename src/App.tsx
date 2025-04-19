@@ -6,8 +6,11 @@ import "./App.css";
 import {
 	DndContext,
 	type DragEndEvent,
+	DragOverlay,
+	type DragStartEvent,
 	KeyboardSensor,
 	PointerSensor,
+	type UniqueIdentifier,
 	closestCenter,
 	useSensor,
 	useSensors,
@@ -17,6 +20,7 @@ import {
 	sortableKeyboardCoordinates,
 	verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { useState } from "react";
 import { SortableItem } from "./components/sortable-item/sortable-item";
 
 function App() {
@@ -32,6 +36,8 @@ function App() {
 		reorderTodos,
 	} = useTodoList();
 
+	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
+
 	const pointerSensor = useSensor(PointerSensor, {
 		activationConstraint: {
 			distance: 10,
@@ -45,6 +51,12 @@ function App() {
 		}),
 	);
 
+	function handleDragStart(event: DragStartEvent) {
+		const { active } = event;
+
+		setActiveId(active.id);
+	}
+
 	const handleDragEnd = (event: DragEndEvent) => {
 		const { active, over } = event;
 
@@ -52,6 +64,8 @@ function App() {
 			// ドラッグ&ドロップで並び替え
 			reorderTodos(active.id.toString(), over.id.toString());
 		}
+
+		setActiveId(null);
 	};
 
 	return (
@@ -65,6 +79,7 @@ function App() {
 				<DndContext
 					sensors={sensors}
 					collisionDetection={closestCenter}
+					onDragStart={handleDragStart}
 					onDragEnd={handleDragEnd}
 				>
 					<SortableContext
@@ -85,6 +100,20 @@ function App() {
 							</SortableItem>
 						))}
 					</SortableContext>
+					<DragOverlay>
+						{activeId ? (
+							<li>
+								<TodoCard
+									// biome-ignore lint/style/noNonNullAssertion: <explanation>
+									todo={activeTodos.find((todo) => todo.id === activeId)!}
+									onToggle={completeTodo}
+									onPostpone={postponeTodo}
+									onDelete={deleteTodo}
+									onSave={saveTodo}
+								/>
+							</li>
+						) : null}
+					</DragOverlay>
 				</DndContext>
 			</ul>
 
