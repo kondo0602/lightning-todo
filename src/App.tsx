@@ -30,10 +30,10 @@ function App() {
 		unCompleteTodo,
 		completeTodo,
 		postponeTodo,
-		activeTodos,
-		completedTodos,
 		saveTodo,
 		reorderTodos,
+		activeTodos,
+		completedTodos,
 	} = useTodoList();
 
 	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
