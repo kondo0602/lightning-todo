@@ -1,20 +1,20 @@
 import { Temporal } from "temporal-polyfill";
 import { v4 as uuidv4 } from "uuid";
 import { useSyncLocalStorage } from "../use-sync-local-storage/use-sync-local-storage";
-import { filterExpiredCompletedTodos } from "./filter-todos";
 
 import type { Todo } from "../../types/todo";
+import { filterTodosDueOnOrBeforeToday } from "./filter-todos";
 
 export const useTodoList = () => {
-	const deleteExpiredCompletedTodos = () => {
-		const filteredTodos = filterExpiredCompletedTodos(storedValue);
+	const initialize = () => {
+		const filteredTodos = filterTodosDueOnOrBeforeToday(storedValue);
 		setStoredValue(filteredTodos);
 	};
 
 	const { storedValue, setStoredValue } = useSyncLocalStorage(
 		"todos",
 		[] as Todo[],
-		deleteExpiredCompletedTodos,
+		initialize,
 	);
 
 	const addTodo = (task: string) => {
