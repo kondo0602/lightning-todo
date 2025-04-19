@@ -14,8 +14,3 @@
 	flex-direction: column;
 	gap: var(--spacing-sm);
 }
-
-.todo-completed-heading {
-	font-size: 0.9em;
-	color: var(--color-text-secondary);
-}
