@@ -113,8 +113,8 @@ function App() {
 				</DndContext>
 			</TodoList>
 			{completedTodos.length > 0 && (
-				<div>
-					<h2>DONE</h2>
+				<>
+					<h2 className="todo-completed-heading">DONE</h2>
 					<TodoList>
 						{completedTodos.map((todo) => (
 							<li key={todo.id}>
@@ -128,7 +128,7 @@ function App() {
 							</li>
 						))}
 					</TodoList>
-				</div>
+				</>
 			)}
 		</div>
 	);

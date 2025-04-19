@@ -15,9 +15,7 @@
 	gap: var(--spacing-sm);
 }
 
-.completed-section h2 {
+.todo-completed-heading {
 	font-size: 0.9em;
 	color: var(--color-text-secondary);
-	margin-bottom: var(--spacing-sm);
-	text-align: left;
 }
