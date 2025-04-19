@@ -21,7 +21,7 @@ import {
 	verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useState } from "react";
-import { SortableItem } from "./components/sortable-item/sortable-item";
+import { SortableListItem } from "./components/sortable-list-item/sortable-list-item";
 
 function App() {
 	const {
@@ -87,17 +87,15 @@ function App() {
 						strategy={verticalListSortingStrategy}
 					>
 						{activeTodos.map((todo) => (
-							<SortableItem key={todo.id} id={todo.id}>
-								<li>
-									<TodoCard
-										todo={todo}
-										onToggle={completeTodo}
-										onPostpone={postponeTodo}
-										onDelete={deleteTodo}
-										onSave={saveTodo}
-									/>
-								</li>
-							</SortableItem>
+							<SortableListItem key={todo.id} id={todo.id}>
+								<TodoCard
+									todo={todo}
+									onToggle={completeTodo}
+									onPostpone={postponeTodo}
+									onDelete={deleteTodo}
+									onSave={saveTodo}
+								/>
+							</SortableListItem>
 						))}
 					</SortableContext>
 					<DragOverlay>
