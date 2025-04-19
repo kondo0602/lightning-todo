@@ -124,13 +124,6 @@ export const useTodoList = () => {
 
 	const activeTodos = storedValue
 		.filter((todo) => !todo.completed)
-		.filter(
-			(todo) =>
-				Temporal.PlainDate.compare(
-					Temporal.PlainDate.from(todo.startAt),
-					Temporal.Now.plainDateISO(),
-				) <= 0,
-		)
 		.sort((a, b) => a.order - b.order);
 
 	const completedTodos = storedValue
