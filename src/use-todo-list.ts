@@ -9,6 +9,7 @@ export type Todo = {
 	startAt: string;
 	completed: boolean;
 	completedAt: string | null;
+	order: number;
 };
 
 export const useTodoList = () => {
@@ -24,6 +25,11 @@ export const useTodoList = () => {
 	);
 
 	const addTodo = (task: string) => {
+		const minOrder =
+			storedValue.length > 0
+				? Math.min(...storedValue.map((todo) => todo.order)) - 1
+				: 0;
+
 		const newTodos = [
 			{
 				id: uuidv4(),
@@ -31,6 +37,7 @@ export const useTodoList = () => {
 				startAt: Temporal.Now.plainDateISO().toString(),
 				completed: false,
 				completedAt: null,
+				order: minOrder,
 			},
 			...storedValue,
 		];
@@ -78,12 +85,48 @@ export const useTodoList = () => {
 		);
 	};
 
-	const saveTodo = (id: string, text: string, note: string) => {
+	const saveTodo = (id: string, text: string) => {
 		setStoredValue(
 			storedValue.map((todo) =>
-				todo.id === id ? { ...todo, text: text, note: note } : todo,
+				todo.id === id ? { ...todo, task: text } : todo,
 			),
 		);
+	};
+
+	const reorderTodos = (activeId: string, overId: string) => {
+		setStoredValue((prevTodos) => {
+			const activeTodo = prevTodos.find((todo) => todo.id === activeId);
+			const overTodo = prevTodos.find((todo) => todo.id === overId);
+
+			if (!activeTodo || !overTodo) return prevTodos;
+
+			const oldOrder = activeTodo.order;
+			const newOrder = overTodo.order;
+
+			return prevTodos.map((todo) => {
+				if (todo.id === activeId) {
+					return { ...todo, order: newOrder };
+				}
+
+				if (
+					oldOrder < newOrder &&
+					todo.order > oldOrder &&
+					todo.order <= newOrder
+				) {
+					return { ...todo, order: todo.order - 1 };
+				}
+
+				if (
+					oldOrder > newOrder &&
+					todo.order < oldOrder &&
+					todo.order >= newOrder
+				) {
+					return { ...todo, order: todo.order + 1 };
+				}
+
+				return todo;
+			});
+		});
 	};
 
 	const activeTodos = storedValue
@@ -94,9 +137,12 @@ export const useTodoList = () => {
 					Temporal.PlainDate.from(todo.startAt),
 					Temporal.Now.plainDateISO(),
 				) <= 0,
-		);
+		)
+		.sort((a, b) => a.order - b.order);
 
-	const completedTodos = storedValue.filter((todo) => todo.completed);
+	const completedTodos = storedValue
+		.filter((todo) => todo.completed)
+		.sort((a, b) => a.order - b.order);
 
 	return {
 		addTodo,
@@ -105,6 +151,7 @@ export const useTodoList = () => {
 		unCompleteTodo,
 		postponeTodo,
 		saveTodo,
+		reorderTodos,
 		activeTodos,
 		completedTodos,
 	};
