@@ -51,15 +51,6 @@ export const EditMode: Story = {
 	},
 };
 
-export const WithNote: Story = {
-	args: {
-		todo: {
-			// biome-ignore lint/style/noNonNullAssertion:
-			...Default.args?.todo!,
-		},
-	},
-};
-
 export const WithLongText: Story = {
 	args: {
 		todo: {
@@ -74,7 +65,7 @@ export const Completed: Story = {
 	args: {
 		todo: {
 			// biome-ignore lint/style/noNonNullAssertion:
-			...WithNote.args?.todo!,
+			...Default.args?.todo!,
 			completed: true,
 			completedAt: Temporal.Now.plainDateISO(),
 		},
