@@ -62,7 +62,6 @@ function App() {
 		const { active, over } = event;
 
 		if (over && active.id !== over.id) {
-			// ドラッグ&ドロップで並び替え
 			reorderTodos(active.id.toString(), over.id.toString());
 		}
 
