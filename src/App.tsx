@@ -71,11 +71,8 @@ function App() {
 	return (
 		<div className="container">
 			<TodoDateDisplay />
-
+			<TodoAddCard onAdd={addTodo} />
 			<ul className="todo-list">
-				<li>
-					<TodoAddCard onAdd={addTodo} />
-				</li>
 				<DndContext
 					sensors={sensors}
 					collisionDetection={closestCenter}
