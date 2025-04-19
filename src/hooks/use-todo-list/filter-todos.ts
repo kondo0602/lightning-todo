@@ -6,12 +6,6 @@ export const filterExpiredCompletedTodos = (todos: Todo[]): Todo[] => {
 
 	return todos.filter((todo) => {
 		if (Temporal.PlainDate.compare(todo.startAt, today) > 0) return false;
-		if (
-			todo.completed &&
-			todo.completedAt !== null &&
-			Temporal.PlainDate.compare(todo.completedAt, today) < 0
-		)
-			return false;
 
 		return true;
 	});

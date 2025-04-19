@@ -87,27 +87,4 @@ describe("filterExpiredCompletedTodos", () => {
 
 		expect(result.length).toEqual(0);
 	});
-
-	it("本日以前の日付に完了したタスクはフィルタリングされること", () => {
-		const todos: Todo[] = [
-			{
-				...defaultTodo,
-				startAt: Temporal.PlainDate.from({
-					year: 2025,
-					month: 3,
-					day: 31,
-				}).toString(),
-				completed: true,
-				completedAt: Temporal.PlainDate.from({
-					year: 2025,
-					month: 3,
-					day: 31,
-				}).toString(),
-			},
-		];
-
-		const result = filterExpiredCompletedTodos(todos);
-
-		expect(result.length).toEqual(0);
-	});
 });
