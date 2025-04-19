@@ -22,6 +22,7 @@ import {
 } from "@dnd-kit/sortable";
 import { useState } from "react";
 import { SortableListItem } from "./components/sortable-list-item/sortable-list-item";
+import { TodoList } from "./components/todo-list/todo-list";
 
 function App() {
 	const {
@@ -72,7 +73,7 @@ function App() {
 		<div className="container">
 			<TodoDateDisplay />
 			<TodoAddCard onAdd={addTodo} />
-			<ul className="todo-list">
+			<TodoList>
 				<DndContext
 					sensors={sensors}
 					collisionDetection={closestCenter}
@@ -110,12 +111,11 @@ function App() {
 						) : null}
 					</DragOverlay>
 				</DndContext>
-			</ul>
-
+			</TodoList>
 			{completedTodos.length > 0 && (
-				<div className="completed-section">
+				<div>
 					<h2>DONE</h2>
-					<ul className="todo-list completed-list">
+					<TodoList>
 						{completedTodos.map((todo) => (
 							<li key={todo.id}>
 								<TodoCard
@@ -127,7 +127,7 @@ function App() {
 								/>
 							</li>
 						))}
-					</ul>
+					</TodoList>
 				</div>
 			)}
 		</div>
