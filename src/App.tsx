@@ -72,6 +72,7 @@ function App() {
 		<div className="container">
 			<TodoDateDisplay />
 			<TodoAddCard onAdd={addTodo} />
+			{activeTodos.length > 0 && (
 			<TodoList>
 				<DndContext
 					sensors={sensors}
@@ -111,22 +112,21 @@ function App() {
 					</DragOverlay>
 				</DndContext>
 			</TodoList>
+			)}
 			{completedTodos.length > 0 && (
-				<>
-					<TodoList title={"DONE"}>
-						{completedTodos.map((todo) => (
-							<li key={todo.id}>
-								<TodoCard
-									todo={todo}
-									onToggle={unCompleteTodo}
-									onPostpone={postponeTodo}
-									onDelete={deleteTodo}
-									onSave={saveTodo}
-								/>
-							</li>
-						))}
-					</TodoList>
-				</>
+				<TodoList title={"DONE"}>
+					{completedTodos.map((todo) => (
+						<li key={todo.id}>
+							<TodoCard
+								todo={todo}
+								onToggle={unCompleteTodo}
+								onPostpone={postponeTodo}
+								onDelete={deleteTodo}
+								onSave={saveTodo}
+							/>
+						</li>
+					))}
+				</TodoList>
 			)}
 		</div>
 	);
