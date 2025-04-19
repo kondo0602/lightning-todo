@@ -1,9 +1,9 @@
 import { Temporal } from "temporal-polyfill";
 import { describe, expect, it, vi } from "vitest";
 import type { Todo } from "../../types/todo";
-import { filterExpiredCompletedTodos } from "./filter-todos";
+import { filterTodosDueOnOrBeforeToday } from "./filter-todos";
 
-describe("filterExpiredCompletedTodos", () => {
+describe("filterTodosDueOnOrBeforeToday", () => {
 	vi.spyOn(Temporal.Now, "plainDateISO").mockImplementation(() => {
 		return Temporal.PlainDate.from({ year: 2025, month: 4, day: 1 });
 	});
@@ -37,7 +37,7 @@ describe("filterExpiredCompletedTodos", () => {
 			},
 		];
 
-		const result = filterExpiredCompletedTodos(todos);
+		const result = filterTodosDueOnOrBeforeToday(todos);
 
 		expect(result.length).toEqual(todos.length);
 	});
@@ -66,7 +66,7 @@ describe("filterExpiredCompletedTodos", () => {
 			},
 		];
 
-		const result = filterExpiredCompletedTodos(todos);
+		const result = filterTodosDueOnOrBeforeToday(todos);
 
 		expect(result.length).toEqual(todos.length);
 	});
@@ -83,7 +83,7 @@ describe("filterExpiredCompletedTodos", () => {
 			},
 		];
 
-		const result = filterExpiredCompletedTodos(todos);
+		const result = filterTodosDueOnOrBeforeToday(todos);
 
 		expect(result.length).toEqual(0);
 	});
