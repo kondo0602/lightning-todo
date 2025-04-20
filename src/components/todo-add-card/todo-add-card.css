@@ -4,11 +4,17 @@
 	border-radius: 8px;
 	outline: none;
 	cursor: pointer;
+	transition: transform 0.3s ease;
 }
 
 .todo-add-card:focus-within {
 	outline: 2px solid var(--color-accent-darker);
 	outline-offset: 2px;
+	transform: scale(1.02);
+}
+
+.todo-add-card:hover {
+	transform: scale(1.02);
 }
 
 .todo-add-card-placeholder {
