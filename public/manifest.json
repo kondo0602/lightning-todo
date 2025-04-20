@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "TooDo",
-  "description": "A simple todo list app that helps you organize too many tasks with ease.",
+  "name": "ADHDo",
+  "description": "A Chrome extension with an ADHD-friendly todo app to help you stay focused.",
   "version": "1.0.0",
   "action": {
     "default_popup": "index.html"
