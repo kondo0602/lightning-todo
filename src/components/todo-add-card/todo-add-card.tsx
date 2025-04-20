@@ -58,6 +58,7 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 	};
 
 	return (
+		// biome-ignore lint/a11y/useKeyWithClickEvents: tabIndexを-1にしているため
 		<div
 			className="todo-add-card"
 			role="button"

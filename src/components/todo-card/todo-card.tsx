@@ -45,6 +45,7 @@ export const TodoCard = (props: TodoCardProps) => {
 	};
 
 	return (
+		// biome-ignore lint/a11y/useKeyWithClickEvents: tabIndexを-1にしているため
 		<div
 			className="todo-card"
 			data-state={props.todo.completed ? "complete" : "incomplete"}

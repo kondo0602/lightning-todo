@@ -24,7 +24,13 @@ export const SortableListItem = (props: SortableListItemProps) => {
 	};
 
 	return (
-		<li ref={setNodeRef} style={style} {...attributes} {...listeners}>
+		<li
+			ref={setNodeRef}
+			style={style}
+			{...attributes}
+			{...listeners}
+			tabIndex={-1}
+		>
 			{props.children}
 		</li>
 	);
