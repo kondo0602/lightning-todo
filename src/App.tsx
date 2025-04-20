@@ -8,7 +8,6 @@ import {
 	type DragEndEvent,
 	DragOverlay,
 	type DragStartEvent,
-	KeyboardSensor,
 	PointerSensor,
 	type UniqueIdentifier,
 	closestCenter,
@@ -17,7 +16,6 @@ import {
 } from "@dnd-kit/core";
 import {
 	SortableContext,
-	sortableKeyboardCoordinates,
 	verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useState } from "react";
@@ -47,9 +45,10 @@ function App() {
 
 	const sensors = useSensors(
 		pointerSensor,
-		useSensor(KeyboardSensor, {
-			coordinateGetter: sortableKeyboardCoordinates,
-		}),
+		// TODO: キーボードアクションによるソートに対応する
+		// useSensor(KeyboardSensor, {
+		// 	coordinateGetter: sortableKeyboardCoordinates,
+		// }),
 	);
 
 	function handleDragStart(event: DragStartEvent) {
