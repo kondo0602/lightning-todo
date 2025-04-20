@@ -15,8 +15,8 @@
 }
 
 .todo-checkbox:checked {
-	background-color: var(--color-accent-lighter);
-	border-color: var(--color-accent-lighter);
+	background-color: var(--color-accent);
+	border-color: var(--color-accent);
 }
 
 .todo-checkbox:checked::after {
@@ -28,12 +28,8 @@
 	font-size: 12px;
 }
 
-.todo-checkbox:disabled {
-	background-color: #333;
-}
-
 .todo-checkbox:checked:disabled {
-	background-color: var(--color-accent-lighter-disabled);
-	border-color: var(--color-accent-lighter-disabled);
+	background-color: var(--color-accent);
+	border-color: var(--color-accent);
 	opacity: 0.7;
 }
