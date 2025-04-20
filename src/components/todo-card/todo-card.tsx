@@ -55,19 +55,17 @@ export const TodoCard = (props: TodoCardProps) => {
 				onBlur={handleSubmit}
 				onSubmit={handleSubmit}
 			>
-				<div className="todo-task-container">
-					<TodoCheckbox
-						checked={props.todo.completed}
-						onChange={() => props.onToggle(props.todo.id)}
-					/>
-					<TodoTaskTextarea
-						ref={textareaRef}
-						className="todo-task-textarea"
-						name="task"
-						defaultValue={props.todo.task}
-						onKeyDown={handleKeyDown}
-					/>
-				</div>
+				<TodoCheckbox
+					checked={props.todo.completed}
+					onChange={() => props.onToggle(props.todo.id)}
+				/>
+				<TodoTaskTextarea
+					ref={textareaRef}
+					className="todo-task-textarea"
+					name="task"
+					defaultValue={props.todo.task}
+					onKeyDown={handleKeyDown}
+				/>
 			</form>
 			{!props.todo.completed && (
 				<button

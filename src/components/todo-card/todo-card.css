@@ -28,7 +28,7 @@
 	resize: none;
 }
 
-.todo-task-container {
+.todo-card-form {
 	display: flex;
 	align-items: flex-start;
 	padding: var(--spacing-sm);
