@@ -9,14 +9,15 @@
 	cursor: pointer;
 }
 
-.todo-card.completed .todo-task-textarea {
-	color: var(--color-text-secondary);
-}
-
 .todo-card:focus-within {
 	outline: 2px solid var(--color-accent-darker);
 	outline-offset: 2px;
 }
+
+.todo-card[data-state="complete"] .todo-task-textarea {
+	color: var(--color-text-secondary);
+}
+
 
 .todo-task-textarea {
 	width: 100%;
@@ -35,11 +36,7 @@
 	gap: var(--spacing-xs);
 }
 
-.todo-note-container {
-	font-size: 0.9em;
-}
-
-.todo-card.completed .todo-task-text {
+.todo-card[data-state="complete"] .todo-task-text {
 	color: var(--color-text-secondary);
 	text-decoration: line-through;
 }

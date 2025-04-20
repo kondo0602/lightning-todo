@@ -114,7 +114,7 @@ function App() {
 			</TodoList>
 			)}
 			{completedTodos.length > 0 && (
-				<TodoList title={"DONE"}>
+				<TodoList title={"COMPLETED"}>
 					{completedTodos.map((todo) => (
 						<li key={todo.id}>
 							<TodoCard

@@ -44,7 +44,8 @@ export const TodoCard = (props: TodoCardProps) => {
 
 	return (
 		<div
-			className={`todo-card ${props.todo.completed ? "completed" : ""}`}
+			className="todo-card"
+			data-state={props.todo.completed ? "complete" : "incomplete"}
 			onClick={() => textareaRef.current?.focus()}
 			role="button"
 			tabIndex={-1}
@@ -73,7 +74,7 @@ export const TodoCard = (props: TodoCardProps) => {
 					className="right-button"
 					type="button"
 					onClick={(e) => {
-						e.stopPropagation(); // カードのクリックイベントが発火しないようにする
+						e.stopPropagation();
 						props.onPostpone(props.todo.id);
 					}}
 					// NOTE: 削除ボタンを押した時にカードにフォーカスリングが表示されないようにするための記述
