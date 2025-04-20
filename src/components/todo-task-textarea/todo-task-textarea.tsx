@@ -15,6 +15,7 @@ export const TodoTaskTextarea = forwardRef<
 			placeholder="Add a task..."
 			required
 			rows={1}
+			spellCheck={false}
 			{...props}
 		/>
 	);
