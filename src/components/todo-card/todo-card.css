@@ -9,15 +9,14 @@
 	cursor: pointer;
 }
 
-.todo-card:focus-within {
-	outline: 2px solid var(--color-accent-darker);
-	outline-offset: 2px;
-}
-
 .todo-card[data-state="complete"] .todo-task-textarea {
 	color: var(--color-text-secondary);
 }
 
+.todo-card:focus-within {
+	outline: 2px solid var(--color-accent-darker);
+	outline-offset: 2px;
+}
 
 .todo-task-textarea {
 	width: 100%;
