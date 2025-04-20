@@ -73,45 +73,45 @@ function App() {
 			<TodoDateDisplay />
 			<TodoAddCard onAdd={addTodo} />
 			{activeTodos.length > 0 && (
-			<TodoList>
-				<DndContext
-					sensors={sensors}
-					collisionDetection={closestCenter}
-					onDragStart={handleDragStart}
-					onDragEnd={handleDragEnd}
-				>
-					<SortableContext
-						items={activeTodos.map((todo) => todo.id)}
-						strategy={verticalListSortingStrategy}
+				<TodoList>
+					<DndContext
+						sensors={sensors}
+						collisionDetection={closestCenter}
+						onDragStart={handleDragStart}
+						onDragEnd={handleDragEnd}
 					>
-						{activeTodos.map((todo) => (
-							<SortableListItem key={todo.id} id={todo.id}>
-								<TodoCard
-									todo={todo}
-									onToggle={completeTodo}
-									onPostpone={postponeTodo}
-									onDelete={deleteTodo}
-									onSave={saveTodo}
-								/>
-							</SortableListItem>
-						))}
-					</SortableContext>
-					<DragOverlay>
-						{activeId ? (
-							<li>
-								<TodoCard
-									// biome-ignore lint/style/noNonNullAssertion: <explanation>
-									todo={activeTodos.find((todo) => todo.id === activeId)!}
-									onToggle={completeTodo}
-									onPostpone={postponeTodo}
-									onDelete={deleteTodo}
-									onSave={saveTodo}
-								/>
-							</li>
-						) : null}
-					</DragOverlay>
-				</DndContext>
-			</TodoList>
+						<SortableContext
+							items={activeTodos.map((todo) => todo.id)}
+							strategy={verticalListSortingStrategy}
+						>
+							{activeTodos.map((todo) => (
+								<SortableListItem key={todo.id} id={todo.id}>
+									<TodoCard
+										todo={todo}
+										onToggle={completeTodo}
+										onPostpone={postponeTodo}
+										onDelete={deleteTodo}
+										onSave={saveTodo}
+									/>
+								</SortableListItem>
+							))}
+						</SortableContext>
+						<DragOverlay>
+							{activeId ? (
+								<li>
+									<TodoCard
+										// biome-ignore lint/style/noNonNullAssertion: <explanation>
+										todo={activeTodos.find((todo) => todo.id === activeId)!}
+										onToggle={completeTodo}
+										onPostpone={postponeTodo}
+										onDelete={deleteTodo}
+										onSave={saveTodo}
+									/>
+								</li>
+							) : null}
+						</DragOverlay>
+					</DndContext>
+				</TodoList>
 			)}
 			{completedTodos.length > 0 && (
 				<TodoList title={"COMPLETED"}>
