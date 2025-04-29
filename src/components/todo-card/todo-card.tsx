@@ -14,7 +14,6 @@ type TodoCardProps = {
 };
 
 export const TodoCard = (props: TodoCardProps) => {
-	const formRef = useRef<HTMLFormElement>(null);
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -25,7 +24,6 @@ export const TodoCard = (props: TodoCardProps) => {
 
 		if (e.key === "Enter" && !e.shiftKey) {
 			e.preventDefault();
-			formRef.current?.requestSubmit();
 			e.currentTarget.blur();
 		}
 	};
