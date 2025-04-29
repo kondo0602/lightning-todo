@@ -41,11 +41,6 @@
 	gap: var(--spacing-xs);
 }
 
-.todo-card[data-state="complete"] .todo-task-text {
-	color: var(--color-text-secondary);
-	text-decoration: line-through;
-}
-
 .right-button,
 .trash-button {
 	position: absolute;
