@@ -10,8 +10,10 @@
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.todo-card:hover {
-	transform: scale(1.02);
+@media (any-hover: hover) {
+	.todo-card:hover {
+		transform: scale(1.02);
+	}
 }
 
 .todo-card:focus-within {
@@ -64,15 +66,19 @@
 	right: var(--spacing-xs);
 }
 
-.right-button:hover,
-.trash-button:hover {
-	background-color: rgba(0, 0, 0, 0.1);
+@media (any-hover: hover) {
+	.right-button:hover,
+	.trash-button:hover {
+		background-color: rgba(0, 0, 0, 0.1);
+	}
 }
 
-.todo-card:hover .right-button,
-.todo-card:hover .trash-button {
-	opacity: 1;
-	background-color: var(--color-surface);
+@media (any-hover: hover) {
+	.todo-card:hover .right-button,
+	.todo-card:hover .trash-button {
+		opacity: 1;
+		background-color: var(--color-surface);
+	}
 }
 
 .todo-card:focus-within .right-button,

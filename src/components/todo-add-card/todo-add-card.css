@@ -13,8 +13,10 @@
 	transform: scale(1.02);
 }
 
-.todo-add-card:hover {
-	transform: scale(1.02);
+@media (any-hover: hover) {
+	.todo-add-card:hover {
+		transform: scale(1.02);
+	}
 }
 
 .todo-add-card-placeholder {
