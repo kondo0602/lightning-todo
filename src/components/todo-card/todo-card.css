@@ -10,10 +10,6 @@
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.todo-card[data-state="complete"] .todo-task-textarea {
-	color: var(--color-text-secondary);
-}
-
 .todo-card:hover {
 	transform: scale(1.02);
 }
@@ -22,6 +18,13 @@
 	outline: 2px solid var(--color-accent);
 	outline-offset: 2px;
 	transform: scale(1.02);
+}
+
+.todo-card-form {
+	display: flex;
+	align-items: flex-start;
+	padding: var(--spacing-sm);
+	gap: var(--spacing-xs);
 }
 
 .todo-task-textarea {
@@ -34,11 +37,8 @@
 	resize: none;
 }
 
-.todo-card-form {
-	display: flex;
-	align-items: flex-start;
-	padding: var(--spacing-sm);
-	gap: var(--spacing-xs);
+.todo-card[data-state="complete"] .todo-task-textarea {
+	color: var(--color-text-secondary);
 }
 
 .right-button,
