@@ -69,7 +69,6 @@ export const TodoCard = (props: TodoCardProps) => {
 					defaultValue={props.todo.task}
 					onKeyDown={handleKeyDown}
 				/>
-				<span>{props.todo.order}</span>
 				<button type="submit" className="visually-hidden" tabIndex={-1} />
 			</form>
 			{/* {!props.todo.completed && (
