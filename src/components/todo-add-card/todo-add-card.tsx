@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { TodoTaskTextarea } from "../todo-task-textarea/todo-task-textarea";
+import { TodoTextarea } from "../todo-textarea/todo-textarea";
 import "./todo-add-card.css";
 
 type TodoAddCardProps = {
@@ -61,7 +61,7 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 				onSubmit={handleSubmit}
 				ref={formRef}
 			>
-				<TodoTaskTextarea
+				<TodoTextarea
 					ref={textareaRef}
 					className="todo-add-card-task-textarea"
 					onKeyDown={handleKeyDown}
