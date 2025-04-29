@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { FaAngleRight, FaRegTrashAlt } from "react-icons/fa";
+// import { FaAngleRight, FaRegTrashAlt } from "react-icons/fa";
 import type { Todo } from "../../types/todo";
 import { TodoCheckbox } from "../todo-checkbox/todo-checkbox";
 import { TodoTaskTextarea } from "../todo-task-textarea/todo-task-textarea";
@@ -69,9 +69,10 @@ export const TodoCard = (props: TodoCardProps) => {
 					defaultValue={props.todo.task}
 					onKeyDown={handleKeyDown}
 				/>
+				<span>{props.todo.order}</span>
 				<button type="submit" className="visually-hidden" tabIndex={-1} />
 			</form>
-			{!props.todo.completed && (
+			{/* {!props.todo.completed && (
 				<button
 					className="right-button"
 					type="button"
@@ -103,7 +104,7 @@ export const TodoCard = (props: TodoCardProps) => {
 				}}
 			>
 				<FaRegTrashAlt />
-			</button>
+			</button> */}
 		</div>
 	);
 };

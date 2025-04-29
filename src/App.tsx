@@ -30,7 +30,7 @@ function App() {
 		completeTodo,
 		postponeTodo,
 		saveTodo,
-		reorderTodos,
+		updateTodoOrder,
 		activeTodos,
 		completedTodos,
 	} = useTodoList();
@@ -60,8 +60,10 @@ function App() {
 	const handleDragEnd = (event: DragEndEvent) => {
 		const { active, over } = event;
 
+		console.log({ active, over });
+
 		if (over && active.id !== over.id) {
-			reorderTodos(active.id.toString(), over.id.toString());
+			updateTodoOrder(active.id.toString(), over.id.toString());
 		}
 
 		setActiveId(null);

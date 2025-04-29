@@ -14,7 +14,7 @@ describe("filterTodosDueOnOrBeforeToday", () => {
 		startAt: Temporal.Now.plainDateISO().toString(),
 		completed: false,
 		completedAt: null,
-		order: 0,
+		order: "1",
 	};
 
 	it("本日以前の日付に開始 かつ 未完了のタスクはフィルタリングされないこと", () => {

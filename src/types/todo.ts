@@ -4,5 +4,5 @@ export type Todo = {
 	startAt: string;
 	completed: boolean;
 	completedAt: string | null;
-	order: number;
+	order: string;
 };
