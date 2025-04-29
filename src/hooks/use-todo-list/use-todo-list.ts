@@ -1,32 +1,12 @@
-import { useState } from "react";
 import { Temporal } from "temporal-polyfill";
 import { v4 as uuidv4 } from "uuid";
-import { useSyncLocalStorage } from "../use-sync-local-storage/use-sync-local-storage";
 
 import { generateKeyBetween } from "fractional-indexing";
 import type { Todo } from "../../types/todo";
-import { filterTodosDueOnOrBeforeToday } from "./filter-todos";
-
-const isDev = () => {
-	return import.meta.env.MODE === "development";
-};
-
-// 開発環境用
-const useDevState = <T>(initialValue: T) => {
-	const [state, setState] = useState<T>(initialValue);
-	return { storedValue: state, setStoredValue: setState };
-};
+import { useStore } from "../use-store/use-store";
 
 export const useTodoList = () => {
-	const initialize = () => {
-		const filteredTodos = filterTodosDueOnOrBeforeToday(storedValue);
-		setStoredValue(filteredTodos);
-	};
-
-	// 開発環境と本番環境で使うフックを切り替え
-	const { storedValue, setStoredValue } = isDev()
-		? useDevState<Todo[]>([])
-		: useSyncLocalStorage("todos", [] as Todo[], initialize);
+	const { storedValue, setStoredValue } = useStore<Todo[]>("todos", []);
 
 	const addTodo = (task: string) => {
 		const minOrderTodo = storedValue.reduce((min, todo) => {
