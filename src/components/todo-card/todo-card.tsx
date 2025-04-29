@@ -10,7 +10,7 @@ type TodoCardProps = {
 	onToggle: (id: string) => void;
 	onPostpone: (id: string) => void;
 	onDelete: (id: string) => void;
-	onSave: (id: string, text: string, note: string) => void;
+	onSave: (id: string, text: string) => void;
 };
 
 export const TodoCard = (props: TodoCardProps) => {
@@ -33,14 +33,12 @@ export const TodoCard = (props: TodoCardProps) => {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		// FormDataを使ってフォームの値を取得
 		const formData = new FormData(e.currentTarget);
 		const newTask = formData.get("task")?.toString() || "";
-		const newNote = formData.get("note")?.toString() || "";
 
 		// テキストか注釈が変更された場合のみ保存する
 		if (newTask !== props.todo.task) {
-			props.onSave(props.todo.id, newTask, newNote);
+			props.onSave(props.todo.id, newTask);
 		}
 	};
 

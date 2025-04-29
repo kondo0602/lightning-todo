@@ -64,6 +64,7 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 				<TodoTextarea
 					ref={textareaRef}
 					className="todo-add-card-task-textarea"
+					name="task"
 					onKeyDown={handleKeyDown}
 				/>
 				<button type="submit" className="visually-hidden" tabIndex={-1} />
