@@ -5,16 +5,6 @@
 	gap: var(--spacing-xs);
 }
 
-.todo-task-textarea {
-	width: 100%;
-	background: transparent;
-	font-size: inherit;
-	field-sizing: content;
-	border: none;
-	outline: none;
-	resize: none;
-}
-
 .todo-card[data-state="complete"] .todo-task-textarea {
 	color: var(--color-text-secondary);
 }

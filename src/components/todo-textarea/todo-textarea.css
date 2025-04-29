@@ -1,4 +1,5 @@
 .todo-textarea {
+	width: 100%;
 	background: transparent;
 	color: var(--color-text-primary);
 	font-size: inherit;

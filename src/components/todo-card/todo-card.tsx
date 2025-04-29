@@ -44,7 +44,6 @@ export const TodoCard = (props: TodoCardProps) => {
 					/>
 					<TodoTextarea
 						ref={textareaRef}
-						className="todo-task-textarea"
 						name="task"
 						defaultValue={props.todo.task}
 					/>
