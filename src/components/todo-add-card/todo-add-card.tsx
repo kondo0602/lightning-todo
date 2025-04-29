@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { TodoTextarea } from "../todo-textarea/todo-textarea";
 import "./todo-add-card.css";
+import { TodoForm } from "../todo-form/todo-form";
 
 type TodoAddCardProps = {
 	onAdd: (text: string) => void;
@@ -54,19 +55,18 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 				<span className="todo-add-card-icon">＋</span>
 				<span>Add a task</span>
 			</div>
-			<form
+			<TodoForm
 				className="todo-add-form"
 				onBlur={handleSubmit}
 				onSubmit={handleSubmit}
 			>
 				<TodoTextarea
 					ref={textareaRef}
-					className="todo-add-card-task-textarea"
+					className="todo-add-textarea"
 					name="task"
 					onKeyDown={handleKeyDown}
 				/>
-				<button type="submit" className="visually-hidden" tabIndex={-1} />
-			</form>
+			</TodoForm>
 		</div>
 	);
 };

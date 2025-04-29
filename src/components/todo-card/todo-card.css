@@ -22,7 +22,7 @@
 	transform: scale(1.02);
 }
 
-.todo-card-form {
+.todo-card-container {
 	display: flex;
 	align-items: flex-start;
 	padding: var(--spacing-sm);

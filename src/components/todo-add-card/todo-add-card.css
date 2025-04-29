@@ -39,42 +39,15 @@
 	border-radius: 50%;
 }
 
-.todo-add-form {
-	display: flex;
-	flex-direction: column;
+.todo-add-card:focus-within .todo-add-card-placeholder {
+	display: none;
 }
 
 .todo-add-card:not(:focus-within) .todo-add-form {
-	position: fixed !important;
-	inset: 0 !important;
-	display: block !important;
-	inline-size: 4px !important;
-	block-size: 4px !important;
-	padding: 0 !important;
-	margin: 0 !important;
-	contain: strict !important;
-	pointer-events: none !important;
-	visibility: visible !important;
-	border: none !important;
-	opacity: 0 !important;
+	display: none;
 }
 
-.todo-add-card:focus-within .todo-add-card-placeholder {
-	position: fixed !important;
-	inset: 0 !important;
-	display: block !important;
-	inline-size: 4px !important;
-	block-size: 4px !important;
-	padding: 0 !important;
-	margin: 0 !important;
-	contain: strict !important;
-	pointer-events: none !important;
-	visibility: visible !important;
-	border: none !important;
-	opacity: 0 !important;
-}
-
-.todo-add-card-task-textarea {
+.todo-add-textarea {
 	padding: var(--spacing-sm);
 	cursor: pointer;
 }

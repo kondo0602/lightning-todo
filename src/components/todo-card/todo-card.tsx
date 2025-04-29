@@ -4,6 +4,7 @@ import type { Todo } from "../../types/todo";
 import { TodoCheckbox } from "../todo-checkbox/todo-checkbox";
 import { TodoTextarea } from "../todo-textarea/todo-textarea";
 import "./todo-card.css";
+import { TodoForm } from "../todo-form/todo-form";
 
 type TodoCardProps = {
 	todo: Todo;
@@ -49,24 +50,21 @@ export const TodoCard = (props: TodoCardProps) => {
 			role="button"
 			tabIndex={-1}
 		>
-			<form
-				className="todo-card-form"
-				onBlur={handleSubmit}
-				onSubmit={handleSubmit}
-			>
-				<TodoCheckbox
-					checked={props.todo.completed}
-					onChange={() => props.onToggle(props.todo.id)}
-				/>
-				<TodoTextarea
-					ref={textareaRef}
-					className="todo-task-textarea"
-					name="task"
-					defaultValue={props.todo.task}
-					onKeyDown={handleKeyDown}
-				/>
-				<button type="submit" className="visually-hidden" tabIndex={-1} />
-			</form>
+			<TodoForm onBlur={handleSubmit} onSubmit={handleSubmit}>
+				<div className="todo-card-container">
+					<TodoCheckbox
+						checked={props.todo.completed}
+						onChange={() => props.onToggle(props.todo.id)}
+					/>
+					<TodoTextarea
+						ref={textareaRef}
+						className="todo-task-textarea"
+						name="task"
+						defaultValue={props.todo.task}
+						onKeyDown={handleKeyDown}
+					/>
+				</div>
+			</TodoForm>
 			{/* {!props.todo.completed && (
 				<button
 					className="right-button"
