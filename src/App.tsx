@@ -1,5 +1,5 @@
-import { TodoAddCard } from "./components/todo-add-card/todo-add-card";
-import { TodoCard } from "./components/todo-card/todo-card";
+import { TodoAddCard } from "./components/domains/todo-add-card/todo-add-card";
+import { TodoCard } from "./components/domains/todo-card/todo-card";
 import { TodoDateDisplay } from "./components/todo-date-display/todo-date-display";
 import { useTodoList } from "./hooks/use-todo-list/use-todo-list";
 import "./App.css";
@@ -19,8 +19,8 @@ import {
 	verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useState } from "react";
-import { SortableListItem } from "./components/sortable-list-item/sortable-list-item";
-import { TodoList } from "./components/todo-list/todo-list";
+import { TodoList } from "./components/domains/todo-list/todo-list";
+import { SortableListItem } from "./components/elements/sortable-list-item/sortable-list-item";
 
 function App() {
 	const {

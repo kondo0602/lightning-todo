@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { TodoTextarea } from "../todo-textarea/todo-textarea";
 import "./todo-add-card.css";
-import { Card } from "../elements/card/card";
+import { Card } from "../../elements/card/card";
 import { TodoForm } from "../todo-form/todo-form";
 
 type TodoAddCardProps = {
