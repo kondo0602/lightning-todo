@@ -1,15 +1,7 @@
-import { TodoAddCard } from "./components/domains/todo-add-card/todo-add-card";
-import { TodoCard } from "./components/domains/todo-card/todo-card";
-import { DateDisplay } from "./components/elements/date-display/date-display";
-import { useTodoList } from "./hooks/use-todo-list/use-todo-list";
-import "./App.css";
 import {
 	DndContext,
-	type DragEndEvent,
 	DragOverlay,
-	type DragStartEvent,
 	PointerSensor,
-	type UniqueIdentifier,
 	closestCenter,
 	useSensor,
 	useSensors,
@@ -19,8 +11,20 @@ import {
 	verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useState } from "react";
+import { TodoAddCard } from "./components/domains/todo-add-card/todo-add-card";
+import { TodoCard } from "./components/domains/todo-card/todo-card";
 import { TodoList } from "./components/domains/todo-list/todo-list";
+import { DateDisplay } from "./components/elements/date-display/date-display";
 import { SortableListItem } from "./components/elements/sortable-list-item/sortable-list-item";
+import { useTodoList } from "./hooks/use-todo-list/use-todo-list";
+
+import type {
+	DragEndEvent,
+	DragStartEvent,
+	UniqueIdentifier,
+} from "@dnd-kit/core";
+
+import "./App.css";
 
 function App() {
 	const {
@@ -59,8 +63,6 @@ function App() {
 
 	const handleDragEnd = (event: DragEndEvent) => {
 		const { active, over } = event;
-
-		console.log({ active, over });
 
 		if (over && active.id !== over.id) {
 			updateTodoOrder(active.id.toString(), over.id.toString());
