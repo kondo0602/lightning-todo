@@ -28,21 +28,7 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 		}
 	};
 
-	const handleBlur = (e: React.FocusEvent<HTMLFormElement>) => {
-		e.preventDefault();
-
-		const form = e.currentTarget;
-		const task = form.elements[0] as HTMLTextAreaElement;
-		const taskText = task.value.trim();
-
-		if (taskText) {
-			onAdd(taskText);
-			task.value = "";
-		}
-		task.blur();
-	};
-
-	const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		const form = e.currentTarget;
@@ -71,8 +57,8 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 			</div>
 			<form
 				className="todo-add-form"
-				onBlur={handleBlur}
-				onSubmit={handleAddTask}
+				onBlur={handleSubmit}
+				onSubmit={handleSubmit}
 				ref={formRef}
 			>
 				<TodoTaskTextarea
