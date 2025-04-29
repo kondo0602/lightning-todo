@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { TodoTextarea } from "../todo-textarea/todo-textarea";
 import "./todo-add-card.css";
+import { Card } from "../elements/card/card";
 import { TodoForm } from "../todo-form/todo-form";
 
 type TodoAddCardProps = {
@@ -26,11 +27,8 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 	};
 
 	return (
-		// biome-ignore lint/a11y/useKeyWithClickEvents: tabIndexを-1にしているため
-		<div
+		<Card
 			className="todo-add-card"
-			role="button"
-			tabIndex={-1}
 			onClick={() => textareaRef.current?.focus()}
 		>
 			<div className="todo-add-card-placeholder">
@@ -48,6 +46,6 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 					name="task"
 				/>
 			</TodoForm>
-		</div>
+		</Card>
 	);
 };

@@ -4,6 +4,7 @@ import type { Todo } from "../../types/todo";
 import { TodoCheckbox } from "../todo-checkbox/todo-checkbox";
 import { TodoTextarea } from "../todo-textarea/todo-textarea";
 import "./todo-card.css";
+import { Card } from "../elements/card/card";
 import { TodoForm } from "../todo-form/todo-form";
 
 type TodoCardProps = {
@@ -30,13 +31,10 @@ export const TodoCard = (props: TodoCardProps) => {
 	};
 
 	return (
-		// biome-ignore lint/a11y/useKeyWithClickEvents: tabIndexを-1にしているため
-		<div
+		<Card
 			className="todo-card"
 			data-state={props.todo.completed ? "complete" : "incomplete"}
 			onClick={() => textareaRef.current?.focus()}
-			role="button"
-			tabIndex={-1}
 		>
 			<TodoForm onBlur={handleSubmit} onSubmit={handleSubmit}>
 				<div className="todo-card-container">
@@ -54,37 +52,37 @@ export const TodoCard = (props: TodoCardProps) => {
 			</TodoForm>
 			{/* {!props.todo.completed && (
 				<button
-					className="right-button"
-					type="button"
-					onClick={(e) => {
-						e.stopPropagation();
-						props.onPostpone(props.todo.id);
+				className="right-button"
+				type="button"
+				onClick={(e) => {
+					e.stopPropagation();
+					props.onPostpone(props.todo.id);
 					}}
 					// NOTE: 削除ボタンを押した時にカードにフォーカスリングが表示されないようにするための記述
 					onMouseDown={(e) => {
 						e.preventDefault();
 						e.stopPropagation();
-					}}
-				>
-					<FaAngleRight />
-				</button>
-			)}
-			<button
-				className="trash-button"
-				type="button"
-				aria-label="trash"
-				onClick={(e) => {
-					e.stopPropagation(); // カードのクリックイベントが発火しないようにする
-					props.onDelete(props.todo.id);
-				}}
-				// NOTE: 削除ボタンを押した時にカードにフォーカスリングが表示されないようにするための記述
-				onMouseDown={(e) => {
-					e.preventDefault();
-					e.stopPropagation();
-				}}
-			>
-				<FaRegTrashAlt />
-			</button> */}
-		</div>
+						}}
+						>
+						<FaAngleRight />
+						</button>
+						)}
+						<button
+						className="trash-button"
+						type="button"
+						aria-label="trash"
+						onClick={(e) => {
+							e.stopPropagation(); // カードのクリックイベントが発火しないようにする
+							props.onDelete(props.todo.id);
+							}}
+							// NOTE: 削除ボタンを押した時にカードにフォーカスリングが表示されないようにするための記述
+							onMouseDown={(e) => {
+								e.preventDefault();
+								e.stopPropagation();
+								}}
+								>
+								<FaRegTrashAlt />
+								</button> */}
+		</Card>
 	);
 };
