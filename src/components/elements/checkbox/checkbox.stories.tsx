@@ -32,14 +32,14 @@ export const Checked: Story = {
 
 export const Disabled: Story = {
 	args: {
-		disabled: true,
 		checked: false,
+		disabled: true,
 	},
 };
 
 export const DisabledChecked: Story = {
 	args: {
-		disabled: true,
 		checked: true,
+		disabled: true,
 	},
 };
