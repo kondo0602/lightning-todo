@@ -10,24 +10,6 @@ type TodoAddCardProps = {
 export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-	// TODO: TodoCardにも同じ関数が定義されているため、textarea側に委譲する
-	// TODO: カードをクリックしたときにマージできるrefとtextareaからblurするためのrefをマージできるようにする
-	const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-		// 日本語入力の変換中はEnterキーを無視する
-		if (e.nativeEvent.isComposing) {
-			return;
-		}
-
-		// NOTE: textareaでEnterを押すと改行されてしまいフォーム送信がされないため、以下のようにする
-		//
-		// Enterだけ押した場合：フォーム送信
-		// Shift + Enterを押した場合：textarea内で改行
-		if (e.key === "Enter" && !e.shiftKey) {
-			e.preventDefault();
-			textareaRef.current?.blur();
-		}
-	};
-
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
@@ -64,7 +46,6 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 					ref={textareaRef}
 					className="todo-add-textarea"
 					name="task"
-					onKeyDown={handleKeyDown}
 				/>
 			</TodoForm>
 		</div>

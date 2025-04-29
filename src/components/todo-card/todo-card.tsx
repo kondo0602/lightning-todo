@@ -17,18 +17,6 @@ type TodoCardProps = {
 export const TodoCard = (props: TodoCardProps) => {
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-	const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-		// 日本語入力の変換中はEnterキーを無視する
-		if (e.nativeEvent.isComposing) {
-			return;
-		}
-
-		if (e.key === "Enter" && !e.shiftKey) {
-			e.preventDefault();
-			e.currentTarget.blur();
-		}
-	};
-
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
@@ -61,7 +49,6 @@ export const TodoCard = (props: TodoCardProps) => {
 						className="todo-task-textarea"
 						name="task"
 						defaultValue={props.todo.task}
-						onKeyDown={handleKeyDown}
 					/>
 				</div>
 			</TodoForm>
