@@ -1,7 +1,7 @@
 import { useRef } from "react";
 // import { FaAngleRight, FaRegTrashAlt } from "react-icons/fa";
 import type { Todo } from "../../../types/todo";
-import { TodoCheckbox } from "../../todo-checkbox/todo-checkbox";
+import { Checkbox } from "../../elements/checkbox/checkbox";
 import { TodoTextarea } from "../todo-textarea/todo-textarea";
 import "./todo-card.css";
 import { Card } from "../../elements/card/card";
@@ -38,7 +38,7 @@ export const TodoCard = (props: TodoCardProps) => {
 		>
 			<TodoForm onBlur={handleSubmit} onSubmit={handleSubmit}>
 				<div className="todo-card-container">
-					<TodoCheckbox
+					<Checkbox
 						checked={props.todo.completed}
 						onChange={() => props.onToggle(props.todo.id)}
 					/>

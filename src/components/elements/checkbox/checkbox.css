@@ -1,4 +1,4 @@
-.todo-checkbox {
+.checkbox {
 	width: 18px;
 	height: 18px;
 	cursor: pointer;
@@ -14,12 +14,12 @@
 	transition: all 0.2s;
 }
 
-.todo-checkbox:checked {
+.checkbox:checked {
 	background-color: var(--color-accent);
 	border-color: var(--color-accent);
 }
 
-.todo-checkbox:checked::after {
+.checkbox:checked::after {
 	content: "✓";
 	position: absolute;
 	left: 50%;
@@ -28,7 +28,7 @@
 	font-size: 12px;
 }
 
-.todo-checkbox:checked:disabled {
+.checkbox:checked:disabled {
 	background-color: var(--color-accent);
 	border-color: var(--color-accent);
 	opacity: 0.7;

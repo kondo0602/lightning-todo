@@ -1,6 +1,6 @@
 import { TodoAddCard } from "./components/domains/todo-add-card/todo-add-card";
 import { TodoCard } from "./components/domains/todo-card/todo-card";
-import { TodoDateDisplay } from "./components/todo-date-display/todo-date-display";
+import { DateDisplay } from "./components/elements/date-display/date-display";
 import { useTodoList } from "./hooks/use-todo-list/use-todo-list";
 import "./App.css";
 import {
@@ -71,7 +71,7 @@ function App() {
 
 	return (
 		<div className="container">
-			<TodoDateDisplay />
+			<DateDisplay />
 			<TodoAddCard onAdd={addTodo} />
 			{activeTodos.length > 0 && (
 				<TodoList>

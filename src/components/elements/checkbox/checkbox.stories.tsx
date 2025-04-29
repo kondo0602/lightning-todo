@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
-import { TodoCheckbox } from "./todo-checkbox";
+import { Checkbox } from "./checkbox";
 
-const meta: Meta<typeof TodoCheckbox> = {
-	title: "Components/TodoCheckbox",
-	component: TodoCheckbox,
+const meta: Meta<typeof Checkbox> = {
+	title: "Components/Checkbox",
+	component: Checkbox,
 	parameters: {
 		layout: "centered",
 	},

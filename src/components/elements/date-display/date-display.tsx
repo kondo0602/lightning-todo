@@ -1,5 +1,5 @@
 import { Temporal } from "temporal-polyfill";
-import "./todo-date-display.css";
+import "./date-display.css";
 
 const MONTHS = [
 	"Jan",
@@ -26,7 +26,7 @@ const WEEKDAYS = [
 	"Saturday",
 ];
 
-export const TodoDateDisplay = () => {
+export const DateDisplay = () => {
 	const now = Temporal.Now.plainDateISO();
 
 	return (
