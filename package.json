@@ -9,9 +9,7 @@
     "lint": "biome check --write src/*",
     "test": "vitest",
     "test:watch": "vitest --watch",
-    "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "storybook": "storybook dev -p 6006"
   },
   "dependencies": {
     "@dnd-kit/core": "6.3.1",
