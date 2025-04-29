@@ -7,7 +7,6 @@ type TodoAddCardProps = {
 };
 
 export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
-	const formRef = useRef<HTMLFormElement>(null);
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 
 	// TODO: textarea側に委譲する
@@ -23,7 +22,6 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 		// Shift + Enterを押した場合：textarea内で改行
 		if (e.key === "Enter" && !e.shiftKey) {
 			e.preventDefault();
-			formRef.current?.requestSubmit();
 			textareaRef.current?.blur();
 		}
 	};
@@ -59,7 +57,6 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 				className="todo-add-form"
 				onBlur={handleSubmit}
 				onSubmit={handleSubmit}
-				ref={formRef}
 			>
 				<TodoTextarea
 					ref={textareaRef}
