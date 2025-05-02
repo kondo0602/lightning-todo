@@ -1,8 +1,8 @@
 import { useRef } from "react";
-import { TodoTextarea } from "../todo-textarea/todo-textarea";
-import "./todo-add-card.css";
 import { Card } from "../../elements/card/card";
 import { TodoForm } from "../todo-form/todo-form";
+import { TodoTextarea } from "../todo-textarea/todo-textarea";
+import styles from "./todo-add-card.module.css";
 
 type TodoAddCardProps = {
 	onAdd: (text: string) => void;
@@ -25,22 +25,19 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 	};
 
 	return (
-		<Card
-			className="todo-add-card"
-			onClick={() => textareaRef.current?.focus()}
-		>
-			<div className="todo-add-card-placeholder">
-				<span className="todo-add-card-icon">＋</span>
+		<Card className={styles.card} onClick={() => textareaRef.current?.focus()}>
+			<div className={styles.placeholder}>
+				<span className={styles.placeholderIcon}>＋</span>
 				<span>Add a task</span>
 			</div>
 			<TodoForm
-				className="todo-add-form"
+				className={styles.form}
 				onBlur={handleSubmit}
 				onSubmit={handleSubmit}
 			>
 				<TodoTextarea
 					ref={textareaRef}
-					className="todo-add-textarea"
+					className={styles.textarea}
 					name="task"
 				/>
 			</TodoForm>

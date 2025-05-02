@@ -1,5 +1,5 @@
 import type { ComponentProps, PropsWithChildren } from "react";
-import "./todo-list.css";
+import styles from "./todo-list.module.css";
 
 type TodoListProps = PropsWithChildren<ComponentProps<"ul">> & {
 	title?: string;
@@ -8,8 +8,8 @@ type TodoListProps = PropsWithChildren<ComponentProps<"ul">> & {
 export const TodoList = ({ title, children, ...props }: TodoListProps) => {
 	return (
 		<>
-			{title && <h2 className="todo-list-heading">{title}</h2>}
-			<ul className="todo-list" {...props}>
+			{title && <h2 className={styles.heading}>{title}</h2>}
+			<ul className={styles.list} {...props}>
 				{children}
 			</ul>
 		</>

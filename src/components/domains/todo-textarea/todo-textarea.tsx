@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 import type { ComponentProps } from "react";
 
-import "./todo-textarea.css";
+import styles from "./todo-textarea.module.css";
 
 type TodoTextareaProps = ComponentProps<"textarea">;
 
@@ -26,7 +26,7 @@ export const TodoTextarea = ({
 	return (
 		<textarea
 			ref={ref}
-			className={clsx("todo-textarea", className)}
+			className={clsx(styles.textarea, className)}
 			placeholder="Add a task..."
 			required
 			rows={1}

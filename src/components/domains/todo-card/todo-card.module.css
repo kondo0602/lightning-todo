@@ -1,13 +1,14 @@
-.todo-card-container {
+.card[data-state="complete"] .textarea {
+	color: var(--color-text-secondary);
+}
+
+.card-container {
 	display: flex;
 	align-items: flex-start;
 	padding: var(--spacing-sm);
 	gap: var(--spacing-xs);
 }
 
-.todo-card[data-state="complete"] .todo-task-textarea {
-	color: var(--color-text-secondary);
-}
 
 .right-button,
 .trash-button {

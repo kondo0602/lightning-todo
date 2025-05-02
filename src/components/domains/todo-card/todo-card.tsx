@@ -1,11 +1,11 @@
 import { useRef } from "react";
 // import { FaAngleRight, FaRegTrashAlt } from "react-icons/fa";
 import type { Todo } from "../../../types/todo";
-import { Checkbox } from "../../elements/checkbox/checkbox";
-import { TodoTextarea } from "../todo-textarea/todo-textarea";
-import "./todo-card.css";
 import { Card } from "../../elements/card/card";
+import { Checkbox } from "../../elements/checkbox/checkbox";
 import { TodoForm } from "../todo-form/todo-form";
+import { TodoTextarea } from "../todo-textarea/todo-textarea";
+import styles from "./todo-card.module.css";
 
 type TodoCardProps = {
 	todo: Todo;
@@ -32,18 +32,19 @@ export const TodoCard = (props: TodoCardProps) => {
 
 	return (
 		<Card
-			className="todo-card"
+			className={styles.card}
 			data-state={props.todo.completed ? "complete" : "incomplete"}
 			onClick={() => textareaRef.current?.focus()}
 		>
 			<TodoForm onBlur={handleSubmit} onSubmit={handleSubmit}>
-				<div className="todo-card-container">
+				<div className={styles.cardContainer}>
 					<Checkbox
 						checked={props.todo.completed}
 						onChange={() => props.onToggle(props.todo.id)}
 					/>
 					<TodoTextarea
 						ref={textareaRef}
+						className={styles.textarea}
 						name="task"
 						defaultValue={props.todo.task}
 					/>

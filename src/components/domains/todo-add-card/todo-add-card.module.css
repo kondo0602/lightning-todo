@@ -1,4 +1,4 @@
-.todo-add-card-placeholder {
+.placeholder {
 	display: flex;
 	align-items: center;
 	padding: var(--spacing-sm);
@@ -6,7 +6,7 @@
 	line-height: 1.15;
 }
 
-.todo-add-card-icon {
+.placeholder-icon {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -18,14 +18,14 @@
 	border-radius: 50%;
 }
 
-.todo-add-card:focus-within .todo-add-card-placeholder {
+.card:focus-within .placeholder {
 	display: none;
 }
 
-.todo-add-card:not(:focus-within) .todo-add-form {
+.card:not(:focus-within) .form {
 	display: none;
 }
 
-.todo-add-textarea {
+.textarea {
 	padding: var(--spacing-sm);
 }
