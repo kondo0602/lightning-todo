@@ -24,7 +24,7 @@ import type {
 	UniqueIdentifier,
 } from "@dnd-kit/core";
 
-import "./App.css";
+import styles from "./App.module.css";
 
 function App() {
 	const {
@@ -72,7 +72,7 @@ function App() {
 	};
 
 	return (
-		<div className="container">
+		<div className={styles.container}>
 			<DateDisplay />
 			<TodoAddCard onAdd={addTodo} />
 			{activeTodos.length > 0 && (
