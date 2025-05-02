@@ -15,15 +15,13 @@ export const TodoAddCard = ({ onAdd }: TodoAddCardProps) => {
 		e.preventDefault();
 
 		const form = e.currentTarget;
-		const task = form.elements[0] as HTMLTextAreaElement;
-
-		const taskText = task.value.trim();
+		const formData = new FormData(form);
+		const taskText = formData.get("task")?.toString();
 
 		if (taskText) {
 			onAdd(taskText);
-			task.value = "";
+			form.reset();
 		}
-		task.blur();
 	};
 
 	return (

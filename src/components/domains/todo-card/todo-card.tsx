@@ -21,11 +21,11 @@ export const TodoCard = (props: TodoCardProps) => {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		const formData = new FormData(e.currentTarget);
-		const newTask = formData.get("task")?.toString() || "";
+		const form = e.currentTarget;
+		const formData = new FormData(form);
+		const newTask = formData.get("task")?.toString();
 
-		// テキストか注釈が変更された場合のみ保存する
-		if (newTask !== props.todo.task) {
+		if (newTask && props.todo.task !== newTask) {
 			props.onSave(props.todo.id, newTask);
 		}
 	};
