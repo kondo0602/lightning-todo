@@ -1,5 +1,5 @@
 import { Temporal } from "temporal-polyfill";
-import "./date-display.css";
+import styles from "./date-display.module.css";
 
 const MONTHS = [
 	"Jan",
@@ -30,10 +30,12 @@ export const DateDisplay = () => {
 	const now = Temporal.Now.plainDateISO();
 
 	return (
-		<div className="date-display">
-			<h1 className="date-display-day">{now.day.toString()}</h1>
-			<span className="date-display-weekday">{WEEKDAYS[now.dayOfWeek]}</span>
-			<span className="date-display-month-year">
+		<div className={styles.dateDisplay}>
+			<h1 className={styles.dateDisplayDay}>{now.day.toString()}</h1>
+			<span className={styles.dateDisplayWeekday}>
+				{WEEKDAYS[now.dayOfWeek]}
+			</span>
+			<span className={styles.dateDisplayMonthYear}>
 				{`${MONTHS[now.month - 1]}, ${now.year.toString()}`}
 			</span>
 		</div>
