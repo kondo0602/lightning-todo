@@ -1,11 +1,15 @@
 import { useRef } from "react";
-// import { FaAngleRight, FaRegTrashAlt } from "react-icons/fa";
-import type { Todo } from "../../../types/todo";
+
 import { Card } from "../../elements/card/card";
 import { Checkbox } from "../../elements/checkbox/checkbox";
 import { TodoForm } from "../todo-form/todo-form";
 import { TodoTextarea } from "../todo-textarea/todo-textarea";
+
+import type { Todo } from "../../../types/todo";
+
 import styles from "./todo-card.module.css";
+
+// import { FaAngleRight, FaRegTrashAlt } from "react-icons/fa";
 
 type TodoCardProps = {
 	todo: Todo;

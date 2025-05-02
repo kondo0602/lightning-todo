@@ -6,9 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "biome check --write src/*",
+    "check": "biome check --write src/*",
     "test": "vitest",
-    "test:watch": "vitest --watch",
     "storybook": "storybook dev -p 6006"
   },
   "dependencies": {

@@ -1,5 +1,7 @@
 import clsx from "clsx";
+
 import type { ComponentProps } from "react";
+
 import styles from "./card.module.css";
 
 type CardProps = ComponentProps<"div">;
