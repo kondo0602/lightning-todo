@@ -1,33 +1,33 @@
+import { generateKeyBetween } from "fractional-indexing";
 import { Temporal } from "temporal-polyfill";
 import { v4 as uuidv4 } from "uuid";
 
-import { generateKeyBetween } from "fractional-indexing";
-import type { Todo } from "../../types/todo";
 import { useStore } from "../use-store/use-store";
+import { getMinOrder } from "./get-min-order";
+
+import type { Todo } from "../../types/todo";
+import { getCompleteTodos } from "./get-complete-todos";
+import { getTodayTodos } from "./get-today-todos";
+import { generateNewOrder } from "./update-todo-order";
 
 export const useTodoList = () => {
 	const { storedValue, setStoredValue } = useStore<Todo[]>("todos", []);
 
 	const addTodo = (task: string) => {
-		const minOrderTodo = storedValue.reduce((min, todo) => {
-			return todo.order < min.order ? todo : min;
-		}, storedValue[0]);
+		const minOrderTodo =
+			storedValue.length > 0 ? getMinOrder(storedValue) : null;
 
-		const newTodos = [
+		setStoredValue([
 			{
 				id: uuidv4(),
 				task,
+				order: generateKeyBetween(null, minOrderTodo),
 				startAt: Temporal.Now.plainDateISO().toString(),
 				completed: false,
 				completedAt: null,
-				order:
-					storedValue.length > 0
-						? generateKeyBetween(null, minOrderTodo.order)
-						: generateKeyBetween(null, null),
 			},
 			...storedValue,
-		];
-		setStoredValue(newTodos);
+		]);
 	};
 
 	const deleteTodo = (id: string) => {
@@ -58,6 +58,38 @@ export const useTodoList = () => {
 		);
 	};
 
+	const updateTodoTask = (id: string, text: string) => {
+		setStoredValue(
+			storedValue.map((todo) =>
+				todo.id === id ? { ...todo, task: text } : todo,
+			),
+		);
+	};
+
+	const updateTodoOrder = (activeId: string, overId: string) => {
+		const activeTodoOrder = storedValue.find(
+			(todo) => todo.id === activeId,
+		)?.order;
+		const overTodoOrder = storedValue.find((todo) => todo.id === overId)?.order;
+
+		if (activeTodoOrder === undefined || overTodoOrder === undefined) return;
+		if (activeTodoOrder === overTodoOrder) return;
+
+		const newOrder = generateNewOrder(
+			activeTodoOrder,
+			overTodoOrder,
+			getTodayTodos(storedValue),
+		);
+
+		if (!newOrder) return;
+
+		setStoredValue(
+			storedValue.map((todo) =>
+				todo.id === activeId ? { ...todo, order: newOrder } : todo,
+			),
+		);
+	};
+
 	const postponeTodo = (id: string) => {
 		setStoredValue(
 			storedValue.map((todo) =>
@@ -71,77 +103,15 @@ export const useTodoList = () => {
 		);
 	};
 
-	const saveTodo = (id: string, text: string) => {
-		setStoredValue(
-			storedValue.map((todo) =>
-				todo.id === id ? { ...todo, task: text } : todo,
-			),
-		);
-	};
-
-	const updateTodoOrder = (activeId: string, overId: string) => {
-		const activeTodo = storedValue.find((todo) => todo.id === activeId);
-		const overTodo = storedValue.find((todo) => todo.id === overId);
-		if (!activeTodo || !overTodo) return;
-
-		if (activeTodo.order === overTodo.order) return;
-
-		let newOrder: string | null = null;
-
-		if (activeTodo.order < overTodo.order) {
-			// activeTodoを上から下に移動した場合
-			// 対象のTODOを上から下に移動した場合は、対象のTODOの前後のTODOのorderを取得して、その間に新しいorderを生成する
-			const overIndex = activeTodos.findIndex((todo) => todo.id === overId);
-			const nextTodo =
-				activeTodos[overIndex + 1] === undefined
-					? null
-					: activeTodos[overIndex + 1];
-
-			newOrder = generateKeyBetween(overTodo.order, nextTodo?.order);
-		} else {
-			// activeTodoを下から上に移動した場合
-			// 対象のTODOを下から上に移動した場合は、対象のTODOの前後のTODOのorderを取得して、その間に新しいorderを生成する
-			const overIndex = activeTodos.findIndex((todo) => todo.id === overId);
-			// TODO: もっといい判定方法ありそう
-			const prevTodo =
-				activeTodos[overIndex - 1] === undefined
-					? null
-					: activeTodos[overIndex - 1];
-
-			newOrder = generateKeyBetween(prevTodo?.order, overTodo.order);
-		}
-
-		setStoredValue(
-			storedValue.map((todo) =>
-				todo.id === activeId ? { ...todo, order: newOrder } : todo,
-			),
-		);
-	};
-
-	const activeTodos = storedValue
-		.filter((todo) => !todo.completed)
-		.filter(
-			(todo) =>
-				Temporal.PlainDate.compare(
-					Temporal.PlainDate.from(todo.startAt),
-					Temporal.Now.plainDateISO(),
-				) <= 0,
-		)
-		.sort((a, b) => (a.order < b.order ? -1 : a.order > b.order ? 1 : 0));
-
-	const completedTodos = storedValue
-		.filter((todo) => todo.completed)
-		.sort((a, b) => (a.order < b.order ? -1 : a.order > b.order ? 1 : 0));
-
 	return {
+		todayTodos: getTodayTodos(storedValue),
+		completedTodos: getCompleteTodos(storedValue),
 		addTodo,
 		deleteTodo,
 		completeTodo,
 		unCompleteTodo,
-		postponeTodo,
-		saveTodo,
+		updateTodoTask,
 		updateTodoOrder,
-		activeTodos,
-		completedTodos,
+		postponeTodo,
 	};
 };

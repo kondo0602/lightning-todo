@@ -28,15 +28,15 @@ import styles from "./App.module.css";
 
 function App() {
 	const {
+		todayTodos,
+		completedTodos,
 		addTodo,
 		deleteTodo,
 		unCompleteTodo,
 		completeTodo,
-		postponeTodo,
-		saveTodo,
+		updateTodoTask,
 		updateTodoOrder,
-		activeTodos,
-		completedTodos,
+		postponeTodo,
 	} = useTodoList();
 
 	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
@@ -75,7 +75,7 @@ function App() {
 		<div className={styles.container}>
 			<DateDisplay />
 			<TodoAddCard onAdd={addTodo} />
-			{activeTodos.length > 0 && (
+			{todayTodos.length > 0 && (
 				<TodoList>
 					<DndContext
 						sensors={sensors}
@@ -84,17 +84,17 @@ function App() {
 						onDragEnd={handleDragEnd}
 					>
 						<SortableContext
-							items={activeTodos.map((todo) => todo.id)}
+							items={todayTodos.map((todo) => todo.id)}
 							strategy={verticalListSortingStrategy}
 						>
-							{activeTodos.map((todo) => (
+							{todayTodos.map((todo) => (
 								<SortableListItem key={todo.id} id={todo.id}>
 									<TodoCard
 										todo={todo}
 										onToggle={completeTodo}
 										onPostpone={postponeTodo}
 										onDelete={deleteTodo}
-										onSave={saveTodo}
+										onSave={updateTodoTask}
 									/>
 								</SortableListItem>
 							))}
@@ -104,11 +104,11 @@ function App() {
 								<li>
 									<TodoCard
 										// biome-ignore lint/style/noNonNullAssertion: <explanation>
-										todo={activeTodos.find((todo) => todo.id === activeId)!}
+										todo={todayTodos.find((todo) => todo.id === activeId)!}
 										onToggle={completeTodo}
 										onPostpone={postponeTodo}
 										onDelete={deleteTodo}
-										onSave={saveTodo}
+										onSave={updateTodoTask}
 									/>
 								</li>
 							) : null}
@@ -125,7 +125,7 @@ function App() {
 								onToggle={unCompleteTodo}
 								onPostpone={postponeTodo}
 								onDelete={deleteTodo}
-								onSave={saveTodo}
+								onSave={updateTodoTask}
 							/>
 						</li>
 					))}
