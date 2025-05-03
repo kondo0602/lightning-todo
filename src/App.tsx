@@ -1,21 +1,11 @@
-import {
-	DndContext,
-	DragOverlay,
-	PointerSensor,
-	closestCenter,
-	useSensor,
-	useSensors,
-} from "@dnd-kit/core";
-import {
-	SortableContext,
-	verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
 import { useState } from "react";
+
 import { TodoAddCard } from "./components/domains/todo-add-card/todo-add-card";
 import { TodoCard } from "./components/domains/todo-card/todo-card";
 import { TodoList } from "./components/domains/todo-list/todo-list";
 import { DateDisplay } from "./components/elements/date-display/date-display";
 import { SortableListItem } from "./components/elements/sortable-list-item/sortable-list-item";
+import { SortableList } from "./components/elements/sortable-list/sortable-list";
 import { useTodoList } from "./hooks/use-todo-list/use-todo-list";
 
 import type {
@@ -41,34 +31,16 @@ function App() {
 
 	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
 
-	const pointerSensor = useSensor(PointerSensor, {
-		activationConstraint: {
-			distance: 10,
-		},
-	});
-
-	const sensors = useSensors(
-		pointerSensor,
-		// TODO: キーボードアクションによるソートに対応する
-		// useSensor(KeyboardSensor, {
-		// 	coordinateGetter: sortableKeyboardCoordinates,
-		// }),
-	);
-
-	function handleDragStart(event: DragStartEvent) {
+	const handleReorderStart = (event: DragStartEvent) => {
 		const { active } = event;
-
 		setActiveId(active.id);
-	}
+	};
 
-	const handleDragEnd = (event: DragEndEvent) => {
+	const handleReorderEnd = (event: DragEndEvent) => {
 		const { active, over } = event;
-
 		if (over && active.id !== over.id) {
 			updateTodoOrder(active.id.toString(), over.id.toString());
 		}
-
-		setActiveId(null);
 	};
 
 	return (
@@ -77,30 +49,12 @@ function App() {
 			<TodoAddCard onAdd={addTodo} />
 			{todayTodos.length > 0 && (
 				<TodoList>
-					<DndContext
-						sensors={sensors}
-						collisionDetection={closestCenter}
-						onDragStart={handleDragStart}
-						onDragEnd={handleDragEnd}
-					>
-						<SortableContext
-							items={todayTodos.map((todo) => todo.id)}
-							strategy={verticalListSortingStrategy}
-						>
-							{todayTodos.map((todo) => (
-								<SortableListItem key={todo.id} id={todo.id}>
-									<TodoCard
-										todo={todo}
-										onToggle={completeTodo}
-										onPostpone={postponeTodo}
-										onDelete={deleteTodo}
-										onSave={updateTodoTask}
-									/>
-								</SortableListItem>
-							))}
-						</SortableContext>
-						<DragOverlay>
-							{activeId ? (
+					<SortableList
+						items={todayTodos}
+						onDragStart={handleReorderStart}
+						onDragEnd={handleReorderEnd}
+						sortableOverlay={
+							activeId ? (
 								<li>
 									<TodoCard
 										// biome-ignore lint/style/noNonNullAssertion: <explanation>
@@ -111,9 +65,21 @@ function App() {
 										onSave={updateTodoTask}
 									/>
 								</li>
-							) : null}
-						</DragOverlay>
-					</DndContext>
+							) : null
+						}
+					>
+						{todayTodos.map((todo) => (
+							<SortableListItem key={todo.id} id={todo.id}>
+								<TodoCard
+									todo={todo}
+									onToggle={completeTodo}
+									onPostpone={postponeTodo}
+									onDelete={deleteTodo}
+									onSave={updateTodoTask}
+								/>
+							</SortableListItem>
+						))}
+					</SortableList>
 				</TodoList>
 			)}
 			{completedTodos.length > 0 && (
