@@ -11,13 +11,12 @@ import { getTodayTodos } from "./get-today-todos";
 import { generateNewOrder } from "./update-todo-order";
 
 export const useTodoList = () => {
-	const { storedValue, setStoredValue } = useStore<Todo[]>("todos", []);
+	const { state, setState } = useStore<Todo[]>("todos", []);
 
 	const addTodo = (task: string) => {
-		const minOrderTodo =
-			storedValue.length > 0 ? getMinOrder(storedValue) : null;
+		const minOrderTodo = state.length > 0 ? getMinOrder(state) : null;
 
-		setStoredValue([
+		setState([
 			{
 				id: uuidv4(),
 				task,
@@ -26,17 +25,17 @@ export const useTodoList = () => {
 				completed: false,
 				completedAt: null,
 			},
-			...storedValue,
+			...state,
 		]);
 	};
 
 	const deleteTodo = (id: string) => {
-		setStoredValue(storedValue.filter((todo) => todo.id !== id));
+		setState(state.filter((todo) => todo.id !== id));
 	};
 
 	const completeTodo = (id: string) => {
-		setStoredValue(
-			storedValue.map((todo) =>
+		setState(
+			state.map((todo) =>
 				todo.id === id
 					? {
 							...todo,
@@ -49,8 +48,8 @@ export const useTodoList = () => {
 	};
 
 	const unCompleteTodo = (id: string) => {
-		setStoredValue(
-			storedValue.map((todo) =>
+		setState(
+			state.map((todo) =>
 				todo.id === id
 					? { ...todo, completed: false, completedAt: null }
 					: todo,
@@ -59,18 +58,14 @@ export const useTodoList = () => {
 	};
 
 	const updateTodoTask = (id: string, text: string) => {
-		setStoredValue(
-			storedValue.map((todo) =>
-				todo.id === id ? { ...todo, task: text } : todo,
-			),
+		setState(
+			state.map((todo) => (todo.id === id ? { ...todo, task: text } : todo)),
 		);
 	};
 
 	const updateTodoOrder = (activeId: string, overId: string) => {
-		const activeTodoOrder = storedValue.find(
-			(todo) => todo.id === activeId,
-		)?.order;
-		const overTodoOrder = storedValue.find((todo) => todo.id === overId)?.order;
+		const activeTodoOrder = state.find((todo) => todo.id === activeId)?.order;
+		const overTodoOrder = state.find((todo) => todo.id === overId)?.order;
 
 		if (activeTodoOrder === undefined || overTodoOrder === undefined) return;
 		if (activeTodoOrder === overTodoOrder) return;
@@ -78,21 +73,21 @@ export const useTodoList = () => {
 		const newOrder = generateNewOrder(
 			activeTodoOrder,
 			overTodoOrder,
-			getTodayTodos(storedValue),
+			getTodayTodos(state),
 		);
 
 		if (!newOrder) return;
 
-		setStoredValue(
-			storedValue.map((todo) =>
+		setState(
+			state.map((todo) =>
 				todo.id === activeId ? { ...todo, order: newOrder } : todo,
 			),
 		);
 	};
 
 	const postponeTodo = (id: string) => {
-		setStoredValue(
-			storedValue.map((todo) =>
+		setState(
+			state.map((todo) =>
 				todo.id === id
 					? {
 							...todo,
@@ -104,8 +99,8 @@ export const useTodoList = () => {
 	};
 
 	return {
-		todayTodos: getTodayTodos(storedValue),
-		completedTodos: getCompleteTodos(storedValue),
+		todayTodos: getTodayTodos(state),
+		completedTodos: getCompleteTodos(state),
 		addTodo,
 		deleteTodo,
 		completeTodo,

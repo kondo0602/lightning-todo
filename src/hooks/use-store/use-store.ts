@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { useMount } from "../use-mount/use-mount";
 
 const isDev = () => {
 	return import.meta.env.MODE === "development";
@@ -7,30 +8,28 @@ const isDev = () => {
 const useDevState = <T>(initialValue: T) => {
 	const [state, setState] = useState<T>(initialValue);
 
-	return { storedValue: state, setStoredValue: setState };
+	return { state, setState };
 };
 
 const useChromeStorage = <T>(key: string, initialValue: T) => {
-	const [storedValue, setStoredValue] = useState<T>(initialValue);
+	const [state, setState] = useState<T>(initialValue);
 
 	const loadData = useCallback(async () => {
 		const result = await chrome.storage.local.get([key]);
-		setStoredValue(result[key]);
+		setState(result[key]);
 	}, [key]);
 
-	const saveData = useCallback(async () => {
-		await chrome.storage.local.set({ [key]: storedValue });
-	}, [key, storedValue]);
+	useMount(loadData);
 
-	useEffect(() => {
-		loadData();
-	}, [loadData]);
+	const saveData = useCallback(async () => {
+		await chrome.storage.local.set({ [key]: state });
+	}, [key, state]);
 
 	useEffect(() => {
 		saveData();
 	}, [saveData]);
 
-	return { storedValue, setStoredValue };
+	return { state, setState };
 };
 
 export const useStore = <T>(key: string, initialValue: T) => {
