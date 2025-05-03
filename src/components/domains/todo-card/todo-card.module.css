@@ -9,46 +9,45 @@
 	gap: var(--spacing-xs);
 }
 
-
-.right-button,
-.trash-button {
+.button-container {
 	position: absolute;
-	top: var(--spacing-xs);
+	top: var(--spacing-sm);
+	right: var(--spacing-sm);
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-xxs);
 	background: var(--color-surface);
-	border: none;
-	color: var(--color-text-secondary);
-	cursor: pointer;
 	opacity: 0;
-	transition: all 0.2s ease-in-out;
-	padding: 4px 8px;
-	font-weight: bold;
-	z-index: 10;
-}
-
-.right-button {
-	right: calc(var(--spacing-xs) + 36px); /* ゴミ箱ボタンの左側に配置 */
-}
-
-.trash-button {
-	right: var(--spacing-xs);
+	transition: opacity 0.3s;
 }
 
 @media (any-hover: hover) {
-	.right-button:hover,
-	.trash-button:hover {
-		background-color: rgba(0, 0, 0, 0.1);
-	}
-}
-
-@media (any-hover: hover) {
-	.todo-card:hover .right-button,
-	.todo-card:hover .trash-button {
+	.card:hover .button-container {
 		opacity: 1;
 		background-color: var(--color-surface);
 	}
 }
 
-.todo-card:focus-within .right-button,
-.todo-card:focus-within .trash-button {
+.card:focus-within .button-container {
 	opacity: 0;
+}
+
+.button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-inline: var(--spacing-xs);
+	padding-block: var(--spacing-xxs);
+	background: var(--color-surface);
+	color: var(--color-text-secondary);
+	border: none;
+	z-index: 10;
+	cursor: pointer;
+	transition: color 0.3s;
+}
+
+@media (any-hover: hover) {
+	.button:hover {
+		color: var(--color-text-primary);
+	}
 }

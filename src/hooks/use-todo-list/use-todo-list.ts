@@ -21,7 +21,7 @@ export const useTodoList = () => {
 				id: uuidv4(),
 				task,
 				order: generateKeyBetween(null, minOrderTodo),
-				startAt: Temporal.Now.plainDateISO().toString(),
+				startAt: Temporal.Now.plainDateISO(),
 				completed: false,
 				completedAt: null,
 			},
@@ -40,7 +40,7 @@ export const useTodoList = () => {
 					? {
 							...todo,
 							completed: true,
-							completedAt: Temporal.Now.plainDateISO().toString(),
+							completedAt: Temporal.Now.plainDateISO(),
 						}
 					: todo,
 			),
@@ -91,7 +91,7 @@ export const useTodoList = () => {
 				todo.id === id
 					? {
 							...todo,
-							startAt: Temporal.Now.plainDateISO().add({ days: 1 }).toString(),
+							startAt: Temporal.Now.plainDateISO().add({ days: 1 }),
 						}
 					: todo,
 			),

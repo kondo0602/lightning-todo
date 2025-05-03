@@ -16,13 +16,13 @@ const useChromeStorage = <T>(key: string, initialValue: T) => {
 
 	const loadData = useCallback(async () => {
 		const result = await chrome.storage.local.get([key]);
-		setState(result[key]);
+		setState(JSON.parse(result[key]));
 	}, [key]);
 
 	useMount(loadData);
 
 	const saveData = useCallback(async () => {
-		await chrome.storage.local.set({ [key]: state });
+		await chrome.storage.local.set({ [key]: JSON.stringify(state) });
 	}, [key, state]);
 
 	useEffect(() => {

@@ -60,8 +60,6 @@ function App() {
 										// biome-ignore lint/style/noNonNullAssertion: <explanation>
 										todo={todayTodos.find((todo) => todo.id === activeId)!}
 										onToggle={completeTodo}
-										onPostpone={postponeTodo}
-										onDelete={deleteTodo}
 										onSave={updateTodoTask}
 									/>
 								</li>
@@ -73,9 +71,9 @@ function App() {
 								<TodoCard
 									todo={todo}
 									onToggle={completeTodo}
+									onSave={updateTodoTask}
 									onPostpone={postponeTodo}
 									onDelete={deleteTodo}
-									onSave={updateTodoTask}
 								/>
 							</SortableListItem>
 						))}
