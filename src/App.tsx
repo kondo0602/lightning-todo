@@ -46,9 +46,9 @@ function App() {
 	return (
 		<div className={styles.container}>
 			<DateDisplay />
-			<TodoAddCard onAdd={addTodo} />
-			{todayTodos.length > 0 && (
-				<TodoList>
+			<TodoList>
+				<TodoAddCard onAdd={addTodo} />
+				{todayTodos.length > 0 && (
 					<SortableList
 						items={todayTodos}
 						onDragStart={handleReorderStart}
@@ -78,8 +78,8 @@ function App() {
 							</SortableListItem>
 						))}
 					</SortableList>
-				</TodoList>
-			)}
+				)}
+			</TodoList>
 			{completedTodos.length > 0 && (
 				<TodoList title={"COMPLETED"}>
 					{completedTodos.map((todo) => (
