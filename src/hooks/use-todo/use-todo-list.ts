@@ -10,7 +10,11 @@ import { getCompleteTodos } from "./get-complete-todos";
 import { getTodayTodos } from "./get-today-todos";
 import { generateNewOrder } from "./update-todo-order";
 
-export const useTodoList = () => {
+type Props = {
+	date: Temporal.PlainDate;
+};
+
+export const useTodoList = ({ date }: Props) => {
 	const { state, setState } = useStore<Todo[]>("todos", []);
 
 	const addTodo = (task: string) => {
@@ -73,7 +77,7 @@ export const useTodoList = () => {
 		const newOrder = generateNewOrder(
 			activeTodoOrder,
 			overTodoOrder,
-			getTodayTodos(state),
+			getTodayTodos({ todos: state, date }),
 		);
 
 		if (!newOrder) return;
@@ -99,8 +103,8 @@ export const useTodoList = () => {
 	};
 
 	return {
-		todayTodos: getTodayTodos(state),
-		completedTodos: getCompleteTodos(state),
+		todayTodos: getTodayTodos({ todos: state, date }),
+		completedTodos: getCompleteTodos({ todos: state, date }),
 		addTodo,
 		deleteTodo,
 		completeTodo,

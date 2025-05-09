@@ -6,7 +6,7 @@ import { TodoList } from "./components/domains/todo-list/todo-list";
 import { DateDisplay } from "./components/elements/date-display/date-display";
 import { SortableListItem } from "./components/elements/sortable-list-item/sortable-list-item";
 import { SortableList } from "./components/elements/sortable-list/sortable-list";
-import { useTodoList } from "./hooks/use-todo-list/use-todo-list";
+import { useTodoList } from "./hooks/use-todo/use-todo-list";
 
 import type {
 	DragEndEvent,
@@ -14,13 +14,13 @@ import type {
 	UniqueIdentifier,
 } from "@dnd-kit/core";
 
-import styles from "./App.module.css";
 import { Temporal } from "temporal-polyfill";
+import styles from "./App.module.css";
 
 function App() {
 	const [displayDate, setDisplayDate] = useState(Temporal.Now.plainDateISO());
 	const backToday = () => setDisplayDate(Temporal.Now.plainDateISO());
-	const goTomorrow = () => setDisplayDate((prev) => prev.add({days: 1}));
+	const goTomorrow = () => setDisplayDate((prev) => prev.add({ days: 1 }));
 
 	const {
 		todayTodos,
@@ -32,7 +32,7 @@ function App() {
 		updateTodoTask,
 		updateTodoOrder,
 		postponeTodo,
-	} = useTodoList();
+	} = useTodoList({ date: displayDate });
 
 	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
 
@@ -50,7 +50,11 @@ function App() {
 
 	return (
 		<div className={styles.container}>
-			<DateDisplay date={displayDate} onClickTodayButton={backToday} onClickTomorrowButton={goTomorrow} />
+			<DateDisplay
+				date={displayDate}
+				onClickTodayButton={backToday}
+				onClickTomorrowButton={goTomorrow}
+			/>
 			<TodoList>
 				<TodoAddCard onAdd={addTodo} />
 				{todayTodos.length > 0 && (
