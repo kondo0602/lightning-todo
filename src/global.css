@@ -32,5 +32,5 @@ body {
 	place-items: center;
 	margin: 0;
 	background-color: var(--color-background);
-	color: var(--color-text);
+	color: var(--color-text-primary);
 }
