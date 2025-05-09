@@ -18,27 +18,37 @@ const MONTHS = [
 ];
 
 const WEEKDAYS = [
-	"Sunday",
 	"Monday",
 	"Tuesday",
 	"Wednesday",
 	"Thursday",
 	"Friday",
 	"Saturday",
+	"Sunday",
 ];
 
-export const DateDisplay = () => {
-	const now = Temporal.Now.plainDateISO();
+type Props = {
+	date: Temporal.PlainDate;
+	onClickTodayButton: () => void
+	onClickTomorrowButton: () => void
+}
 
+export const DateDisplay = ({
+	date,
+	onClickTodayButton,
+	onClickTomorrowButton
+}: Props) => {
 	return (
 		<div className={styles.dateDisplay}>
-			<h1 className={styles.dateDisplayDay}>{now.day.toString()}</h1>
+			<h1 className={styles.dateDisplayDay}>{date.day.toString()}</h1>
 			<span className={styles.dateDisplayWeekday}>
-				{WEEKDAYS[now.dayOfWeek]}
+				{WEEKDAYS[date.dayOfWeek - 1]}
 			</span>
 			<span className={styles.dateDisplayMonthYear}>
-				{`${MONTHS[now.month - 1]}, ${now.year.toString()}`}
+				{`${MONTHS[date.month - 1]}, ${date.year.toString()}`}
 			</span>
+			<button className={styles.dateDisplayTodayButton} onClick={onClickTodayButton} >Today</button>
+			<button className={styles.dateDisplayTomorrowButton} onClick={onClickTomorrowButton}>Tomorrow</button>
 		</div>
 	);
 };

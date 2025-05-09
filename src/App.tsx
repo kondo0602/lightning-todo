@@ -15,8 +15,13 @@ import type {
 } from "@dnd-kit/core";
 
 import styles from "./App.module.css";
+import { Temporal } from "temporal-polyfill";
 
 function App() {
+	const [displayDate, setDisplayDate] = useState(Temporal.Now.plainDateISO());
+	const backToday = () => setDisplayDate(Temporal.Now.plainDateISO());
+	const goTomorrow = () => setDisplayDate((prev) => prev.add({days: 1}));
+
 	const {
 		todayTodos,
 		completedTodos,
@@ -45,7 +50,7 @@ function App() {
 
 	return (
 		<div className={styles.container}>
-			<DateDisplay />
+			<DateDisplay date={displayDate} onClickTodayButton={backToday} onClickTomorrowButton={goTomorrow} />
 			<TodoList>
 				<TodoAddCard onAdd={addTodo} />
 				{todayTodos.length > 0 && (
