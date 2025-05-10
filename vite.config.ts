@@ -4,17 +4,17 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 
 export default defineConfig({
 	plugins: [react()],
+	css: {
+		modules: {
+			localsConvention: "dashes",
+		},
+	},
 	build: {
 		outDir: "dist",
 		rollupOptions: {
 			input: {
 				main: "./index.html",
 			},
-		},
-	},
-	css: {
-		modules: {
-			localsConvention: "dashes",
 		},
 	},
 });
