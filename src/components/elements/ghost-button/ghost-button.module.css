@@ -1,0 +1,11 @@
+.button {
+  display: grid;
+	place-items: center;
+  background-color: transparent;
+	border: none;
+	border-radius: 8px;
+}
+
+.button:hover:not(:disabled) {
+	background-color: color-mix(in srgb, var(--color-surface) 94%, white);
+}

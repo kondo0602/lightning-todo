@@ -27,38 +27,13 @@
 
 .date-display-yesterday-button {
 	grid-area: yesterday;
-	display: grid;
-	place-items: center;
-	background-color :transparent;
-	border:none;
-	border-radius: 8px;
-}
-
-.date-display-yesterday-button:hover:not(:disabled) {
-	background-color: color-mix(in srgb, var(--color-surface) 94%, white);
 }
 
 .date-display-today-button {
 	grid-area: today;
-	background-color :transparent;
 	padding-inline: 8px;
-	border: none;
-	border-radius: 8px;
-}
-
-.date-display-today-button:hover {
-	background-color: color-mix(in srgb, var(--color-surface) 94%, white);
 }
 
 .date-display-tomorrow-button {
 	grid-area: tomorrow;
-	display: grid;
-	place-items: center;
-	background-color :transparent;
-	border:none;
-	border-radius: 8px;
-}
-
-.date-display-tomorrow-button:hover {
-	background-color: color-mix(in srgb, var(--color-surface) 94%, white);
 }

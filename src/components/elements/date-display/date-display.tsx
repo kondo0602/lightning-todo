@@ -1,5 +1,6 @@
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { Temporal } from "temporal-polyfill";
+import { GhostButton } from "../ghost-button/ghost-button";
 import styles from "./date-display.module.css";
 
 const MONTHS = [
@@ -49,28 +50,28 @@ export const DateDisplay = ({
 			<span className={styles.dateDisplayMonthYear}>
 				{`${MONTHS[date.month - 1]}, ${date.year.toString()}`}
 			</span>
-			<button
+			<GhostButton
 				type="button"
 				className={styles.dateDisplayYesterdayButton}
 				disabled={date.day === Temporal.Now.plainDateISO().day}
 				onClick={onClickYesterdayButton}
 			>
 				<IoIosArrowBack />
-			</button>
-			<button
+			</GhostButton>
+			<GhostButton
 				type="button"
 				className={styles.dateDisplayTodayButton}
 				onClick={onClickTodayButton}
 			>
 				Today
-			</button>
-			<button
+			</GhostButton>
+			<GhostButton
 				type="button"
 				className={styles.dateDisplayTomorrowButton}
 				onClick={onClickTomorrowButton}
 			>
 				<IoIosArrowForward />
-			</button>
+			</GhostButton>
 		</div>
 	);
 };
