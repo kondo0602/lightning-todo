@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && zip -r app.zip dist",
+    "build": "tsc -b && vite build && zip -r app.zip build",
     "check": "biome check --write src/*",
     "test": "vitest",
     "storybook": "storybook dev -p 6006"
