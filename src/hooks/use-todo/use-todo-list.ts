@@ -25,7 +25,7 @@ export const useTodoList = ({ date }: Props) => {
 				id: uuidv4(),
 				task,
 				order: generateKeyBetween(null, minOrderTodo),
-				startAt: Temporal.Now.plainDateISO(),
+				startAt: date,
 				completed: false,
 				completedAt: null,
 			},
