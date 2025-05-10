@@ -1,5 +1,5 @@
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { Temporal } from "temporal-polyfill";
-
 import styles from "./date-display.module.css";
 
 const MONTHS = [
@@ -29,14 +29,16 @@ const WEEKDAYS = [
 
 type Props = {
 	date: Temporal.PlainDate;
-	onClickTodayButton: () => void
-	onClickTomorrowButton: () => void
-}
+	onClickYesterdayButton: () => void;
+	onClickTodayButton: () => void;
+	onClickTomorrowButton: () => void;
+};
 
 export const DateDisplay = ({
 	date,
+	onClickYesterdayButton,
 	onClickTodayButton,
-	onClickTomorrowButton
+	onClickTomorrowButton,
 }: Props) => {
 	return (
 		<div className={styles.dateDisplay}>
@@ -47,8 +49,28 @@ export const DateDisplay = ({
 			<span className={styles.dateDisplayMonthYear}>
 				{`${MONTHS[date.month - 1]}, ${date.year.toString()}`}
 			</span>
-			<button className={styles.dateDisplayTodayButton} onClick={onClickTodayButton} >Today</button>
-			<button className={styles.dateDisplayTomorrowButton} onClick={onClickTomorrowButton}>Tomorrow</button>
+			<button
+				type="button"
+				className={styles.dateDisplayYesterdayButton}
+				disabled={date.day === Temporal.Now.plainDateISO().day}
+				onClick={onClickYesterdayButton}
+			>
+				<IoIosArrowBack />
+			</button>
+			<button
+				type="button"
+				className={styles.dateDisplayTodayButton}
+				onClick={onClickTodayButton}
+			>
+				Today
+			</button>
+			<button
+				type="button"
+				className={styles.dateDisplayTomorrowButton}
+				onClick={onClickTomorrowButton}
+			>
+				<IoIosArrowForward />
+			</button>
 		</div>
 	);
 };

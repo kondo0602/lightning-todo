@@ -19,7 +19,8 @@ import styles from "./App.module.css";
 
 function App() {
 	const [displayDate, setDisplayDate] = useState(Temporal.Now.plainDateISO());
-	const backToday = () => setDisplayDate(Temporal.Now.plainDateISO());
+	const goYesterday = () => setDisplayDate((prev) => prev.add({ days: -1 }));
+	const goToday = () => setDisplayDate(Temporal.Now.plainDateISO());
 	const goTomorrow = () => setDisplayDate((prev) => prev.add({ days: 1 }));
 
 	const {
@@ -52,7 +53,8 @@ function App() {
 		<div className={styles.container}>
 			<DateDisplay
 				date={displayDate}
-				onClickTodayButton={backToday}
+				onClickYesterdayButton={goYesterday}
+				onClickTodayButton={goToday}
 				onClickTomorrowButton={goTomorrow}
 			/>
 			<TodoList>
