@@ -1,6 +1,5 @@
 import { useRef } from "react";
 
-import { RxArrowRight, RxCross1 } from "react-icons/rx";
 import { Card } from "../../elements/card/card";
 import { Checkbox } from "../../elements/checkbox/checkbox";
 import { TodoForm } from "../todo-form/todo-form";
@@ -8,6 +7,8 @@ import { TodoTextarea } from "../todo-textarea/todo-textarea";
 
 import type { Todo } from "../../../types/todo";
 
+import { IoIosArrowForward, IoMdTrash } from "react-icons/io";
+import { GhostButton } from "../../elements/ghost-button/ghost-button";
 import styles from "./todo-card.module.css";
 
 type TodoCardProps = {
@@ -60,25 +61,8 @@ export const TodoCard = ({
 				</div>
 			</TodoForm>
 			<div className={styles.buttonContainer}>
-				{onPostpone && (
-					<button
-						className={styles.button}
-						type="button"
-						tabIndex={-1}
-						onClick={(e) => {
-							e.stopPropagation();
-							onPostpone(todo.id);
-						}}
-						onMouseDown={(e) => {
-							e.preventDefault();
-							e.stopPropagation();
-						}}
-					>
-						<RxArrowRight />
-					</button>
-				)}
 				{onDelete && (
-					<button
+					<GhostButton
 						className={styles.button}
 						type="button"
 						tabIndex={-1}
@@ -91,8 +75,25 @@ export const TodoCard = ({
 							e.stopPropagation();
 						}}
 					>
-						<RxCross1 />
-					</button>
+						<IoMdTrash />
+					</GhostButton>
+				)}
+				{onPostpone && (
+					<GhostButton
+						className={styles.button}
+						type="button"
+						tabIndex={-1}
+						onClick={(e) => {
+							e.stopPropagation();
+							onPostpone(todo.id);
+						}}
+						onMouseDown={(e) => {
+							e.preventDefault();
+							e.stopPropagation();
+						}}
+					>
+						<IoIosArrowForward />
+					</GhostButton>
 				)}
 			</div>
 		</Card>
