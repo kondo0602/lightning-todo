@@ -95,7 +95,7 @@ export const useTodoList = ({ date }: Props) => {
 				todo.id === id
 					? {
 							...todo,
-							startAt: Temporal.Now.plainDateISO().add({ days: 1 }),
+							startAt: todo.startAt.add({ days: 1 }),
 						}
 					: todo,
 			),
