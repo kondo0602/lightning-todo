@@ -1,7 +1,7 @@
 .button {
-  display: grid;
+	display: grid;
 	place-items: center;
-  background-color: transparent;
+	background-color: transparent;
 	color: var(--color-text-primary);
 	border: none;
 	border-radius: 8px;
