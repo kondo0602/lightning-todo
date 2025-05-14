@@ -8,7 +8,6 @@ type GetCompleteTodos = (props: {
 
 export const getCompleteTodos: GetCompleteTodos = ({ todos, date }) => {
 	return todos
-		.filter((todo) => todo.completed)
 		.filter(
 			(todo) =>
 				todo.completedAt &&
@@ -17,5 +16,6 @@ export const getCompleteTodos: GetCompleteTodos = ({ todos, date }) => {
 					date,
 				) === 0,
 		)
+		.filter((todo) => todo.completed)
 		.sort((a, b) => (a.order < b.order ? -1 : a.order > b.order ? 1 : 0));
 };
