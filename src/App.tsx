@@ -24,7 +24,7 @@ function App() {
 	const goTomorrow = () => setDisplayDate((prev) => prev.add({ days: 1 }));
 
 	const {
-		todayTodos,
+		incompleteTodos,
 		completedTodos,
 		addTodo,
 		deleteTodo,
@@ -59,9 +59,9 @@ function App() {
 			/>
 			<TodoList>
 				<TodoAddCard onAdd={addTodo} />
-				{todayTodos.length > 0 && (
+				{incompleteTodos.length > 0 && (
 					<SortableList
-						items={todayTodos}
+						items={incompleteTodos}
 						onDragStart={handleReorderStart}
 						onDragEnd={handleReorderEnd}
 						sortableOverlay={
@@ -69,7 +69,7 @@ function App() {
 								<li>
 									<TodoCard
 										// biome-ignore lint/style/noNonNullAssertion: <explanation>
-										todo={todayTodos.find((todo) => todo.id === activeId)!}
+										todo={incompleteTodos.find((todo) => todo.id === activeId)!}
 										onToggle={completeTodo}
 										onSave={updateTodoTask}
 									/>
@@ -77,7 +77,7 @@ function App() {
 							) : null
 						}
 					>
-						{todayTodos.map((todo) => (
+						{incompleteTodos.map((todo) => (
 							<SortableListItem key={todo.id} id={todo.id}>
 								<TodoCard
 									todo={todo}

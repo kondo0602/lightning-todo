@@ -1,10 +1,10 @@
 import { Temporal } from "temporal-polyfill";
 import { describe, expect, it } from "vitest";
-import { getTodayTodos } from "./get-today-todos";
+import { getIncompleteTodos } from "./get-incomplete-todos";
 
 import type { Todo } from "../../types/todo";
 
-describe("getTodayTodos", () => {
+describe("getIncompleteTodos", () => {
 	const yesterday = Temporal.Now.plainDateISO().subtract({ days: 1 });
 	const today = Temporal.Now.plainDateISO();
 	const tomorrow = Temporal.Now.plainDateISO().add({ days: 1 });
@@ -61,7 +61,7 @@ describe("getTodayTodos", () => {
 	];
 
 	it("dateが本日日付の場合、本日以前の未完了のタスク + 本日の未完了のタスクがorder順に返ること", () => {
-		const result = getTodayTodos({ todos: defaultInput, date: today });
+		const result = getIncompleteTodos({ todos: defaultInput, date: today });
 
 		expect(result).toHaveLength(2);
 		expect(result.map((todo) => todo.task)).toEqual([
@@ -71,7 +71,7 @@ describe("getTodayTodos", () => {
 	});
 
 	it("dateが未来日付の場合、その日の未完了のタスクがorder順に返ること", () => {
-		const result = getTodayTodos({ todos: defaultInput, date: tomorrow });
+		const result = getIncompleteTodos({ todos: defaultInput, date: tomorrow });
 
 		expect(result).toHaveLength(1);
 		expect(result.map((todo) => todo.task)).toEqual(["明日の未完了のタスク"]);

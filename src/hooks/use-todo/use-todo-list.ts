@@ -7,7 +7,7 @@ import { getMinOrder } from "./get-min-order";
 
 import type { Todo } from "../../types/todo";
 import { getCompleteTodos } from "./get-complete-todos";
-import { getTodayTodos } from "./get-today-todos";
+import { getIncompleteTodos } from "./get-incomplete-todos";
 import { generateNewOrder } from "./update-todo-order";
 
 type Props = {
@@ -82,7 +82,7 @@ export const useTodoList = ({ date }: Props) => {
 		const newOrder = generateNewOrder(
 			activeTodoOrder,
 			overTodoOrder,
-			getTodayTodos({ todos: state, date }),
+			getIncompleteTodos({ todos: state, date }),
 		);
 
 		if (!newOrder) return;
@@ -108,7 +108,7 @@ export const useTodoList = ({ date }: Props) => {
 	};
 
 	return {
-		todayTodos: getTodayTodos({ todos: state, date }),
+		incompleteTodos: getIncompleteTodos({ todos: state, date }),
 		completedTodos: getCompleteTodos({ todos: state, date }),
 		addTodo,
 		deleteTodo,
