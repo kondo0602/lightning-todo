@@ -11,8 +11,9 @@ export const getCompleteTodos: GetCompleteTodos = ({ todos, date }) => {
 		.filter((todo) => todo.completed)
 		.filter(
 			(todo) =>
+				todo.completedAt &&
 				Temporal.PlainDate.compare(
-					Temporal.PlainDate.from(todo.startAt),
+					Temporal.PlainDate.from(todo.completedAt),
 					date,
 				) === 0,
 		)

@@ -1,5 +1,5 @@
 import { generateKeyBetween } from "fractional-indexing";
-import { Temporal } from "temporal-polyfill";
+import type { Temporal } from "temporal-polyfill";
 import { v4 as uuidv4 } from "uuid";
 
 import { useStore } from "../use-store/use-store";
@@ -44,7 +44,7 @@ export const useTodoList = ({ date }: Props) => {
 					? {
 							...todo,
 							completed: true,
-							completedAt: Temporal.Now.plainDateISO(),
+							completedAt: date,
 						}
 					: todo,
 			),
@@ -55,7 +55,12 @@ export const useTodoList = ({ date }: Props) => {
 		setState(
 			state.map((todo) =>
 				todo.id === id
-					? { ...todo, completed: false, completedAt: null }
+					? {
+							...todo,
+							startedAt: date,
+							completed: false,
+							completedAt: null,
+						}
 					: todo,
 			),
 		);
@@ -95,7 +100,7 @@ export const useTodoList = ({ date }: Props) => {
 				todo.id === id
 					? {
 							...todo,
-							startAt: todo.startAt.add({ days: 1 }),
+							startAt: date.add({ days: 1 }),
 						}
 					: todo,
 			),
