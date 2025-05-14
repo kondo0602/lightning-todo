@@ -1,14 +1,14 @@
 import { generateKeyBetween } from "fractional-indexing";
-import type { Temporal } from "temporal-polyfill";
 import { v4 as uuidv4 } from "uuid";
 
 import { useStore } from "../use-store/use-store";
-import { getMinOrder } from "./get-min-order";
-
-import type { Todo } from "../../types/todo";
+import { generateNewOrder } from "./generate-new-order";
 import { getCompleteTodos } from "./get-complete-todos";
 import { getIncompleteTodos } from "./get-incomplete-todos";
-import { generateNewOrder } from "./update-todo-order";
+import { getMinOrder } from "./get-min-order";
+
+import type { Temporal } from "temporal-polyfill";
+import type { Todo } from "../../types/todo";
 
 type Props = {
 	date: Temporal.PlainDate;
@@ -73,17 +73,11 @@ export const useTodoList = ({ date }: Props) => {
 	};
 
 	const updateTodoOrder = (activeId: string, overId: string) => {
-		const activeTodoOrder = state.find((todo) => todo.id === activeId)?.order;
-		const overTodoOrder = state.find((todo) => todo.id === overId)?.order;
-
-		if (activeTodoOrder === undefined || overTodoOrder === undefined) return;
-		if (activeTodoOrder === overTodoOrder) return;
-
-		const newOrder = generateNewOrder(
-			activeTodoOrder,
-			overTodoOrder,
-			getIncompleteTodos({ todos: state, date }),
-		);
+		const newOrder = generateNewOrder({
+			todos: getIncompleteTodos({ todos: state, date }),
+			activeId,
+			overId,
+		});
 
 		if (!newOrder) return;
 
