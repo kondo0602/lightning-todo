@@ -12,6 +12,7 @@
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	scrollbar-width: thin;
 	scrollbar-gutter: stable both-edges;
 }
 
@@ -20,7 +21,7 @@
 	height: 100%;
 	min-height: 480px;
 	padding-block: var(--spacing-sm);
-	padding-inline: var(--spacing-xs);
+	padding-inline: var(--spacing-xxs);
 	line-height: 1.5;
 	font-size: 14px;
 	font-weight: 400;
