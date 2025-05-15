@@ -6,12 +6,13 @@ const isDev = () => {
 };
 
 const useDevState = <T>(initialValue: T) => {
-	const [state, setState] = useState<T>(initialValue);
-
-	return { state, setState };
+	return useState<T>(initialValue);
 };
 
-const useChromeStorage = <T>(key: string, initialValue: T) => {
+const useChromeStorage = <T>(
+	key: string,
+	initialValue: T,
+): [T, React.Dispatch<React.SetStateAction<T>>] => {
 	const [state, setState] = useState<T>(initialValue);
 
 	const loadData = useCallback(async () => {
@@ -29,7 +30,7 @@ const useChromeStorage = <T>(key: string, initialValue: T) => {
 		saveData();
 	}, [saveData]);
 
-	return { state, setState };
+	return [state, setState];
 };
 
 export const useStore = <T>(key: string, initialValue: T) => {

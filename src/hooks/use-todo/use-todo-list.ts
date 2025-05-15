@@ -15,7 +15,7 @@ type Props = {
 };
 
 export const useTodoList = ({ date }: Props) => {
-	const { state, setState } = useStore<Todo[]>("todos", []);
+	const [state, setState] = useStore<Todo[]>("todos", []);
 
 	const addTodo = (task: string) => {
 		const minOrderTodo = state.length > 0 ? getMinOrder(state) : null;
