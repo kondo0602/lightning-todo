@@ -9,6 +9,8 @@ import { getMinOrder } from "./get-min-order";
 
 import type { Temporal } from "temporal-polyfill";
 import type { Todo } from "../../types/todo";
+import { useMount } from "../use-mount/use-mount";
+import { deleteOldCompletedTodos } from "./delete-old-complete-todo";
 
 type Props = {
 	date: Temporal.PlainDate;
@@ -16,6 +18,8 @@ type Props = {
 
 export const useTodoList = ({ date }: Props) => {
 	const [state, setState] = useStore<Todo[]>("todos", []);
+
+	useMount(() => setState(deleteOldCompletedTodos({ todos: state })));
 
 	const addTodo = (task: string) => {
 		const minOrderTodo = state.length > 0 ? getMinOrder(state) : null;
@@ -33,9 +37,8 @@ export const useTodoList = ({ date }: Props) => {
 		]);
 	};
 
-	const deleteTodo = (id: string) => {
+	const deleteTodo = (id: string) =>
 		setState(state.filter((todo) => todo.id !== id));
-	};
 
 	const completeTodo = (id: string) => {
 		setState(

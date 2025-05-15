@@ -61,7 +61,7 @@ describe("deleteOldCompletedTodos", () => {
 	];
 
 	it("完了日が過去日になっているタスクが削除されること", () => {
-		const result = deleteOldCompletedTodos(defaultInput);
+		const result = deleteOldCompletedTodos({ todos: defaultInput });
 
 		expect(result).toEqual([
 			expect.objectContaining({
