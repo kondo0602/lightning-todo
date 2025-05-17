@@ -78,7 +78,7 @@ export const TodoCard = ({
 						<IoMdTrash />
 					</GhostButton>
 				)}
-				{onPostpone && (
+				{!todo.completed && onPostpone && (
 					<GhostButton
 						className={styles.button}
 						type="button"
