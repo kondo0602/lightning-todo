@@ -7,12 +7,17 @@
 	border-radius: 8px;
 	outline: none;
 	cursor: pointer;
-	transition: background-color 0.3s ease;
+	transition: background-color box-shadow 0.3s ease;
 }
 
 .card:focus-within {
-	outline: 2px solid var(--color-accent);
-	outline-offset: 2px;
+	box-shadow:
+		0 0 1px color-mix(in srgb, var(--color-white) 94%, white),
+		0 0 2px color-mix(in srgb, var(--color-white) 94%, white),
+		0 0 4px var(--color-accent),
+		0 0 2px var(--color-accent),
+		0 0 4px var(--color-accent),
+		0 0 8px var(--color-accent);
 	background-color: color-mix(in srgb, var(--color-surface) 94%, white);
 }
 

@@ -11,7 +11,10 @@
 }
 
 .checkbox:checked {
-	border-color: var(--color-accent);
+	box-shadow:
+		0 0 1px color-mix(in srgb, var(--color-white) 94%, white),
+		0 0 2px var(--color-accent),
+		0 0 4px var(--color-accent);
 }
 
 .checkbox:checked::after {
@@ -21,7 +24,7 @@
 	top: 50%;
 	transform: translate(-50%, -50%);
 	color: var(--color-accent);
-	font-size: 13px;
+	font-size: 12px;
 }
 
 .checkbox:checked:disabled {
