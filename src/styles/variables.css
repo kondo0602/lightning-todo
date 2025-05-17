@@ -253,7 +253,7 @@ body {
 	--color-text-disabled: var(--color-neutral-500);
 	--color-text-placeholder: var(--color-neutral-400);
 	--color-border: var(--color-neutral-400);
-	--color-accent: var(--color-amber-600);
+	--color-accent: var(--color-yellow-300);
 
 	/* spacing */
 	--space-unit: 16px;
