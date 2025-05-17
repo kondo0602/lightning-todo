@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "ADHDo",
-  "description": "A Chrome extension with an ADHD-friendly todo app to help you stay focused.",
-  "version": "1.0.3",
+  "name": "Lightning Todo",
+  "description": "A lightning-fast, offline-first todo app Chrome extension.",
+  "version": "1.0.0",
   "action": {
     "default_popup": "index.html"
   },
